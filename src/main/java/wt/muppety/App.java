@@ -3,12 +3,26 @@
  */
 package wt.muppety;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import javafx.application.Application;
+import javafx.stage.Stage;
+import wt.muppety.controller.AppController;
+
+public class App extends Application {
+
+    private Stage primaryStage;
+    private AppController appController;
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Pharmacy app");
+
+        this.appController = new AppController(primaryStage);
+        this.appController.initRootLayout();
     }
 }
