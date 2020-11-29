@@ -16,24 +16,58 @@ public class AppController {
 
     public void initRootLayout() {
         try {
-
-            // load layout from FXML file
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(AppController.class.getResource("../../../view/MainViewPane.fxml"));
             BorderPane rootLayout = loader.load();
 
-            // set initial data into controller
             MainViewController controller = loader.getController();
+            controller.setAppController(this);
 
-            // add layout to a scene and show them all
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
             primaryStage.show();
 
         } catch (IOException e) {
-            // don't do this in common apps
             e.printStackTrace();
         }
 
+    }
+
+    public void showUserListPane() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AppController.class.getResource("../../../view/UserListPane.fxml"));
+            BorderPane userListLayout = loader.load();
+
+            Scene scene = new Scene(userListLayout);
+            primaryStage.setScene(scene);
+
+            UserListController controller = loader.getController();
+            controller.setAppController(this);
+
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showProductListPane() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AppController.class.getResource("../../../view/ProductListPane.fxml"));
+            BorderPane productListLayout = loader.load();
+
+            Scene scene = new Scene(productListLayout);
+            primaryStage.setScene(scene);
+
+            ProductListController controller = loader.getController();
+            controller.setAppController(this);
+
+            primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

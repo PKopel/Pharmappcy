@@ -5,32 +5,38 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import wt.muppety.model.User;
+import wt.muppety.model.Product;
 
-public class UserListController {
+public class ProductListController {
 
     private AppController appController;
 
     @FXML
-    public TableView<User> userTable;
+    public TableView<Product> productTable;
 
     @FXML
-    public TableColumn firstNameColumn;
+    public TableColumn nameColumn;
 
     @FXML
-    public TableColumn lastNameColumn;
+    public TableColumn priceColumn;
 
     @FXML
-    public TableColumn positionColumn;
+    public TableColumn categoryColumn;
 
     @FXML
-    public Button addButton;
+    public TableColumn onPrescriptionColumn;
+
+    @FXML
+    public Button addProductButton;
+
+    @FXML
+    public Button addCategoryButton;
+    
+    @FXML
+    public Button deleteButton;
 
     @FXML
     public Button editButton;
-
-    @FXML
-    public Button deleteButton;
 
     @FXML
     public Button backButton;
@@ -43,7 +49,11 @@ public class UserListController {
         //TODO
     }
 
-    public void handleAddAction(ActionEvent event) {
+    public void handleAddProductAction(ActionEvent event) {
+        //TODO
+    }
+
+    public void handleAddCategoryAction(ActionEvent event) {
         //TODO
     }
 
