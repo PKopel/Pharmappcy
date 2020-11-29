@@ -1,13 +1,13 @@
 package wt.muppety.presenter;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import wt.muppety.model.Category;
+import wt.muppety.model.Product;
 
-public class EditProductDialogPresenter {
+public class EditProductDialogPresenter extends AbstractDialogPresenter<Product> {
     @FXML
     public TextField nameTextField;
 
@@ -23,9 +23,13 @@ public class EditProductDialogPresenter {
     @FXML
     public CheckBox onPrescriptionTextField;
 
-    public void handleCancelAction(ActionEvent event) {
+    @Override
+    protected void updateModel() {
+        //TODO
     }
 
-    public void handleOkAction(ActionEvent event) {
+    @Override
+    protected void updateControls() {
+        //TODO
     }
 }

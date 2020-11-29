@@ -5,26 +5,38 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import wt.muppety.model.User;
-import wt.muppety.presenter.EditUserDialogPresenter;
+import wt.muppety.presenter.AbstractDialogPresenter;
+import wt.muppety.view.LayoutName;
 
 import java.io.IOException;
 
 public class AppController {
+    private final String pathToResources = "../../../";
+
     private final Stage primaryStage;
 
     public AppController(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
-    public void showMainViewPane() {
+    /**
+     * Generic function responsible for displaying a window with layout corresponding to
+     * argument layoutName. Loads layout defined in .fxml file and initializes its controller,
+     * then shows it in application window.
+     *
+     * @param data       Data required by layout controller
+     * @param layoutName Enum LayoutName associated with .fxml file to display
+     * @param <T>        Type of data required by layout controller
+     */
+    public <T> void showPane(T data, LayoutName layoutName) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(AppController.class.getResource("../../../view/MainViewPane.fxml"));
+            loader.setLocation(AppController.class.getResource(pathToResources + layoutName.getPath()));
             BorderPane rootLayout = loader.load();
 
-            MainViewController controller = loader.getController();
+            IController<T> controller = loader.getController();
             controller.setAppController(this);
+            controller.setData(data);
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
@@ -33,51 +45,22 @@ public class AppController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-    public void showUserListPane() {
+    /**
+     * Generic function responsible for displaying a dialog with layout corresponding to
+     * argument layoutName. Loads layout defined in .fxml file and initializes its controller,
+     * then shows it in dialog window.
+     *
+     * @param data       Data required by layout controller
+     * @param layoutName Enum LayoutName associated with .fxml file to display
+     * @param title      Title for dialog window
+     * @param <T>        Type of data required by layout controller
+     */
+    public <T> void showDialog(T data, LayoutName layoutName, String title) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(AppController.class.getResource("../../../view/UserListPane.fxml"));
-            BorderPane userListLayout = loader.load();
-
-            Scene scene = new Scene(userListLayout);
-            primaryStage.setScene(scene);
-
-            UserListController controller = loader.getController();
-            controller.setAppController(this);
-
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showProductListPane() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(AppController.class.getResource("../../../view/ProductListPane.fxml"));
-            BorderPane productListLayout = loader.load();
-
-            Scene scene = new Scene(productListLayout);
-            primaryStage.setScene(scene);
-
-            ProductListController controller = loader.getController();
-            controller.setAppController(this);
-
-            primaryStage.show();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void showEditUserDialog(User user, String title) {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(AppController.class.getResource("../../../view/EditUserDialog.fxml"));
+            loader.setLocation(AppController.class.getResource(pathToResources + layoutName.getPath()));
             BorderPane page = loader.load();
 
             Stage dialogStage = new Stage();
@@ -87,9 +70,9 @@ public class AppController {
             dialogStage.setScene(scene);
             dialogStage.setTitle(title);
 
-            EditUserDialogPresenter presenter = loader.getController();
-            presenter.setDialogStage(dialogStage);
-            presenter.setData(user);
+            AbstractDialogPresenter<T> presenter = loader.getController();
+            presenter.setStage(dialogStage);
+            presenter.setData(data);
 
             dialogStage.showAndWait();
 

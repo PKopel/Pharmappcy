@@ -7,33 +7,30 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import wt.muppety.model.User;
 
-public class UserListController {
+import java.util.Collection;
 
-    private AppController appController;
+import static wt.muppety.view.LayoutName.EditUser;
+import static wt.muppety.view.LayoutName.MainView;
+
+public class UserListController implements IController<Collection<User>> {
 
     @FXML
     public TableView<User> userTable;
-
     @FXML
     public TableColumn firstNameColumn;
-
     @FXML
     public TableColumn lastNameColumn;
-
     @FXML
     public TableColumn positionColumn;
-
     @FXML
     public Button addButton;
-
     @FXML
     public Button editButton;
-
     @FXML
     public Button deleteButton;
-
     @FXML
     public Button backButton;
+    private AppController appController;
 
     public void handleDeleteAction(ActionEvent event) {
         //TODO
@@ -42,19 +39,25 @@ public class UserListController {
     public void handleEditAction(ActionEvent event) {
         User user = userTable.getSelectionModel().getSelectedItem();
         if (user != null) {
-            appController.showEditUserDialog(user, "Edit user");
+            appController.showDialog(user, EditUser, "Edit user");
         }
     }
 
     public void handleAddAction(ActionEvent event) {
-        appController.showEditUserDialog(new User(), "Add user");
+        appController.showDialog(new User(), EditUser, "Add user");
     }
 
     public void handleBackAction(ActionEvent event) {
-        appController.showMainViewPane();
+        appController.showPane(null, MainView);
     }
 
+    @Override
     public void setAppController(AppController appController) {
         this.appController = appController;
+    }
+
+    @Override
+    public void setData(Collection<User> data) {
+
     }
 }

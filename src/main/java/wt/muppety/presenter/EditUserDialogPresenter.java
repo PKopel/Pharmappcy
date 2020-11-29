@@ -1,16 +1,12 @@
 package wt.muppety.presenter;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import wt.muppety.model.Position;
 import wt.muppety.model.User;
 
-import java.text.ParseException;
-
-public class EditUserDialogPresenter {
+public class EditUserDialogPresenter extends AbstractDialogPresenter<User> {
 
     @FXML
     public TextField firstNameTextField;
@@ -27,42 +23,13 @@ public class EditUserDialogPresenter {
     @FXML
     public TextField passwordTextField;
 
-    private Stage dialogStage;
-
-    private User user;
-
-    private boolean approved;
-
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
-    }
-
-    public void setData(User user) {
-        this.user = user;
-        updateControls();
-    }
-
-    public boolean isApproved() {
-        return approved;
-    }
-
-    @FXML
-    private void handleOkAction(ActionEvent event) {
-        updateModel();
-        approved = true;
-        dialogStage.close();
-    }
-
-    @FXML
-    private void handleCancelAction(ActionEvent event) {
-        dialogStage.close();
-    }
-
-    private void updateModel() {
+    @Override
+    protected void updateModel() {
         //TODO
     }
 
-    private void updateControls() {
+    @Override
+    protected void updateControls() {
         //TODO
     }
 }
