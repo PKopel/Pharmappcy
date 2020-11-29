@@ -31,7 +31,7 @@ public class ProductListController {
 
     @FXML
     public Button addCategoryButton;
-    
+
     @FXML
     public Button deleteButton;
 
@@ -58,7 +58,7 @@ public class ProductListController {
     }
 
     public void handleBackAction(ActionEvent event) {
-        appController.initRootLayout();
+        appController.showMainViewPane();
     }
 
     public void setAppController(AppController appController) {

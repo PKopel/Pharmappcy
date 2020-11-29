@@ -40,15 +40,18 @@ public class UserListController {
     }
 
     public void handleEditAction(ActionEvent event) {
-        //TODO
+        User user = userTable.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            appController.showEditUserDialog(user, "Edit user");
+        }
     }
 
     public void handleAddAction(ActionEvent event) {
-        //TODO
+        appController.showEditUserDialog(new User(), "Add user");
     }
 
     public void handleBackAction(ActionEvent event) {
-        appController.initRootLayout();
+        appController.showMainViewPane();
     }
 
     public void setAppController(AppController appController) {

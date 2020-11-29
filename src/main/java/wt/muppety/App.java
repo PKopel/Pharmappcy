@@ -17,12 +17,12 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
 
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Pharmacy app");
 
         this.appController = new AppController(primaryStage);
-        this.appController.initRootLayout();
+        this.appController.showMainViewPane();
     }
 }

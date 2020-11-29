@@ -3,7 +3,10 @@ package wt.muppety.controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import wt.muppety.model.User;
+import wt.muppety.presenter.EditUserDialogPresenter;
 
 import java.io.IOException;
 
@@ -14,7 +17,7 @@ public class AppController {
         this.primaryStage = primaryStage;
     }
 
-    public void initRootLayout() {
+    public void showMainViewPane() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(AppController.class.getResource("../../../view/MainViewPane.fxml"));
@@ -65,6 +68,30 @@ public class AppController {
             controller.setAppController(this);
 
             primaryStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showEditUserDialog(User user, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(AppController.class.getResource("../../../view/EditUserDialog.fxml"));
+            BorderPane page = loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            dialogStage.setTitle(title);
+
+            EditUserDialogPresenter presenter = loader.getController();
+            presenter.setDialogStage(dialogStage);
+            presenter.setData(user);
+
+            dialogStage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
