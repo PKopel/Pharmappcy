@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
-            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="wt.muppety.controller.UserListController">
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="wt.muppety.controller.EmployeeListController">
     <top>
         <HBox prefHeight="20.0" BorderPane.alignment="CENTER">
             <opaqueInsets>
@@ -40,7 +40,7 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="userTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <TableView fx:id="employeeTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
                 <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First name"/>
                 <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last name"/>

@@ -1,12 +1,17 @@
-package model;
-
+package wt.muppety.model;
 
 import java.util.Objects;
 
 public class Employee {
     public static final String TABLE_NAME = "Employee";
+    private int id;
+    private String firstname;
+    private String lastname;
+    private String position;
+    private String login;
+    private String password;
 
-    public Employee(String firstname, String lastname, String position, String login, String password){
+    public Employee(String firstname, String lastname, String position, String login, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.position = position;
@@ -14,7 +19,8 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(){}
+    public Employee() {
+    }
 
     public int getId() {
         return id;
@@ -60,7 +66,6 @@ public class Employee {
         this.password = password;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,14 +79,5 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(getLogin(), getPassword());
     }
-
-    private int id;
-    private String firstname;
-    private String lastname;
-    private String position;
-    private String login;
-    private String password;
-
-
 
 }

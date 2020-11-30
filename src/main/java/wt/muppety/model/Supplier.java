@@ -1,14 +1,20 @@
-package model;
+package wt.muppety.model;
 
 public class Supplier {
 
-    public Supplier(String companyName, String email, String phoneNumber){
+    private int id;
+    private String companyName;
+    private String email;
+    private String phoneNumber;
+
+    public Supplier(String companyName, String email, String phoneNumber) {
         this.companyName = companyName;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public  Supplier(){}
+    public Supplier() {
+    }
 
     public int getId() {
         return id;
@@ -37,9 +43,4 @@ public class Supplier {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    private int id;
-    private String companyName;
-    private String email;
-    private String phoneNumber;
 }

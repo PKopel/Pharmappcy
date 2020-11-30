@@ -15,8 +15,8 @@
             <BorderPane.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </BorderPane.margin>
-            <Button fx:id="userListButton" mnemonicParsing="false"
-                    onAction="#handleUserListAction" text="User list">
+            <Button fx:id="employeeListButton" mnemonicParsing="false"
+                    onAction="#handleEmployeeListAction" text="Employee list">
                 <HBox.margin>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                 </HBox.margin>

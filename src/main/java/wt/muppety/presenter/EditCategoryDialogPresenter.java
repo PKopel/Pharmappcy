@@ -11,11 +11,11 @@ public class EditCategoryDialogPresenter extends AbstractDialogPresenter<Categor
 
     @Override
     protected void updateModel() {
-        //TODO
+        data.setName(nameTextField.getText());
     }
 
     @Override
     protected void updateControls() {
-        //TODO
+        //IGNORE
     }
 }

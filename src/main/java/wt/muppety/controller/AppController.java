@@ -52,12 +52,13 @@ public class AppController {
      * argument layoutName. Loads layout defined in .fxml file and initializes its controller,
      * then shows it in dialog window.
      *
+     * @param <T>        Type of data required by layout controller
      * @param data       Data required by layout controller
      * @param layoutName Enum LayoutName associated with .fxml file to display
      * @param title      Title for dialog window
-     * @param <T>        Type of data required by layout controller
+     * @return
      */
-    public <T> void showDialog(T data, LayoutName layoutName, String title) {
+    public <T> boolean showDialog(T data, LayoutName layoutName, String title) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(AppController.class.getResource(pathToResources + layoutName.getPath()));
@@ -75,9 +76,10 @@ public class AppController {
             presenter.setData(data);
 
             dialogStage.showAndWait();
-
+            return presenter.isAccepted();
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

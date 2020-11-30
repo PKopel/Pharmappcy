@@ -1,11 +1,18 @@
-package model;
+package wt.muppety.model;
+
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Transaction {
 
-    public Transaction(Product product, Employee employee, int quantity, double value, LocalDateTime datetime){
+    private int id;
+    private Employee employee;
+    private Product product;
+    private int quantity;
+    private double value;
+    private LocalDateTime datetime;
+
+    public Transaction(Product product, Employee employee, int quantity, double value, LocalDateTime datetime) {
         this.product = product;
         this.employee = employee;
         this.quantity = quantity;
@@ -13,9 +20,10 @@ public class Transaction {
         this.datetime = datetime;
     }
 
-    public Transaction(){}
+    public Transaction() {
+    }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
@@ -58,12 +66,4 @@ public class Transaction {
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
-
-
-    private int id;
-    private Employee employee;
-    private Product product;
-    private int quantity;
-    private double value;
-    private LocalDateTime datetime;
 }

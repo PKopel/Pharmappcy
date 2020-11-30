@@ -3,24 +3,25 @@ package wt.muppety.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import wt.muppety.model.MockData;
 
+import static wt.muppety.view.LayoutName.EmployeeList;
 import static wt.muppety.view.LayoutName.ProductList;
-import static wt.muppety.view.LayoutName.UserList;
 
 public class MainViewController implements IController<Void> {
 
     @FXML
-    public Button userListButton;
+    public Button employeeListButton;
     @FXML
     public Button productListButton;
     private AppController appController;
 
-    public void handleUserListAction(ActionEvent event) {
-        appController.showPane(null, UserList);
+    public void handleEmployeeListAction(ActionEvent event) {
+        appController.showPane(MockData.employees, EmployeeList);
     }
 
     public void handleProductListAction(ActionEvent event) {
-        appController.showPane(null, ProductList);
+        appController.showPane(MockData.products, ProductList);
     }
 
     @Override
