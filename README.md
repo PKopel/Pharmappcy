@@ -27,51 +27,52 @@ gradlew.bat run
 ![db_model](db_model.png)
 
 Product zawiera:
-* CategoryID
-* SupplierID
-* Name
-* UnitPrice
+* ID - identyfikator (Primary Key)
+* CategoryID - identyfikator kategorii produktu (Foreign Key)
+* SupplierID - identyfikator dostawcy (Foreign Key)
+* Name - nazwa produktu
+* UnitPrice - cena produktu
 * OnPrescription - flaga mówiąca o tym, czy lek jest na receptę
-* Manufacturer
+* Manufacturer - nazwa producenta
 
 Category zawiera:
-* ID
-* Name
+* ID - identyfikator (Primary Key)
+* Name - nazwa kategorii
 
 Supplier zawiera:
-* ID
-* CompanyName
-* Email
-* PhoneNumber
+* ID - identyfikator (Primary Key)
+* CompanyName - nazwa firmy
+* Email - email do komunikacji z firmą
+* PhoneNumber - numer telefonu do komunikacji z firmą
 
 Transaction zawiera:
-* ID
-* ProductID
-* EmployeeID
-* Quantity
-* Value
-* Date
+* ID - identyfikator (Primary Key)
+* ProductID - identyfikator kupowanego produktu (Foreign Key)
+* EmployeeID - identyfikator pracownika nadzorującego transakcję (Foreign Key)
+* Quantity - ilość kupowanych produktów
+* Value - cena do zapłaty
+* Date - data wykonania transakcji
 
 Employee zawiera:
-* ID
-* Firstname
-* Lastname
-* Position
-* Login
-* Password
+* ID - identyfikator (Primary Key oraz Foreign Key)
+* Firstname - imię
+* Lastname - nazwisko
+* Position - pozycja w firmie: Manager, Chair lub Worker
+* Login - będzie wykorzystywany przy autentykacji
+* Password - będzie wykorzystywane przy autentykacji
 
 Permissions zawiera:
-* EmployeeID
-* CanSell
-* CanBuy
-* CanBrowseDatabase
-* CanModerateDatabase
+* EmployeeID - identyfikator (Primary Key)
+* CanSell - pozwolenie na sprzedawanie leków
+* CanBuy - pozwolenie na kupowanie leków
+* CanBrowseDatabase - pozwolenie na przeglądanie bazy danych
+* CanModerateDatabase - pozwolenie na modyfikację bazy danych
 
 
 ## Przewodnik po projekcie
 [Data Access Object](./src/main/java/wt/muppety/dao)
 
-[Model](./src/main/java/wt/muppety/model) - klasy Category, Employee, MockData, Product, Supplier, Transaction
+[Model](./src/main/java/wt/muppety/model) - klasy Category, Employee, MockData, Product, Supplier, Transaction - w obecnym stanie w każdej klasie znajduje się konstruktor oraz gettery i settery poszczególnych atrybutów.
 
 GUI zgodne ze wzorcem model-view-presenter:
 
@@ -87,10 +88,12 @@ Po uruchomieniu aplikacji mamy opcję przejścia do listy pracowników lub do li
 
 ![gui_1](gui_1.png)
 
-Po przejściu do Employee list mamy widok na listę pracowników z danymi: imię, nazwisko i pozycja. Mamy opcję dodania pracownika oraz usunięcia/edytowania wpisu z listy.
+Po przejściu do Employee list mamy widok na listę pracowników z danymi: imię, nazwisko i pozycja. Mamy opcję dodania pracownika oraz usunięcia/edytowania wpisu z listy. 
+Po wybraniu opcji Add uruchamia się okno Add user z polami z klasy Employee do wypełnienia. Po wybraniu opcji Edit uruchamia się okno Edit user z polami wstępnie wypełnionymi. Po kliknięciu na konkretny wpis na liście aktywuje się opcja Delete i wpis jest usuwany z listy.
+ Widok po dodaniu jednego pracownika:
 
 ![gui_2](gui_2.png)
 
-Po przejściu do Product list mamy widok na listę produktów z danymi: nazwa, cena, kategoria, wytwórca oraz informacja, czy lek jest na receptę. Mamy opcję dodania produktu, dodania kategorii oraz usunięcia/edytowania wpisu z listy.
+Po przejściu do Product list mamy widok na listę produktów z danymi: nazwa, cena, kategoria, wytwórca oraz informacja, czy lek jest na receptę. Mamy opcję dodania produktu, dodania kategorii oraz usunięcia/edytowania wpisu z listy. Opcje - analogiczne jak w Employee list. Widok dodawania produktu:
 
 ![gui_3](gui_3.png)
