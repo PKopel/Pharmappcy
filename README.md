@@ -4,7 +4,7 @@
 
 #### **Milestone 1 (stan na 01.12.2020)** 
 - model danych
-- integracja z bazą danych (Hibernate)
+- plany integracji z bazą danych (Hibernate, SQLite)
 - GUI pozwalające na dodawanie, edytowanie i usuwanie pracowników i produktów oraz dodawanie kategorii produktów
 
 ## Opis
