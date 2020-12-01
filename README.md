@@ -31,7 +31,7 @@ gradlew.bat run
 
 ## Model bazy danych
 
-![db_model](db_model.png)
+![db_model](docs/db_model.png)
 
 Product zawiera:
 * ID - identyfikator (Primary Key)
@@ -93,14 +93,14 @@ GUI zgodne ze wzorcem model-view-presenter:
 
 Po uruchomieniu aplikacji mamy opcję przejścia do listy pracowników lub do listy produktów:
 
-![gui_1](gui_1.png)
+![gui_1](docs/gui_1.png)
 
 Po przejściu do Employee list mamy widok na listę pracowników z danymi: imię, nazwisko i pozycja. Mamy opcję dodania pracownika oraz usunięcia/edytowania wpisu z listy. 
 Po wybraniu opcji Add uruchamia się okno Add user z polami z klasy Employee do wypełnienia. Po wybraniu opcji Edit uruchamia się okno Edit user z polami wstępnie wypełnionymi. Po kliknięciu na konkretny wpis na liście aktywuje się opcja Delete i wpis jest usuwany z listy.
  Widok po dodaniu jednego pracownika:
 
-![gui_2](gui_2.png)
+![gui_2](docs/gui_2.png)
 
 Po przejściu do Product list mamy widok na listę produktów z danymi: nazwa, cena, kategoria, wytwórca oraz informacja, czy lek jest na receptę. Mamy opcję dodania produktu, dodania kategorii oraz usunięcia/edytowania wpisu z listy. Opcje - analogiczne jak w Employee list. Widok dodawania produktu:
 
-![gui_3](gui_3.png)
+![gui_3](docs/gui_3.png)
