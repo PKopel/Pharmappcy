@@ -5,7 +5,7 @@
 #### **Milestone 1 (stan na 01.12.2020)** 
 - model danych
 - integracja z bazą danych (Hibernate)
-- GUI pozwalające na dodawanie, edytowanie i usuwanie pracowników oraz produktów
+- GUI pozwalające na dodawanie, edytowanie i usuwanie pracowników i produktów oraz dodawanie kategorii produktów
 
 ## Opis
 Aplikacja do zarządzania apteką. 
