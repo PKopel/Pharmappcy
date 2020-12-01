@@ -1,7 +1,14 @@
-# Pharmacy App - aplikacja do zarządzania apteką
+# Pharmacy App
 ### Grupa: Paweł Kopel, Konrad Przewłoka, Marek Ślązak, Magdalena Badura
 
+
 #### **Milestone 1 (stan na 01.12.2020)** 
+- model danych
+- integracja z bazą danych (Hibernate)
+- GUI pozwalające na dodawanie, edytowanie i usuwanie pracowników oraz produktów
+
+## Opis
+Aplikacja do zarządzania apteką. 
 
 ## Technologie
 * Java 14, Gradle
