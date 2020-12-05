@@ -1,18 +1,17 @@
 package wt.muppety.model;
 
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
+@Entity
+@Table(name = Transaction.TABLE_NAME)
 public class Transaction {
 
-    private int id;
-    private Employee employee;
-    private Product product;
-    private int quantity;
-    private double value;
-    private LocalDateTime datetime;
+    public static final String TABLE_NAME = "Transaction";
 
-    public Transaction(Product product, Employee employee, int quantity, double value, LocalDateTime datetime) {
+    public Transaction(Product product, Employee employee, int quantity, double value, LocalDateTime datetime){
         this.product = product;
         this.employee = employee;
         this.quantity = quantity;
@@ -20,10 +19,9 @@ public class Transaction {
         this.datetime = datetime;
     }
 
-    public Transaction() {
-    }
+    public Transaction(){}
 
-    public int getId() {
+    public int getId(){
         return id;
     }
 
@@ -66,4 +64,33 @@ public class Transaction {
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Employee employee;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Product product;
+    @Column(name="quantity", nullable = false)
+    private int quantity;
+    @Column(name="value", nullable = false)
+    private double value;
+    @Column(name="datetime", nullable = false)
+    private LocalDateTime datetime;
 }

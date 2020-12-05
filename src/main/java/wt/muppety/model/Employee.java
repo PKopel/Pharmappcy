@@ -1,17 +1,14 @@
 package wt.muppety.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name=Employee.TABLE_NAME)
 public class Employee {
     public static final String TABLE_NAME = "Employee";
-    private int id;
-    private String firstname;
-    private String lastname;
-    private String position;
-    private String login;
-    private String password;
 
-    public Employee(String firstname, String lastname, String position, String login, String password) {
+    public Employee(String firstname, String lastname, String position, String login, String password){
         this.firstname = firstname;
         this.lastname = lastname;
         this.position = position;
@@ -19,8 +16,7 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee() {
-    }
+    public Employee(){}
 
     public int getId() {
         return id;
@@ -66,6 +62,24 @@ public class Employee {
         this.password = password;
     }
 
+    public boolean canBuy() {
+        return permissions.canBuy;
+    }
+
+    public boolean canSell() {
+        return permissions.canSell;
+    }
+
+    public boolean canBrowseDb() {
+        return permissions.canBrowseDB;
+    }
+
+    public boolean canModerateDB() {
+        return permissions.canModerateDB;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,5 +93,31 @@ public class Employee {
     public int hashCode() {
         return Objects.hash(getLogin(), getPassword());
     }
+
+    public void setPermissions(boolean canBuy, boolean canSell, boolean canBrowseDB, boolean canModerateDB) {
+        permissions.canBuy = canBuy;
+        permissions.canSell = canSell;
+        permissions.canBrowseDB = canBrowseDB;
+        permissions.canModerateDB = canModerateDB;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "firstname", nullable = false, length = 50)
+    private String firstname;
+    @Column(name = "lastname", nullable = false, length = 50)
+    private String lastname;
+    @Column(name = "position", nullable = false, length = 50)
+    private String position;
+    @Column(name = "login", nullable = false, length = 50)
+    private String login;
+    @Column(name = "password", nullable = false, length = 50)
+    private String password;
+    @Embedded
+    private Permissions permissions;
+
+
 
 }

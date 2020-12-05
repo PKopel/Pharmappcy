@@ -4,17 +4,25 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost/tempDB?createDatabaseIfNotExist=true</property>
+        <property name="connection.url">jdbc:sqlite:testDB.db</property>
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
         <property name="connection.username"></property>
         <property name="connection.password"></property>
+        <property name="connection.pool_size">10</property>
+
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 
         <!-- DB schema will be updated if needed -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
+        <mapping class="wt.muppety.model.Employee"></mapping>
+        <mapping class="wt.muppety.model.Product"></mapping>
+        <mapping class="wt.muppety.model.Transaction"></mapping>
+        <mapping class="wt.muppety.model.Supplier"></mapping>
+        <mapping class="wt.muppety.model.Category"></mapping>
 
     </session-factory>
 </hibernate-configuration>
