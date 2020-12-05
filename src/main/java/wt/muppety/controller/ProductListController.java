@@ -10,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import wt.muppety.authentication.Authenticator;
-import wt.muppety.authentication.PermissionValue;
 import wt.muppety.model.Category;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
@@ -65,11 +63,6 @@ public class ProductListController implements IController<ObservableList<Product
             String text = dataValue.getValue().isOnPrescription() ? "yes" : "no";
             return new SimpleStringProperty(text);
         });
-
-        Authenticator.guardButton(addProductButton, PermissionValue.ADDPRODUCT);
-        Authenticator.guardButton(addCategoryButton, PermissionValue.ADDCATEGORY);
-        Authenticator.guardButton(editButton, PermissionValue.EDITPRODUCT);
-        Authenticator.guardButton(deleteButton, PermissionValue.DELETEPRODUCT);
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(productTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
