@@ -3,6 +3,7 @@ package wt.muppety.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import wt.muppety.authentication.Authenticator;
 import wt.muppety.model.MockData;
 
 import static wt.muppety.view.LayoutName.EmployeeList;
@@ -14,6 +15,9 @@ public class MainViewController implements IController<Void> {
     public Button employeeListButton;
     @FXML
     public Button productListButton;
+    @FXML
+    public Button loginButton;
+
     private AppController appController;
 
     public void handleEmployeeListAction(ActionEvent event) {
@@ -24,6 +28,7 @@ public class MainViewController implements IController<Void> {
         appController.showPane(MockData.products, ProductList);
     }
 
+
     @Override
     public void setAppController(AppController appController) {
         this.appController = appController;
@@ -32,5 +37,9 @@ public class MainViewController implements IController<Void> {
     @Override
     public void setData(Void data) {
 // operation ignored
+    }
+
+    public void handleLogin(ActionEvent actionEvent) {
+        Authenticator.logIn();
     }
 }

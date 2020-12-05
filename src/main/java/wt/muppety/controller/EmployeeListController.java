@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import wt.muppety.authentication.Authenticator;
+import wt.muppety.authentication.Permission;
 import wt.muppety.model.Employee;
 
 import static wt.muppety.view.LayoutName.EditUser;
@@ -42,6 +44,10 @@ public class EmployeeListController implements IController<ObservableList<Employ
         firstNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getFirstname()));
         lastNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getLastname()));
         positionColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getPosition()));
+
+        Authenticator.guardButton(addButton, Permission.ADDUSER);
+        Authenticator.guardButton(editButton, Permission.EDITUSER);
+        Authenticator.guardButton(deleteButton, Permission.DELETEUSER);
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(employeeTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(employeeTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
