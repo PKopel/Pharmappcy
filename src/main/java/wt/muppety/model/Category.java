@@ -1,18 +1,21 @@
 package wt.muppety.model;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name=Category.TABLE_NAME)
 public class Category {
 
-    private int id;
-    private String name;
+    public static final String TABLE_NAME = "Category";
 
-    public Category(String name) {
+    public Category(String name){
         this.name = name;
     }
 
-    public Category() {
-    }
+    public Category(){}
 
     public int getId() {
         return id;
@@ -39,8 +42,12 @@ public class Category {
         return Objects.hash(getName());
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, mappedBy = "Category")
+    private Set<Product> products = new HashSet();
 }

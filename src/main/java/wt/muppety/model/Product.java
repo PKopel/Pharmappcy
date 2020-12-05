@@ -1,16 +1,14 @@
 package wt.muppety.model;
 
+import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name=Product.TABLE_NAME)
 public class Product {
-    private int id;
-    private Set<Category> categories;
-    private Supplier supplier;
-    private String name;
-    private double unitPrice;
-    private boolean onPrescription;
-    private String manufacturer;
-    private Permissions permissions;
+
+    public static final String TABLE_NAME = "Product";
 
     public Product(Set<Category> categories, Supplier supplier, String name, double unitPrice, boolean onPrescription, String manufacturer) {
         this.categories = categories;
@@ -76,40 +74,34 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public boolean canBuy() {
-        return permissions.canBuy;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return getId() == product.getId();
     }
 
-    public boolean canSell() {
-        return permissions.canSell;
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 
-    public boolean canBrowseDb() {
-        return permissions.canBrowseDB;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    private Set<Category> categories;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Supplier supplier;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
+    @Column(name = "unitPrice",nullable = false)
+    private double unitPrice;
+    @Column(name = "onPrescription",nullable = false)
+    private boolean onPrescription;
+    @Column(name = "manfacturer", nullable = false, length = 50)
+    private String manufacturer;
 
-    public boolean canModerateDB() {
-        return permissions.canModerateDB;
-    }
-
-    public void setPermissions(boolean canBuy, boolean canSell, boolean canBrowseDB, boolean canModerateDB) {
-        permissions.canBuy = canBuy;
-        permissions.canSell = canSell;
-        permissions.canBrowseDB = canBrowseDB;
-        permissions.canModerateDB = canModerateDB;
-    }
-
-    private class Permissions {
-        protected boolean canBuy;
-        protected boolean canSell;
-        protected boolean canBrowseDB;
-        protected boolean canModerateDB;
-
-        public Permissions() {
-            canBuy = false;
-            canSell = false;
-            canBrowseDB = false;
-            canModerateDB = false;
-        }
-    }
 }
