@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name=Category.TABLE_NAME)
+@Table(name=Category.TABLE_NAME, uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
 public class Category {
 
     public static final String TABLE_NAME = "Category";
