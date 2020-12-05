@@ -1,6 +1,7 @@
 package wt.muppety.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,8 +11,8 @@ public class Product {
 
     public static final String TABLE_NAME = "Product";
 
-    public Product(Set<Category> categories, Supplier supplier, String name, double unitPrice, boolean onPrescription, String manufacturer) {
-        this.categories = categories;
+    public Product(Supplier supplier, String name, double unitPrice, boolean onPrescription, String manufacturer) {
+        this.categories = new HashSet<>();
         this.supplier = supplier;
         this.name = name;
         this.unitPrice = unitPrice;
