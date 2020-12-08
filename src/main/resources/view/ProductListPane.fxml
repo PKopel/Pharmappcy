@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="wt.muppety.controller.ProductListController"
+            prefHeight="400.0" prefWidth="800.0">
+    <top>
+        <HBox prefHeight="20.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+            <opaqueInsets>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </opaqueInsets>
+            <BorderPane.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </BorderPane.margin>
+            <Button fx:id="deleteButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleDeleteAction"
+                    text="Delete">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="editButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleEditAction"
+                    text="Edit">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="addProductButton" alignment="TOP_LEFT" mnemonicParsing="false"
+                    onAction="#handleAddProductAction"
+                    text="Add product">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="addCategoryButton" alignment="TOP_LEFT" mnemonicParsing="false"
+                    onAction="#handleAddCategoryAction"
+                    text="Add category">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="backButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#handleBackAction"
+                    text="Back">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </top>
+    <center>
+        <TableView fx:id="productTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name"/>
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price"/>
+                <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Categories"/>
+                <TableColumn fx:id="manufacturerColumn" prefWidth="75.0" text="Manufacturer"/>
+                <TableColumn fx:id="onPrescriptionColumn" prefWidth="75.0" text="Prescription"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+    </center>
+</BorderPane>
