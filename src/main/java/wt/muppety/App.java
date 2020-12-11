@@ -3,6 +3,12 @@ package wt.muppety;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import wt.muppety.controller.AppController;
+import wt.muppety.dao.*;
+import wt.muppety.model.Employee;
+import wt.muppety.model.Product;
+import wt.muppety.model.Supplier;
+
+import java.time.LocalDateTime;
 
 import static wt.muppety.view.LayoutName.MainView;
 

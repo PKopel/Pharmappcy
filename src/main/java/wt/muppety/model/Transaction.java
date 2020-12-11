@@ -9,7 +9,7 @@ import java.util.Objects;
 @Table(name = Transaction.TABLE_NAME)
 public class Transaction {
 
-    public static final String TABLE_NAME = "Transaction";
+    public static final String TABLE_NAME = "Tranzaction";
 
     public Transaction(Product product, Employee employee, int quantity, double value, LocalDateTime datetime){
         this.product = product;

@@ -6,7 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name=Category.TABLE_NAME, uniqueConstraints = {@UniqueConstraint(columnNames = {"name"})})
+@Table(name=Category.TABLE_NAME)
 public class Category {
 
     public static final String TABLE_NAME = "Category";
@@ -48,6 +48,6 @@ public class Category {
     private int id;
     @Column(name = "name", nullable = false, length = 50)
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST, mappedBy = "Category")
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     private Set<Product> products = new HashSet();
 }
