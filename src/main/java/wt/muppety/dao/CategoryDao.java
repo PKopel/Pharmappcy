@@ -36,14 +36,8 @@ public class CategoryDao extends BaseDao<Category> {
     public ObservableList<Category> listAll() {
 
         try{ 
-            ObservableList<Category> categories = FXCollections.observableArrayList(currentSession().createQuery("FROM Category").list());
-            System.out.println("list all categories");
-            for(Category category : categories){
-                System.out.println(category.getName());
-            }
-            
+            ObservableList<Category> categories = FXCollections.observableArrayList(currentSession().createQuery("FROM Category").list());            
             return categories;
-            //return Optional.of(categories);
         }catch (Exception e){
             e.printStackTrace();
         }

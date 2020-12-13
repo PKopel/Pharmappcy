@@ -6,10 +6,12 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import wt.muppety.model.Category;
+import wt.muppety.model.Supplier;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
 
 import wt.muppety.dao.CategoryDao;
+import wt.muppety.dao.SupplierDao;
 
 import javafx.collections.ObservableList;
 import java.util.HashSet;
@@ -26,6 +28,9 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
     public ComboBox<Category> categoryComboBox;
 
     @FXML
+    public ComboBox<Supplier> supplierComboBox;
+
+    @FXML
     public TextField manufacturerTextField;
 
     @FXML
@@ -36,8 +41,9 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
         CategoryDao categoryDao = new CategoryDao();
         ObservableList<Category> categories = categoryDao.listAll();
         categoryComboBox.setItems(categories);
-        //public static ObservableList<Category> categories = FXCollections.observableArrayList();
-        //categoryComboBox.setItems(MockData.categories);
+        SupplierDao supplierDao = new SupplierDao();
+        ObservableList<Supplier> suppliers = supplierDao.listAll();
+        supplierComboBox.setItems(suppliers);
     }
 
     @Override
@@ -51,6 +57,8 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
             newCategories = new HashSet<>();
         newCategories.add(categoryComboBox.getValue());
         data.setCategories(newCategories);
+        data.setSupplier(supplierComboBox.getValue());
+        
     }
 
     @Override
@@ -58,7 +66,7 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
         nameTextField.setText(data.getName());
         priceTextField.setText(((Double) data.getUnitPrice()).toString());
         manufacturerTextField.setText(data.getManufacturer());
-        onPrescriptionCheckBox.setSelected(data.isOnPrescription());
+        onPrescriptionCheckBox.setSelected(data.getOnPrescription());
     }
 
 }

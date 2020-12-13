@@ -61,6 +61,12 @@ public class Supplier {
         return Objects.hash(getId(), getCompanyName(), getEmail(), getPhoneNumber());
     }
 
+    @Override
+    public String toString()
+    {
+        return companyName;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")

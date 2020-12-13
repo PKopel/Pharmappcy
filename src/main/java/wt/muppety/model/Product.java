@@ -59,7 +59,7 @@ public class Product {
         this.unitPrice = unitPrice;
     }
 
-    public boolean isOnPrescription() {
+    public boolean getOnPrescription() {
         return onPrescription;
     }
 
