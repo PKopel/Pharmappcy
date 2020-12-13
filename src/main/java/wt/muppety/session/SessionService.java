@@ -17,6 +17,9 @@ public class SessionService {
     }
 
     public static Session getSession() {
+        if (SessionService.session == null) {
+            SessionService.openSession();
+        }
         return session;
     }
 

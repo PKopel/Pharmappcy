@@ -41,6 +41,12 @@
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                 </HBox.margin>
             </Button>
+            <Button fx:id="lilButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#handleAddSupplierAction"
+                text="Add supplier">
+            <HBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </HBox.margin>
+            </Button>
             <Button fx:id="backButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#handleBackAction"
                     text="Back">
                 <HBox.margin>

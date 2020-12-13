@@ -14,7 +14,15 @@ import wt.muppety.model.Category;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
 
+import java.util.Optional;
+import wt.muppety.model.Supplier;
+import wt.muppety.model.Category;
+import wt.muppety.dao.ProductDao;
+import wt.muppety.dao.SupplierDao;
+import wt.muppety.dao.CategoryDao;
+
 import static wt.muppety.view.LayoutName.*;
+import java.util.List;
 
 public class ProductListController implements IController<ObservableList<Product>> {
 
@@ -40,13 +48,23 @@ public class ProductListController implements IController<ObservableList<Product
     public Button editButton;
     @FXML
     public Button backButton;
+    @FXML
+    public Button lilButton;
     private AppController appController;
     private ObservableList<Product> data = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        //productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        ProductDao productDao = new ProductDao();
+        data =  productDao.listAll();
         productTable.setItems(data);
+        if(productTable != null){
+            System.out.println("lolllllllllllllllll" + data.size());
+            System.out.println(data.get(0).getName());
+        }
+
+        //nameColumn.setCellValueFactory("lol");
 
         nameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getName()));
         priceColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getUnitPrice() + " zł"));
@@ -84,6 +102,8 @@ public class ProductListController implements IController<ObservableList<Product
         Product newProduct = new Product();
         if (appController.showDialog(newProduct, EditProduct, "Add product")) {
             data.add(newProduct);
+            ProductDao productDao = new ProductDao();
+            Optional<Product> product = productDao.create(newProduct);
         }
     }
 
@@ -91,12 +111,28 @@ public class ProductListController implements IController<ObservableList<Product
         Category newCategory = new Category();
         if (appController.showDialog(newCategory, EditCategory, "Add category")) {
             MockData.categories.add(newCategory);
+            CategoryDao categoryDao = new CategoryDao();
+            Optional<Category> category = categoryDao.create(newCategory);
         }
     }
+
+    public void handleAddSupplierAction(ActionEvent event) {
+        Supplier newSupplier = new Supplier();
+        SupplierDao supplierDao = new SupplierDao();
+        if (appController.showDialog(newSupplier, EditSupplier, "Add supplier")) {
+            MockData.suppliers.add(newSupplier);
+            
+            Optional<Supplier> supplier = supplierDao.create(newSupplier);
+            
+        }
+        supplierDao.listAll();
+    }
+
 
     public void handleBackAction(ActionEvent event) {
         appController.showPane(null, MainView);
     }
+
 
     @Override
     public void setAppController(AppController appController) {

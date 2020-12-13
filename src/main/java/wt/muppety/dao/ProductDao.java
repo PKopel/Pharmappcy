@@ -5,6 +5,9 @@ import wt.muppety.model.Category;
 import wt.muppety.model.Product;
 import wt.muppety.model.Supplier;
 
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import java.util.List;
 import java.util.Optional;
 
 public class ProductDao extends BaseDao<Product> {
@@ -17,6 +20,32 @@ public class ProductDao extends BaseDao<Product> {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    public Optional<Product> create(Product product) {
+        try {
+            this.save(product);
+            return findById(product.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public ObservableList<Product> listAll() {
+        try{ 
+            ObservableList<Product> products = FXCollections.observableArrayList(currentSession().createQuery("FROM Product").list());            System.out.println("list all products");
+            for(Product product : products){
+                System.out.println("Product.getName()");
+            }
+            
+            return products;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        //return Optional.empty();
+        return null;
     }
 
     public Optional<Product> findById(final int indexNumber) {

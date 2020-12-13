@@ -6,11 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import wt.muppety.session.SessionService;
 
-import java.io.Serializable;
-
 public abstract class BaseDao<T> {
     public void save(final T object) throws PersistenceException {
         final Session session = SessionService.getSession();
+
         final Transaction tx = session.beginTransaction();
         session.save(object);
         session.merge(object);

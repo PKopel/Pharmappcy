@@ -6,7 +6,9 @@ public enum LayoutName {
     ProductList("view/ProductListPane.fxml"),
     EditUser("view/EditEmployeeDialog.fxml"),
     EditProduct("view/EditProductDialog.fxml"),
-    EditCategory("view/EditCategoryDialog.fxml");
+    EditCategory("view/EditCategoryDialog.fxml"),
+    EditSupplier("view/EditSupplierDialog.fxml"),
+    EditTransaction("view/EditTransactionDialog.fxml");
 
     private final String path;
 

@@ -8,6 +8,9 @@ import wt.muppety.model.Category;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
 
+import wt.muppety.dao.CategoryDao;
+
+import javafx.collections.ObservableList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +32,11 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
 
     @FXML
     private void initialize() {
-        categoryComboBox.setItems(MockData.categories);
+        CategoryDao categoryDao = new CategoryDao();
+        ObservableList<Category> categories = categoryDao.listAll();
+        categoryComboBox.setItems(categories);
+        //public static ObservableList<Category> categories = FXCollections.observableArrayList();
+        //categoryComboBox.setItems(MockData.categories);
     }
 
     @Override
