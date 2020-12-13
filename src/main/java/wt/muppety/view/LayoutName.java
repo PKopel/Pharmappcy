@@ -2,6 +2,7 @@ package wt.muppety.view;
 
 public enum LayoutName {
     MainView("view/MainViewPane.fxml"),
+    Login("view/LoginDialog.fxml"),
     EmployeeList("view/EmployeeListPane.fxml"),
     ProductList("view/ProductListPane.fxml"),
     EditUser("view/EditEmployeeDialog.fxml"),

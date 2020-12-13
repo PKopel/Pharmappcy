@@ -1,19 +1,14 @@
 package wt.muppety.authentication;
 
 public enum Permission {
-    BUY(0),
-    SELL(1),
-    ADDUSER(2),
-    EDITUSER(3),
-    DELETEUSER(4),
-    ADDPRODUCT(5),
-    EDITPRODUCT(6),
-    DELETEPRODUCT(7),
-    ADDCATEGORY(8),
+    canBuy(0),
+    canSell(1),
+    canBrowseDB(2),
+    canModerateDB(3),
     ;
 
     private final int val;
-    private Permission(int val){
+    Permission(int val){
         this.val=val;
     }
 

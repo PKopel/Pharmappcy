@@ -10,8 +10,8 @@ import java.util.BitSet;
 public class Authenticator {
 
     private static final Authenticator _instance = new Authenticator();
-    private String login;
-    private boolean isLoggedIn = true;
+    private String _login;
+    private boolean isLoggedIn = false;
     private final BitSet _permissions = new BitSet(Permission.values().length);
 
 
@@ -22,15 +22,28 @@ public class Authenticator {
         _instance._permissions.set(p.value());
     }
 
+    public static boolean isLoggedIn(){
+        return !_instance.isLoggedIn;
+    }
+
     private void grantAllPermissions()
     {
         for(Permission p : Permission.values()) _instance.grantPermission(p);
     }
 
-    public static void logIn()
+    public static boolean logIn(LoginData data)
     {
+        /*Optional<Employee> login_result = new EmployeeDao().findByLogin(data);
+        if(login_result.isPresent()){
+            _instance.isLoggedIn=true;
+            _instance._login = data.getLogin();
+            _instance._permissions.or(login_result.get().permissionsBitSet());
+            return true;
+        }
+        return false;*/
         _instance.isLoggedIn=true;
         _instance.grantAllPermissions();
+        return true;
     }
 
     private static boolean hasPermissionTo(Permission p)

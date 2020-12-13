@@ -11,11 +11,11 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import wt.muppety.authentication.Authenticator;
-import wt.muppety.authentication.Permission;
 import wt.muppety.model.Category;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
 
+import static wt.muppety.authentication.Permission.*;
 import static wt.muppety.view.LayoutName.*;
 
 public class ProductListController implements IController<ObservableList<Product>> {
@@ -66,10 +66,10 @@ public class ProductListController implements IController<ObservableList<Product
             return new SimpleStringProperty(text);
         });
 
-        Authenticator.guardButton(addProductButton, Permission.ADDPRODUCT);
-        Authenticator.guardButton(editButton, Permission.EDITPRODUCT);
-        Authenticator.guardButton(deleteButton, Permission.DELETEPRODUCT);
-        Authenticator.guardButton(addCategoryButton, Permission.ADDCATEGORY);
+        Authenticator.guardButton(addProductButton, canModerateDB);
+        Authenticator.guardButton(editButton, canModerateDB);
+        Authenticator.guardButton(deleteButton, canModerateDB);
+        Authenticator.guardButton(addCategoryButton, canModerateDB);
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(productTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
