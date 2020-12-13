@@ -11,6 +11,7 @@ import wt.muppety.dao.ProductDao;
 import javafx.collections.ObservableList;
 import java.util.HashSet;
 import java.util.Set;
+import java.time.*; 
 
 public class EditTransactionDialogPresenter extends AbstractDialogPresenter<Transaction> {
 
@@ -35,6 +36,8 @@ public class EditTransactionDialogPresenter extends AbstractDialogPresenter<Tran
         data.setQuantity(Integer.parseInt(quantityTextField.getText()));
         Product product = productComboBox.getValue();
         data.setProduct(product);
+        data.setDatetime(LocalDateTime.now());
+        data.setValue(product.getUnitPrice() * data.getQuantity());
     }
 
     @Override

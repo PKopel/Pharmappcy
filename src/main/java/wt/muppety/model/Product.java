@@ -88,6 +88,12 @@ public class Product {
         return Objects.hash(getId());
     }
 
+    @Override
+    public String toString()
+    {
+        return name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
