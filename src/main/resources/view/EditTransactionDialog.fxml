@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="wt.muppety.presenter.EditTransactionDialogPresenter"
+            prefWidth="500.0">
+    <center>
+        <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0"/>
+                <RowConstraints minHeight="10.0"/>
+                <RowConstraints minHeight="10.0"/>
+                <RowConstraints minHeight="10.0"/>
+                <RowConstraints minHeight="10.0"/>
+            </rowConstraints>
+            <Label text="Product">
+                <GridPane.margin>
+                    <Insets left="5.0" right="5.0" top="5.0"/>
+                </GridPane.margin>
+            </Label>
+            <Label text="Quantity" GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets left="5.0" right="5.0" top="5.0"/>
+                </GridPane.margin>
+            </Label>
+
+            <ComboBox fx:id="productComboBox" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <GridPane.margin>
+                    <Insets left="5.0" right="5.0" top="5.0"/>
+                </GridPane.margin>
+            </ComboBox>
+            <TextField fx:id="quantityTextField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <GridPane.margin>
+                    <Insets left="5.0" right="5.0" top="5.0"/>
+                </GridPane.margin>
+            </TextField>
+
+        </GridPane>
+    </center>
+    <bottom>
+        <HBox alignment="BOTTOM_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets left="5.0" right="5.0" top="5.0"/>
+            </BorderPane.margin>
+            <Button onAction="#handleCancelAction" prefWidth="100.0" text="_Cancel">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+            <Button onAction="#handleOkAction" prefWidth="60.0" text="_Ok">
+                <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </bottom>
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
+</BorderPane>

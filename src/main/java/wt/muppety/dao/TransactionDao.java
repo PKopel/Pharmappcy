@@ -21,6 +21,16 @@ public class TransactionDao extends  BaseDao<Transaction>{
         return Optional.empty();
     }
 
+    public Optional<Transaction> create(Transaction transaction){
+        try {
+            this.save(transaction);
+            return findById(transaction.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
     public Optional<Transaction> findById(final int indexNumber) {
         try {
             Transaction transaction = currentSession().createQuery("SELECT c FROM Transaction c WHERE c.id = :id", Transaction.class)

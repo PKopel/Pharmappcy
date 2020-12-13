@@ -17,6 +17,16 @@ public class EmployeeDao extends BaseDao<Employee> {
         return Optional.empty();
     }
 
+    public Optional<Employee> create(Employee employee){
+        try{
+            this.save(employee);
+            return findById(employee.getId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
     public Optional<Employee> findById(final int indexNumber) {
         try{
             Employee employee = currentSession().createQuery("SELECT c FROM Employee c WHERE c.id = :id", Employee.class)

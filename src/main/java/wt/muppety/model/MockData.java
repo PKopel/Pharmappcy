@@ -9,4 +9,6 @@ public class MockData {
     public static ObservableList<Product> products = FXCollections.observableArrayList();
     public static ObservableList<String> positions = FXCollections.observableArrayList("Manager", "Chair", "Worker");
     public static ObservableList<Category> categories = FXCollections.observableArrayList();
+    public static ObservableList<Supplier> suppliers = FXCollections.observableArrayList();
 }
+
