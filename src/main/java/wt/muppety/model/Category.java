@@ -42,6 +42,12 @@ public class Category {
         return Objects.hash(getName());
     }
 
+    @Override
+    public String toString()
+    {
+        return name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")

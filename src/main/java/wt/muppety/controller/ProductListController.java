@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import wt.muppety.model.Category;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
@@ -20,9 +21,11 @@ import wt.muppety.model.Category;
 import wt.muppety.dao.ProductDao;
 import wt.muppety.dao.SupplierDao;
 import wt.muppety.dao.CategoryDao;
+import wt.muppety.dao.BaseDao;
 
 import static wt.muppety.view.LayoutName.*;
 import java.util.List;
+import java.util.Observable;
 
 public class ProductListController implements IController<ObservableList<Product>> {
 
@@ -31,7 +34,7 @@ public class ProductListController implements IController<ObservableList<Product
     @FXML
     public TableColumn<Product, String> nameColumn;
     @FXML
-    public TableColumn<Product, String> priceColumn;
+    public TableColumn<Product, String> unitPriceColumn;
     @FXML
     public TableColumn<Product, String> manufacturerColumn;
     @FXML
@@ -55,32 +58,49 @@ public class ProductListController implements IController<ObservableList<Product
 
     @FXML
     private void initialize() {
-        //productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
         ProductDao productDao = new ProductDao();
-        data =  productDao.listAll();
-        productTable.setItems(data);
-        if(productTable != null){
-            System.out.println("lolllllllllllllllll" + data.size());
-            System.out.println(data.get(0).getName());
-        }
+        ObservableList<Product> products =  productDao.listAll();
+        productTable.setItems(products);
+        
+        TableColumn nameColumn = new TableColumn("Name");
+        TableColumn unitPriceColumn = new TableColumn("Price");
+        TableColumn categoryColumn = new TableColumn("Category");
+        TableColumn manufacturerColumn = new TableColumn("Manufacturer");
+        TableColumn onPrescriptionColumn = new TableColumn("On prescription");
+        TableColumn supplierColumn = new TableColumn("Supplier");
 
-        //nameColumn.setCellValueFactory("lol");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("categories"));
+        manufacturerColumn.setCellValueFactory(new PropertyValueFactory<>("manufacturer"));
+        onPrescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("onPrescription"));
+        supplierColumn.setCellValueFactory(new PropertyValueFactory<>("supplier"));
 
-        nameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getName()));
-        priceColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getUnitPrice() + " zł"));
-        categoryColumn.setCellValueFactory(dataValue -> {
-            StringBuilder builder = new StringBuilder();
-            dataValue.getValue().getCategories().forEach(category -> {
-                builder.append(category);
-                builder.append(", ");
-            });
-            return new SimpleStringProperty(builder.toString());
-        });
-        manufacturerColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getManufacturer()));
-        onPrescriptionColumn.setCellValueFactory(dataValue -> {
-            String text = dataValue.getValue().isOnPrescription() ? "yes" : "no";
-            return new SimpleStringProperty(text);
-        });
+        productTable.setItems(products);
+        productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        productTable.getColumns().addAll(nameColumn);
+        productTable.getColumns().addAll(unitPriceColumn);
+        productTable.getColumns().addAll(categoryColumn);
+        productTable.getColumns().addAll(manufacturerColumn);
+        productTable.getColumns().addAll(onPrescriptionColumn);
+        productTable.getColumns().addAll(supplierColumn);
+
+        // nameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getName()));
+        // priceColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getUnitPrice() + " zł"));
+        // categoryColumn.setCellValueFactory(dataValue -> {
+        //     StringBuilder builder = new StringBuilder();
+        //     dataValue.getValue().getCategories().forEach(category -> {
+        //         builder.append(category);
+        //         builder.append(", ");
+        //     });
+        //     return new SimpleStringProperty(builder.toString());
+        // });
+        // manufacturerColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getManufacturer()));
+        // onPrescriptionColumn.setCellValueFactory(dataValue -> {
+        //     String text = dataValue.getValue().isOnPrescription() ? "yes" : "no";
+        //     return new SimpleStringProperty(text);
+        // });
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(productTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
@@ -88,12 +108,18 @@ public class ProductListController implements IController<ObservableList<Product
 
     public void handleDeleteAction(ActionEvent event) {
         data.removeAll(productTable.getSelectionModel().getSelectedItems());
+        Product product = productTable.getSelectionModel().getSelectedItem();
+        ProductDao productDao = new ProductDao();
+        productDao.deleteById(Product.class, product.getId());
     }
 
     public void handleEditAction(ActionEvent event) {
         Product product = productTable.getSelectionModel().getSelectedItem();
+        ProductDao productDao = new ProductDao();
+        
         if (product != null) {
             appController.showDialog(product, EditProduct, "Edit product");
+            productDao.update(product);
         }
         productTable.refresh();
     }

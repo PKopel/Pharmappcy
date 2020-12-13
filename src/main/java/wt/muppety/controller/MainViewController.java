@@ -9,6 +9,7 @@ import wt.muppety.model.Product;
 import java.util.Optional;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
+import wt.muppety.dao.ProductDao;
 import wt.muppety.dao.TransactionDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,7 +40,10 @@ public class MainViewController implements IController<Void> {
     }
 
     public void handleProductListAction(ActionEvent event) {
-        appController.showPane(MockData.products, ProductList);
+        ProductDao productDao = new ProductDao();
+        ObservableList<Product> products = productDao.listAll();
+        appController.showPane(products, ProductList);
+        // appController.showPane(MockData.products, ProductList);
     }
 
     public void handleAddTransactionAction(ActionEvent event) {

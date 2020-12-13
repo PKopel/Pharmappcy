@@ -3,6 +3,8 @@ package wt.muppety.dao;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Supplier;
 
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,20 +42,18 @@ public class SupplierDao extends BaseDao<Supplier> {
         return Optional.empty();
     }
 
-    public Optional<List<Supplier>> listAll() {
+    public ObservableList<Supplier> listAll() {
+
         try{ 
-            List<Supplier> suppliers = currentSession().createQuery("FROM Supplier").list();
-            System.out.println("list all suppliers");
-            for(Supplier supplier : suppliers){
-                System.out.println(supplier.getCompanyName());
-            }
-            
-            return Optional.of(suppliers);
+            ObservableList<Supplier> suppliers = FXCollections.observableArrayList(currentSession().createQuery("FROM Supplier").list());            
+            return suppliers;
+            //return Optional.of(categories);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return Optional.empty();
+        return null;
+        //return Optional.empty();
     }
 
 }
