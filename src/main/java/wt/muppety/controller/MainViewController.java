@@ -39,11 +39,7 @@ public class MainViewController implements IController<Void> {
     @FXML
     public Button loginButton;
 
-    @FXML
-    public Button addTransaction;
     private AppController appController;
-    private ObservableList<Transaction> data = FXCollections.observableArrayList();
-
     private ObservableList<Transaction> data = FXCollections.observableArrayList();
 
 

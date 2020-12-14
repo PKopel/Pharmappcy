@@ -1,6 +1,10 @@
 package wt.muppety.model;
 
+import wt.muppety.authentication.Permission;
+
 import javax.persistence.*;
+import java.lang.reflect.Field;
+import java.util.BitSet;
 
 @Embeddable
 public class Permissions {
@@ -16,6 +20,14 @@ public class Permissions {
     public boolean canModerateDB = false;
 
     public Permissions() {
+    }
+
+    public BitSet asBitSet(){
+        BitSet ret = new BitSet(Permission.values().length);
+        for (Field f : this.getClass().getDeclaredFields()){
+            ret.set(Permission.valueOf(f.getName()).value());
+        }
+        return ret;
     }
 
 }

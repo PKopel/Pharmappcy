@@ -1,6 +1,7 @@
 package wt.muppety.model;
 
 import javax.persistence.*;
+import java.util.BitSet;
 import java.util.Objects;
 
 @Entity
@@ -78,6 +79,9 @@ public class Employee {
         return permissions.canModerateDB;
     }
 
+    public BitSet permissionsBitSet(){
+        return permissions.asBitSet();
+    }
 
 
     @Override
