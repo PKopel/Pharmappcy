@@ -26,9 +26,10 @@ public abstract class BaseDao<T> {
 
     // should be used as boolean result = deleteById(Product.class,product.getId)
     public boolean deleteById(Class<?> type, int id) {
+        System.out.println(id);
         final Session session = SessionService.getSession();
         final Transaction tx = session.beginTransaction();
-        Object persistentInstance = session.load(type, id + 1);
+        Object persistentInstance = session.load(type, id);
         if (persistentInstance != null) {
             session.delete(persistentInstance);
             tx.commit();

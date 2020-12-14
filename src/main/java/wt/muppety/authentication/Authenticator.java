@@ -43,7 +43,7 @@ public class Authenticator {
         return false;*/
         _instance.isLoggedIn=true;
         _instance.grantAllPermissions();
-        return true;
+        return false;
     }
 
     private static boolean hasPermissionTo(Permission p)

@@ -15,6 +15,7 @@ import wt.muppety.model.Category;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import wt.muppety.model.Supplier;
 import wt.muppety.model.Category;
@@ -26,6 +27,7 @@ import wt.muppety.dao.BaseDao;
 import static wt.muppety.view.LayoutName.*;
 import java.util.List;
 import java.util.Observable;
+import java.util.stream.Collectors;
 
 public class ProductListController implements IController<ObservableList<Product>> {
 
@@ -107,10 +109,15 @@ public class ProductListController implements IController<ObservableList<Product
     }
 
     public void handleDeleteAction(ActionEvent event) {
-        data.removeAll(productTable.getSelectionModel().getSelectedItems());
-        Product product = productTable.getSelectionModel().getSelectedItem();
         ProductDao productDao = new ProductDao();
-        productDao.deleteById(Product.class, product.getId());
+        System.out.println(productTable.getSelectionModel().getSelectedItems().size());
+        for (Product product : new ArrayList<>(productTable.getSelectionModel().getSelectedItems())){
+            productDao.deleteById(Product.class, product.getId());
+        }
+        data.removeAll(productTable.getSelectionModel().getSelectedItems());
+
+
+
     }
 
     public void handleEditAction(ActionEvent event) {
