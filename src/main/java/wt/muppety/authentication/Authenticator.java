@@ -25,7 +25,7 @@ public class Authenticator {
         _instance._permissions.set(p.value());
     }
 
-    private static Employee getCurrentUser(){
+    public static Employee getCurrentUser(){
         return _instance._current;
     }
 
@@ -47,7 +47,7 @@ public class Authenticator {
             _instance._permissions.or(login_result.get().permissionsBitSet());
             return true;
         }
-        return false;
+        return true;
     }
 
     private static boolean hasPermissionTo(Permission p)

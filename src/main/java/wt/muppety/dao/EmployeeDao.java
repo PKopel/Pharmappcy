@@ -41,8 +41,11 @@ public class EmployeeDao extends BaseDao<Employee> {
     }
 
     public ObservableList<Employee> listAll() {
-        try{
-            return FXCollections.observableArrayList(currentSession().createQuery("FROM Product").list());
+        try{ 
+            ObservableList<Employee> employees = FXCollections.observableArrayList(currentSession().createQuery("FROM Employee").list());
+
+            
+            return employees;
         }catch (Exception e){
             e.printStackTrace();
         }

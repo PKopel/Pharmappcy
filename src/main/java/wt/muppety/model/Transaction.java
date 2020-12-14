@@ -3,6 +3,7 @@ package wt.muppety.model;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +18,7 @@ public class Transaction {
         this.quantity = quantity;
         this.value = value;
         this.datetime = datetime;
+        
     }
 
     public Transaction(){}
@@ -61,6 +63,12 @@ public class Transaction {
         return datetime;
     }
 
+
+    public String getFormattedDatetime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER);
+        return this.datetime.format(formatter);
+    }
+
     public void setDatetime(LocalDateTime datetime) {
         this.datetime = datetime;
     }
@@ -93,4 +101,6 @@ public class Transaction {
     private double value;
     @Column(name="datetime", nullable = false)
     private LocalDateTime datetime;
+
+    private static final String DATE_FORMATTER= "yyyy-MM-dd HH:mm:ss";
 }

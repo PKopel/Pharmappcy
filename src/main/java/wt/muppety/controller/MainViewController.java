@@ -9,11 +9,13 @@ import wt.muppety.authentication.LoginData;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Transaction;
 import wt.muppety.model.Product;
+import wt.muppety.model.Employee;
 import java.util.Optional;
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import wt.muppety.dao.ProductDao;
 import wt.muppety.dao.TransactionDao;
+import wt.muppety.dao.EmployeeDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -53,7 +55,9 @@ public class MainViewController implements IController<Void> {
     }
 
     public void handleEmployeeListAction(ActionEvent event) {
-        appController.showPane(MockData.employees, EmployeeList);
+        EmployeeDao employeeDao = new EmployeeDao();
+        ObservableList<Employee> employees = employeeDao.listAll();
+        appController.showPane(employees, EmployeeList);
     }
 
     public void handleProductListAction(ActionEvent event) {
@@ -64,7 +68,6 @@ public class MainViewController implements IController<Void> {
     }
 
     public void handleAddTransactionAction(ActionEvent event) {
-        System.out.println("handle add transaction action aCtiVaTEd");
         Transaction newTransaction = new Transaction();
         if (appController.showDialog(newTransaction, EditTransaction, "Add transaction")) {
             data.add(newTransaction);

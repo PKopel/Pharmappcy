@@ -2,6 +2,7 @@ package wt.muppety.controller;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class EmployeeListController implements IController<ObservableList<Employ
     @FXML
     public Button backButton;
     private AppController appController;
-    private ObservableList<Employee> data;
+    private ObservableList<Employee> data = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {

@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import wt.muppety.model.Transaction;
 import wt.muppety.model.Product;
 import wt.muppety.dao.TransactionDao;
+import wt.muppety.authentication.Authenticator;
 import wt.muppety.dao.ProductDao;
 
 import javafx.collections.ObservableList;
@@ -37,7 +38,8 @@ public class EditTransactionDialogPresenter extends AbstractDialogPresenter<Tran
         Product product = productComboBox.getValue();
         data.setProduct(product);
         data.setDatetime(LocalDateTime.now());
-        data.setValue(product.getUnitPrice() * data.getQuantity());
+        data.setValue((double) (product.getUnitPrice() * data.getQuantity()));
+        data.setEmployee(Authenticator.getCurrentUser());
     }
 
     @Override

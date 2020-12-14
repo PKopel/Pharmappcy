@@ -34,11 +34,7 @@ public class ProductDao extends BaseDao<Product> {
 
     public ObservableList<Product> listAll() {
         try{ 
-            ObservableList<Product> products = FXCollections.observableArrayList(currentSession().createQuery("FROM Product").list());            System.out.println("list all products");
-            // for(Product product : products){
-            //     System.out.println("Product.getName()");
-            // }
-            
+            ObservableList<Product> products = FXCollections.observableArrayList(currentSession().createQuery("FROM Product").list());
             return products;
         }catch (Exception e){
             e.printStackTrace();
