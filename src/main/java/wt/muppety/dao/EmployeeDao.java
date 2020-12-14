@@ -21,7 +21,6 @@ public class EmployeeDao extends BaseDao<Employee> {
 
     public Optional<Employee> create(String firstname, String lastname, String position, String login, String password){
         Employee employee = new Employee(firstname,lastname,position,login,password);
-        employee.setPermissions(true, true, true, true);
         try{
             this.save(employee);
             return findById(employee.getId());
@@ -33,7 +32,6 @@ public class EmployeeDao extends BaseDao<Employee> {
 
     public Optional<Employee> create(Employee employee){
         try{
-            employee.setPermissions(true, true, true, true);
             this.save(employee);
             return findById(employee.getId());
         }catch (Exception e){
@@ -43,13 +41,8 @@ public class EmployeeDao extends BaseDao<Employee> {
     }
 
     public ObservableList<Employee> listAll() {
-        try{ 
-            ObservableList<Employee> employees = FXCollections.observableArrayList(currentSession().createQuery("FROM Product").list());            System.out.println("list all products");
-            // for(Product product : products){
-            //     System.out.println("Product.getName()");
-            // }
-            
-            return employees;
+        try{
+            return FXCollections.observableArrayList(currentSession().createQuery("FROM Product").list());
         }catch (Exception e){
             e.printStackTrace();
         }

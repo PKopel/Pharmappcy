@@ -47,9 +47,9 @@ public class EmployeeListController implements IController<ObservableList<Employ
         ObservableList<Employee> employees =  employeeDao.listAll();
         employeeTable.setItems(employees);
         
-        TableColumn firstNameColumn = new TableColumn("First name");
-        TableColumn lastNameColumn = new TableColumn("Last name");
-        TableColumn positionColumn = new TableColumn("Position");
+        TableColumn<Employee,String> firstNameColumn = new TableColumn<>("First name");
+        TableColumn<Employee,String> lastNameColumn = new TableColumn<>("Last name");
+        TableColumn<Employee,String> positionColumn = new TableColumn<>("Position");
 
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));

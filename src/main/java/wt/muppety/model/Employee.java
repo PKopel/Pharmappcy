@@ -10,16 +10,15 @@ public class Employee {
     public static final String TABLE_NAME = "Employee";
 
     public Employee(String firstname, String lastname, String position, String login, String password){
+        this();
         this.firstname = firstname;
         this.lastname = lastname;
         this.position = position;
         this.login = login;
         this.password = password;
-        this.permissions = new Permissions();
-        setPermissions(true, true, true, true);
     }
 
-    public Employee(){}
+    public Employee(){setPermissions(true, true, true, true);}
 
     public int getId() {
         return id;
@@ -122,7 +121,7 @@ public class Employee {
     @Column(name = "password", nullable = false, length = 50)
     private String password;
     @Embedded
-    private Permissions permissions;
+    private final Permissions permissions = new Permissions();
 
 
 

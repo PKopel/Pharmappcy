@@ -3,14 +3,17 @@ package wt.muppety.authentication;
 import javafx.scene.control.Button;
 
 import javafx.beans.binding.Bindings;
+import wt.muppety.dao.EmployeeDao;
+import wt.muppety.model.Employee;
 
 import java.util.Arrays;
 import java.util.BitSet;
+import java.util.Optional;
 
 public class Authenticator {
 
     private static final Authenticator _instance = new Authenticator();
-    private String _login;
+    private Employee _current;
     private boolean isLoggedIn = false;
     private final BitSet _permissions = new BitSet(Permission.values().length);
 
@@ -20,6 +23,10 @@ public class Authenticator {
     private void grantPermission(Permission p)
     {
         _instance._permissions.set(p.value());
+    }
+
+    private static Employee getCurrentUser(){
+        return _instance._current;
     }
 
     public static boolean isLoggedIn(){
@@ -33,17 +40,14 @@ public class Authenticator {
 
     public static boolean logIn(LoginData data)
     {
-        /*Optional<Employee> login_result = new EmployeeDao().findByLogin(data);
+        Optional<Employee> login_result = new EmployeeDao().findByLogin(data);
         if(login_result.isPresent()){
             _instance.isLoggedIn=true;
-            _instance._login = data.getLogin();
+            _instance._current = login_result.get();
             _instance._permissions.or(login_result.get().permissionsBitSet());
             return true;
         }
-        return false;*/
-        _instance.isLoggedIn=true;
-        _instance.grantAllPermissions();
-        return true;
+        return false;
     }
 
     private static boolean hasPermissionTo(Permission p)

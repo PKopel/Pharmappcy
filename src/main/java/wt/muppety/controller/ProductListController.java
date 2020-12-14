@@ -65,12 +65,12 @@ public class ProductListController implements IController<ObservableList<Product
         ObservableList<Product> products =  productDao.listAll();
         productTable.setItems(products);
         
-        TableColumn nameColumn = new TableColumn("Name");
-        TableColumn unitPriceColumn = new TableColumn("Price");
-        TableColumn categoryColumn = new TableColumn("Category");
-        TableColumn manufacturerColumn = new TableColumn("Manufacturer");
-        TableColumn onPrescriptionColumn = new TableColumn("On prescription");
-        TableColumn supplierColumn = new TableColumn("Supplier");
+        TableColumn<Product,String> nameColumn = new TableColumn<>("Name");
+        TableColumn<Product,Float> unitPriceColumn = new TableColumn<>("Price");
+        TableColumn<Product,Category> categoryColumn = new TableColumn<>("Category");
+        TableColumn<Product,String> manufacturerColumn = new TableColumn<>("Manufacturer");
+        TableColumn<Product,Boolean> onPrescriptionColumn = new TableColumn<>("On prescription");
+        TableColumn<Product,String> supplierColumn = new TableColumn<>("Supplier");
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
