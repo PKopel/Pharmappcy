@@ -14,6 +14,8 @@ public class Permissions {
     public boolean canBrowseDB = false;
     @Column(name = "canModerateDB", nullable = false)
     public boolean canModerateDB = false;
-    public Permissions() {}
+
+    public Permissions() {
+    }
 
 }

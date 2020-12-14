@@ -21,10 +21,11 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
+import static wt.muppety.view.LayoutName.EmployeeList;
+import static wt.muppety.view.LayoutName.ProductList;
 import javafx.collections.FXCollections;
 
-import static wt.muppety.authentication.Permission.canBrowseDB;
-import static wt.muppety.authentication.Permission.canModerateDB;
+import static wt.muppety.authentication.Permission.*;
 import static wt.muppety.view.LayoutName.*;
 
 public class MainViewController implements IController<Void> {
@@ -34,11 +35,15 @@ public class MainViewController implements IController<Void> {
     @FXML
     public Button productListButton;
     @FXML
+    public Button addTransaction;
+    @FXML
     public Button loginButton;
 
     @FXML
     public Button addTransaction;
     private AppController appController;
+    private ObservableList<Transaction> data = FXCollections.observableArrayList();
+
     private ObservableList<Transaction> data = FXCollections.observableArrayList();
 
 
@@ -70,6 +75,10 @@ public class MainViewController implements IController<Void> {
             TransactionDao transactionDao = new TransactionDao();
             Optional<Transaction> transaction = transactionDao.create(newTransaction);
         }
+        ProductDao productDao = new ProductDao();
+        ObservableList<Product> products = productDao.listAll();
+        appController.showPane(products, ProductList);
+        // appController.showPane(MockData.products, ProductList);
     }
 
     public void handleLogin(ActionEvent event) {
