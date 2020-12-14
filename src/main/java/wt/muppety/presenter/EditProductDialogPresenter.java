@@ -1,6 +1,5 @@
 package wt.muppety.presenter;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -68,5 +67,4 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
         manufacturerTextField.setText(data.getManufacturer());
         onPrescriptionCheckBox.setSelected(data.getOnPrescription());
     }
-
 }

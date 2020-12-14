@@ -20,10 +20,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import static wt.muppety.view.LayoutName.*;
 
-import static wt.muppety.view.LayoutName.EmployeeList;
-import static wt.muppety.view.LayoutName.ProductList;
+import javafx.collections.FXCollections;
+
+import static wt.muppety.authentication.Permission.canBrowseDB;
+import static wt.muppety.authentication.Permission.canModerateDB;
+import static wt.muppety.view.LayoutName.*;
 
 public class MainViewController implements IController<Void> {
 
@@ -44,6 +46,7 @@ public class MainViewController implements IController<Void> {
     private void initialize() {
         Authenticator.guardButton(employeeListButton,canBrowseDB);
         Authenticator.guardButton(productListButton,canBrowseDB);
+        Authenticator.guardButton(addTransaction,canModerateDB);
         loginButton.managedProperty().bind(Bindings.createBooleanBinding(Authenticator::isLoggedIn));
         loginButton.visibleProperty().bind(Bindings.createBooleanBinding(Authenticator::isLoggedIn));
     }
@@ -69,6 +72,15 @@ public class MainViewController implements IController<Void> {
         }
     }
 
+    public void handleLogin(ActionEvent event) {
+        LoginData data = new LoginData();
+        if(this.appController.showDialog(data,Login,"Sign in")){
+            Authenticator.logIn(data);
+            this.initialize();
+        }
+
+    }
+
     @Override
     public void setAppController(AppController appController) {
         this.appController = appController;
@@ -77,14 +89,5 @@ public class MainViewController implements IController<Void> {
     @Override
     public void setData(Void data) {
 // operation ignored
-    }
-
-    public void handleLogin(ActionEvent event) {
-        LoginData data = new LoginData();
-        if(this.appController.showDialog(data,Login,"Sign in")){
-            Authenticator.logIn(data);
-            this.initialize();
-        }
-
     }
 }

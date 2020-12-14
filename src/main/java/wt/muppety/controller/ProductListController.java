@@ -11,7 +11,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import wt.muppety.authentication.Authenticator;
 import wt.muppety.model.Category;
 import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
@@ -24,7 +23,6 @@ import wt.muppety.dao.SupplierDao;
 import wt.muppety.dao.CategoryDao;
 import wt.muppety.dao.BaseDao;
 
-import static wt.muppety.authentication.Permission.*;
 import static wt.muppety.view.LayoutName.*;
 import java.util.List;
 import java.util.Observable;
@@ -60,11 +58,11 @@ public class ProductListController implements IController<ObservableList<Product
 
     @FXML
     private void initialize() {
-        //productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products =  productDao.listAll();
         productTable.setItems(products);
-
+        
         TableColumn nameColumn = new TableColumn("Name");
         TableColumn unitPriceColumn = new TableColumn("Price");
         TableColumn categoryColumn = new TableColumn("Category");
@@ -104,11 +102,6 @@ public class ProductListController implements IController<ObservableList<Product
         //     return new SimpleStringProperty(text);
         // });
 
-        Authenticator.guardButton(addProductButton, canModerateDB);
-        Authenticator.guardButton(editButton, canModerateDB);
-        Authenticator.guardButton(deleteButton, canModerateDB);
-        Authenticator.guardButton(addCategoryButton, canModerateDB);
-
         deleteButton.disableProperty().bind(Bindings.isEmpty(productTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
     }
@@ -123,7 +116,7 @@ public class ProductListController implements IController<ObservableList<Product
     public void handleEditAction(ActionEvent event) {
         Product product = productTable.getSelectionModel().getSelectedItem();
         ProductDao productDao = new ProductDao();
-
+        
         if (product != null) {
             appController.showDialog(product, EditProduct, "Edit product");
             productDao.update(product);
