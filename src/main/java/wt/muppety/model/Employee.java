@@ -15,6 +15,8 @@ public class Employee {
         this.position = position;
         this.login = login;
         this.password = password;
+        this.permissions = new Permissions();
+        setPermissions(true, true, true, true);
     }
 
     public Employee(){}

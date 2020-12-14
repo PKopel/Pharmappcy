@@ -54,7 +54,7 @@ public class ProductListController implements IController<ObservableList<Product
     @FXML
     public Button backButton;
     @FXML
-    public Button lilButton;
+    public Button addSupplierButton;
     private AppController appController;
     private ObservableList<Product> data = FXCollections.observableArrayList();
 

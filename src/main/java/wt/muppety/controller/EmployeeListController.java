@@ -11,6 +11,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.model.Employee;
+import wt.muppety.dao.EmployeeDao;
+import java.util.Optional;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import static wt.muppety.authentication.Permission.canModerateDB;
 import static wt.muppety.view.LayoutName.EditUser;
@@ -39,11 +42,31 @@ public class EmployeeListController implements IController<ObservableList<Employ
 
     @FXML
     private void initialize() {
-        employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        firstNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getFirstname()));
-        lastNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getLastname()));
-        positionColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getPosition()));
+        EmployeeDao employeeDao = new EmployeeDao();
+        ObservableList<Employee> employees =  employeeDao.listAll();
+        employeeTable.setItems(employees);
+        
+        TableColumn firstNameColumn = new TableColumn("First name");
+        TableColumn lastNameColumn = new TableColumn("Last name");
+        TableColumn positionColumn = new TableColumn("Position");
+
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+
+        employeeTable.setItems(employees);
+        employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        employeeTable.getColumns().addAll(firstNameColumn);
+        employeeTable.getColumns().addAll(lastNameColumn);
+        employeeTable.getColumns().addAll(positionColumn);
+
+
+        // employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        // firstNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getFirstname()));
+        // lastNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getLastname()));
+        // positionColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getPosition()));
 
         Authenticator.guardButton(addButton, canModerateDB);
         Authenticator.guardButton(editButton, canModerateDB);
@@ -55,12 +78,18 @@ public class EmployeeListController implements IController<ObservableList<Employ
 
     public void handleDeleteAction(ActionEvent event) {
         data.removeAll(employeeTable.getSelectionModel().getSelectedItems());
+        Employee employee = employeeTable.getSelectionModel().getSelectedItem();
+        EmployeeDao employeeDao = new EmployeeDao();
+        employeeDao.deleteById(Employee.class, employee.getId());
+    
     }
 
     public void handleEditAction(ActionEvent event) {
         Employee user = employeeTable.getSelectionModel().getSelectedItem();
+        EmployeeDao employeeDao = new EmployeeDao();
         if (user != null) {
             appController.showDialog(user, EditUser, "Edit user");
+            employeeDao.update(user);
         }
         employeeTable.refresh();
     }
@@ -69,7 +98,10 @@ public class EmployeeListController implements IController<ObservableList<Employ
         Employee newEmployee = new Employee();
         if (appController.showDialog(newEmployee, EditUser, "Add user")) {
             data.add(newEmployee);
+            EmployeeDao employeeDao = new EmployeeDao();
+            Optional<Employee> employee = employeeDao.create(newEmployee);
         }
+
     }
 
     public void handleBackAction(ActionEvent event) {

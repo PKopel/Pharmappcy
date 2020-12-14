@@ -41,11 +41,6 @@
     </top>
     <center>
         <TableView fx:id="employeeTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First name"/>
-                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last name"/>
-                <TableColumn fx:id="positionColumn" prefWidth="75.0" text="Position"/>
-            </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
             </columnResizePolicy>
