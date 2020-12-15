@@ -58,14 +58,38 @@ W projekcie wykorzystano wzorce projektowe:
 
 Po uruchomieniu aplikacji otwiera się okno logowania:
 
-![gui_1](docs/pictures/gui_1.png)
+![gui_login](docs/pictures/login.png)
 
-Po przejściu do Employee list mamy widok na listę pracowników z danymi: imię, nazwisko i pozycja. Mamy opcję dodania pracownika oraz usunięcia/edytowania wpisu z listy. 
+Do logowania trzeba wykorzystać dane użytkownika znajdującego się już w bazie, np. login 'user'
+hasło 'user'.
+
+
+Po przejściu do Employee list otwiera się widok na listę pracowników z danymi: imię, nazwisko i pozycja. Mamy opcję 
+dodania pracownika oraz usunięcia/edytowania wpisu z listy.
+
+![gui_employee_list](docs/pictures/employee_list.png)
+
 Po wybraniu opcji Add uruchamia się okno Add user z polami z klasy Employee do wypełnienia. Po wybraniu opcji Edit uruchamia się okno Edit user z polami wstępnie wypełnionymi. Po kliknięciu na konkretny wpis na liście aktywuje się opcja Delete i wpis jest usuwany z listy.
  Widok po dodaniu jednego pracownika:
 
-![gui_2](docs/pictures/gui_2.png)
+![gui_add_employee](docs/pictures/add_user.png)
 
-Po przejściu do Product list mamy widok na listę produktów z danymi: nazwa, cena, kategoria, wytwórca oraz informacja, czy lek jest na receptę. Mamy opcję dodania produktu, dodania kategorii oraz usunięcia/edytowania wpisu z listy. Opcje - analogiczne jak w Employee list. Widok dodawania produktu:
+Po przejściu do Product list otwiera się widok na listę produktów z danymi: nazwa, cena, kategoria, wytwórca, 
+informacja, czy lek jest na receptę oraz dostawca. Mamy opcję dodania/usunięcia/edytowania produktu, dodania kategorii oraz 
+dodania dostawcy do listy.
 
-![gui_3](docs/pictures/gui_3.png)
+![gui_product_list](docs/pictures/product_list.png)
+
+Widok dodawania produktu:
+
+![gui_add_product](docs/pictures/add_product.png)
+
+Widok dodawania dostawcy:
+
+![gui_add_supplier](docs/pictures/add_supplier.png)
+
+Trzecią opcją w głównym oknie jest dodanie nowej transakcji:
+
+![gui_add_transaction](docs/pictures/add_transaction.png)
+
+Zamknięcie okna nowej transakcji powoduje otwarcie widoku listy produktów.
