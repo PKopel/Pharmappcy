@@ -10,6 +10,9 @@ import wt.muppety.view.LayoutName;
 
 import java.io.IOException;
 
+/**
+ * Main class responsible for loading GUI layouts.
+ */
 public class AppController {
     private final String pathToResources = "../../../";
 
@@ -34,7 +37,7 @@ public class AppController {
             loader.setLocation(AppController.class.getResource(pathToResources + layoutName.getPath()));
             BorderPane rootLayout = loader.load();
 
-            IController<T> controller = loader.getController();
+            AbstractController<T> controller = loader.getController();
             controller.setAppController(this);
             controller.setData(data);
 
@@ -56,7 +59,7 @@ public class AppController {
      * @param data       Data required by layout controller
      * @param layoutName Enum LayoutName associated with .fxml file to display
      * @param title      Title for dialog window
-     * @return
+     * @return           true if presenter accepts data provided in dialog, false otherwise
      */
     public <T> boolean showDialog(T data, LayoutName layoutName, String title) {
         try {

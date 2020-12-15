@@ -1,14 +1,9 @@
 package wt.muppety.dao;
 
-import wt.muppety.model.Category;
-import wt.muppety.model.Supplier;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
-
-import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
-import java.util.List;
+import javafx.collections.ObservableList;
+import wt.muppety.model.Category;
+
 import java.util.Optional;
 
 public class CategoryDao extends BaseDao<Category> {
@@ -33,22 +28,10 @@ public class CategoryDao extends BaseDao<Category> {
         return Optional.empty();
     }
 
-    public ObservableList<Category> listAll() {
-
-        try{ 
-            ObservableList<Category> categories = FXCollections.observableArrayList(currentSession().createQuery("FROM Category").list());            
-            return categories;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return null;
-        //return Optional.empty();
-    }
-
     public Optional<Category> findById(final int indexNumber) {
         try {
-            Category category = currentSession().createQuery("SELECT c FROM Category c WHERE c.id = :id", Category.class)
+            Category category = currentSession()
+                    .createQuery("SELECT c FROM Category c WHERE c.id = :id", Category.class)
                     .setParameter("id", indexNumber).getSingleResult();
             return Optional.of(category);
         } catch (Exception e) {
@@ -59,13 +42,28 @@ public class CategoryDao extends BaseDao<Category> {
 
     public Optional<Category> findByName(final String name) {
         try {
-            Category category = currentSession().createQuery("SELECT c FROM Category c WHERE c.name = :name", Category.class)
+            Category category = currentSession()
+                    .createQuery("SELECT c FROM Category c WHERE c.name = :name", Category.class)
                     .setParameter("name", name).getSingleResult();
             return Optional.of(category);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    @Override
+    public ObservableList<Category> listAll() {
+
+        try {
+            return FXCollections.observableArrayList(
+                    currentSession().createQuery("FROM Category", Category.class).list()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 }

@@ -1,7 +1,6 @@
 package wt.muppety.controller;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,17 +9,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import wt.muppety.authentication.Authenticator;
-import wt.muppety.model.Employee;
-import wt.muppety.dao.EmployeeDao;
-import java.util.Optional;
 import javafx.scene.control.cell.PropertyValueFactory;
+import wt.muppety.authentication.Authenticator;
+import wt.muppety.dao.EmployeeDao;
+import wt.muppety.model.Employee;
+
+import java.util.Optional;
 
 import static wt.muppety.authentication.Permission.canModerateDB;
 import static wt.muppety.view.LayoutName.EditUser;
-import static wt.muppety.view.LayoutName.MainView;
 
-public class EmployeeListController implements IController<ObservableList<Employee>> {
+/**
+ * Controller for layout presenting employee list.
+ * Allows to add, remove and edit employee entries in system's database.
+ */
+public class EmployeeListController extends AbstractController<ObservableList<Employee>> {
 
     @FXML
     public TableView<Employee> employeeTable;
@@ -38,19 +41,14 @@ public class EmployeeListController implements IController<ObservableList<Employ
     public Button deleteButton;
     @FXML
     public Button backButton;
-    private AppController appController;
     private ObservableList<Employee> data = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
 
         EmployeeDao employeeDao = new EmployeeDao();
-        ObservableList<Employee> employees =  employeeDao.listAll();
+        ObservableList<Employee> employees = employeeDao.listAll();
         employeeTable.setItems(employees);
-        
-        TableColumn<Employee,String> firstNameColumn = new TableColumn<>("First name");
-        TableColumn<Employee,String> lastNameColumn = new TableColumn<>("Last name");
-        TableColumn<Employee,String> positionColumn = new TableColumn<>("Position");
 
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
@@ -58,16 +56,6 @@ public class EmployeeListController implements IController<ObservableList<Employ
 
         employeeTable.setItems(employees);
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        employeeTable.getColumns().addAll(firstNameColumn);
-        employeeTable.getColumns().addAll(lastNameColumn);
-        employeeTable.getColumns().addAll(positionColumn);
-
-
-        // employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        // firstNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getFirstname()));
-        // lastNameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getLastname()));
-        // positionColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getPosition()));
 
         Authenticator.guardButton(addButton, canModerateDB);
         Authenticator.guardButton(editButton, canModerateDB);
@@ -81,8 +69,8 @@ public class EmployeeListController implements IController<ObservableList<Employ
         data.removeAll(employeeTable.getSelectionModel().getSelectedItems());
         Employee employee = employeeTable.getSelectionModel().getSelectedItem();
         EmployeeDao employeeDao = new EmployeeDao();
-        employeeDao.deleteById(Employee.class, employee.getId());
-    
+        boolean deleted = employeeDao.deleteById(Employee.class, employee.getId());
+        if (!deleted) System.out.println("Error while deleting " + employee);
     }
 
     public void handleEditAction(ActionEvent event) {
@@ -98,15 +86,11 @@ public class EmployeeListController implements IController<ObservableList<Employ
     public void handleAddAction(ActionEvent event) {
         Employee newEmployee = new Employee();
         if (appController.showDialog(newEmployee, EditUser, "Add user")) {
-            data.add(newEmployee);
             EmployeeDao employeeDao = new EmployeeDao();
             Optional<Employee> employee = employeeDao.create(newEmployee);
+            data.add(employee.orElseThrow());
         }
 
-    }
-
-    public void handleBackAction(ActionEvent event) {
-        appController.showPane(null, MainView);
     }
 
     @Override

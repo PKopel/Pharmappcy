@@ -6,7 +6,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import wt.muppety.model.Category;
 import wt.muppety.model.Supplier;
-import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
 
 import wt.muppety.dao.CategoryDao;

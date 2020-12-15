@@ -6,10 +6,26 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name=Product.TABLE_NAME)
+@Table(name = Product.TABLE_NAME)
 public class Product {
 
     public static final String TABLE_NAME = "Product";
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Set<Category> categories;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Supplier supplier;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
+    @Column(name = "unitPrice", nullable = false)
+    private double unitPrice;
+    @Column(name = "onPrescription", nullable = false)
+    private boolean onPrescription;
+    @Column(name = "manfacturer", nullable = false, length = 50)
+    private String manufacturer;
 
     public Product(Supplier supplier, String name, double unitPrice, boolean onPrescription, String manufacturer) {
         this.categories = new HashSet<>();
@@ -89,26 +105,8 @@ public class Product {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return name;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id")
-    private int id;
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
-    private Set<Category> categories;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Supplier supplier;
-    @Column(name = "name", nullable = false, length = 50)
-    private String name;
-    @Column(name = "unitPrice",nullable = false)
-    private double unitPrice;
-    @Column(name = "onPrescription",nullable = false)
-    private boolean onPrescription;
-    @Column(name = "manfacturer", nullable = false, length = 50)
-    private String manufacturer;
 
 }

@@ -1,10 +1,11 @@
 package wt.muppety.dao;
 
-import javax.persistence.PersistenceException;
-
+import javafx.collections.ObservableList;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import wt.muppety.session.SessionService;
+
+import javax.persistence.PersistenceException;
 
 public abstract class BaseDao<T> {
     public void save(final T object) throws PersistenceException {
@@ -24,8 +25,15 @@ public abstract class BaseDao<T> {
         tx.commit();
     }
 
-    // should be used as boolean result = deleteById(Product.class,product.getId)
-    public boolean deleteById(Class<?> type, int id) {
+    /**
+     * Method to delete item from database by id.
+     * Should be used as boolean result = deleteById(Product.class,product.getId)
+     *
+     * @param type Class object of type of item to delete
+     * @param id   Id of object to delete
+     * @return     true if object of given id was deleted, false otherwise
+     */
+    public boolean deleteById(Class<T> type, int id) {
         System.out.println(id);
         final Session session = SessionService.getSession();
         final Transaction tx = session.beginTransaction();
@@ -37,6 +45,8 @@ public abstract class BaseDao<T> {
         }
         return false;
     }
+
+    public abstract ObservableList<T> listAll();
 
     public Session currentSession() {
         return SessionService.getSession();

@@ -10,6 +10,11 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Optional;
 
+/**
+ * Main class responsible for managing employee permissions in the system.
+ * Allows to log in user and check their permissions.
+ * Implements pattern Singleton.
+ */
 public class Authenticator {
 
     private static final Authenticator _instance = new Authenticator();
@@ -25,17 +30,17 @@ public class Authenticator {
         _instance._permissions.set(p.value());
     }
 
+    private void grantAllPermissions()
+    {
+        for(Permission p : Permission.values()) _instance.grantPermission(p);
+    }
+
     public static Employee getCurrentUser(){
         return _instance._current;
     }
 
     public static boolean isLoggedIn(){
         return !_instance.isLoggedIn;
-    }
-
-    private void grantAllPermissions()
-    {
-        for(Permission p : Permission.values()) _instance.grantPermission(p);
     }
 
     public static boolean logIn(LoginData data)

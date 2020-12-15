@@ -7,10 +7,10 @@
  *    May you share freely, never taking more than you give.
  *
  */
-package org.hibernate.dialect;
+package wt.muppety.org.hibernate.dialect;
 
-import org.hibernate.JDBCException;
 import org.hibernate.ScrollMode;
+import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.*;
 import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.identity.SQLiteDialectIdentityColumnSupport;
@@ -37,12 +37,66 @@ import java.sql.Types;
  * An SQL dialect for SQLite 3.
  */
 public class SQLiteDialect extends Dialect {
+    private static final SQLiteDialectIdentityColumnSupport IDENTITY_COLUMN_SUPPORT = new SQLiteDialectIdentityColumnSupport();
+    // limit/offset support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    private static final AbstractLimitHandler LIMIT_HANDLER = new AbstractLimitHandler() {
+        @Override
+        public String processSql(String sql, RowSelection selection) {
+            final boolean hasOffset = LimitHelper.hasFirstRow(selection);
+            return sql + (hasOffset ? " limit ? offset ?" : " limit ?");
+        }
+
+        @Override
+        public boolean supportsLimit() {
+            return true;
+        }
+
+        @Override
+        public boolean bindLimitParametersInReverseOrder() {
+            return true;
+        }
+    };
+
+    // database type mapping support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    private static final int SQLITE_BUSY = 5;
+
+    // IDENTITY support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    private static final int SQLITE_LOCKED = 6;
+    private static final int SQLITE_IOERR = 10;
+    private static final int SQLITE_CORRUPT = 11;
+    private static final int SQLITE_NOTFOUND = 12;
+    private static final int SQLITE_FULL = 13;
+    private static final int SQLITE_CANTOPEN = 14;
+    private static final int SQLITE_PROTOCOL = 15;
+
+  /*
+    @Override
+  public boolean dropTemporaryTableAfterUse() {
+    return true; // temporary tables are only dropped when the connection is closed. If the connection is pooled...
+  }
+  */
+
+    // current timestamp support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    private static final int SQLITE_TOOBIG = 18;
+    private static final int SQLITE_CONSTRAINT = 19;
+    private static final int SQLITE_MISMATCH = 20;
+
+    // SQLException support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    private static final int SQLITE_NOTADB = 26;
+    private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
+        @Override
+        protected String doExtractConstraintName(SQLException sqle) throws NumberFormatException {
+            final int errorCode = JdbcExceptionHelper.extractErrorCode(sqle);
+            if (errorCode == SQLITE_CONSTRAINT) {
+                return extractUsingTemplate("constraint ", " failed", sqle.getMessage());
+            }
+            return null;
+        }
+    };
     private final UniqueDelegate uniqueDelegate;
 
     public SQLiteDialect() {
         registerColumnType(Types.BIT, "boolean");
-        //registerColumnType(Types.FLOAT, "float");
-        //registerColumnType(Types.DOUBLE, "double");
         registerColumnType(Types.DECIMAL, "decimal");
         registerColumnType(Types.CHAR, "char");
         registerColumnType(Types.LONGVARCHAR, "longvarchar");
@@ -89,41 +143,16 @@ public class SQLiteDialect extends Dialect {
         uniqueDelegate = new SQLiteUniqueDelegate(this);
     }
 
-    // database type mapping support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
     @Override
     public String getCastTypeName(int code) {
         // FIXME
         return super.getCastTypeName(code);
     }
 
-    // IDENTITY support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    private static final SQLiteDialectIdentityColumnSupport IDENTITY_COLUMN_SUPPORT = new SQLiteDialectIdentityColumnSupport();
-
     @Override
     public IdentityColumnSupport getIdentityColumnSupport() {
         return IDENTITY_COLUMN_SUPPORT;
     }
-
-    // limit/offset support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private static final AbstractLimitHandler LIMIT_HANDLER = new AbstractLimitHandler() {
-        @Override
-        public String processSql(String sql, RowSelection selection) {
-            final boolean hasOffset = LimitHelper.hasFirstRow(selection);
-            return sql + (hasOffset ? " limit ? offset ?" : " limit ?");
-        }
-
-        @Override
-        public boolean supportsLimit() {
-            return true;
-        }
-
-        @Override
-        public boolean bindLimitParametersInReverseOrder() {
-            return true;
-        }
-    };
 
     @Override
     public LimitHandler getLimitHandler() {
@@ -147,15 +176,6 @@ public class SQLiteDialect extends Dialect {
         return false;
     }
 
-  /*
-    @Override
-  public boolean dropTemporaryTableAfterUse() {
-    return true; // temporary tables are only dropped when the connection is closed. If the connection is pooled...
-  }
-  */
-
-    // current timestamp support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
     @Override
     public boolean supportsCurrentTimestampSelection() {
         return true;
@@ -170,55 +190,26 @@ public class SQLiteDialect extends Dialect {
         return "select current_timestamp";
     }
 
-    // SQLException support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    private static final int SQLITE_BUSY = 5;
-    private static final int SQLITE_LOCKED = 6;
-    private static final int SQLITE_IOERR = 10;
-    private static final int SQLITE_CORRUPT = 11;
-    private static final int SQLITE_NOTFOUND = 12;
-    private static final int SQLITE_FULL = 13;
-    private static final int SQLITE_CANTOPEN = 14;
-    private static final int SQLITE_PROTOCOL = 15;
-    private static final int SQLITE_TOOBIG = 18;
-    private static final int SQLITE_CONSTRAINT = 19;
-    private static final int SQLITE_MISMATCH = 20;
-    private static final int SQLITE_NOTADB = 26;
-
     @Override
     public SQLExceptionConversionDelegate buildSQLExceptionConversionDelegate() {
-        return new SQLExceptionConversionDelegate() {
-            @Override
-            public JDBCException convert(SQLException sqlException, String message, String sql) {
-                final int errorCode = JdbcExceptionHelper.extractErrorCode(sqlException);
-                if (errorCode == SQLITE_TOOBIG || errorCode == SQLITE_MISMATCH) {
-                    return new DataException(message, sqlException, sql);
-                } else if (errorCode == SQLITE_BUSY || errorCode == SQLITE_LOCKED) {
-                    return new LockAcquisitionException(message, sqlException, sql);
-                } else if ((errorCode >= SQLITE_IOERR && errorCode <= SQLITE_PROTOCOL) || errorCode == SQLITE_NOTADB) {
-                    return new JDBCConnectionException(message, sqlException, sql);
-                }
-
-                // returning null allows other delegates to operate
-                return null;
+        return (sqlException, message, sql) -> {
+            final int errorCode = JdbcExceptionHelper.extractErrorCode(sqlException);
+            if (errorCode == SQLITE_TOOBIG || errorCode == SQLITE_MISMATCH) {
+                return new DataException(message, sqlException, sql);
+            } else if (errorCode == SQLITE_BUSY || errorCode == SQLITE_LOCKED) {
+                return new LockAcquisitionException(message, sqlException, sql);
+            } else if ((errorCode >= SQLITE_IOERR && errorCode <= SQLITE_PROTOCOL) || errorCode == SQLITE_NOTADB) {
+                return new JDBCConnectionException(message, sqlException, sql);
             }
+
+            // returning null allows other delegates to operate
+            return null;
         };
     }
 
     public ViolatedConstraintNameExtracter getViolatedConstraintNameExtracter() {
         return EXTRACTER;
     }
-
-    private static final ViolatedConstraintNameExtracter EXTRACTER = new TemplatedViolatedConstraintNameExtracter() {
-        @Override
-        protected String doExtractConstraintName(SQLException sqle) throws NumberFormatException {
-            final int errorCode = JdbcExceptionHelper.extractErrorCode(sqle);
-            if (errorCode == SQLITE_CONSTRAINT) {
-                return extractUsingTemplate("constraint ", " failed", sqle.getMessage());
-            }
-            return null;
-        }
-    };
 
     // union subclass support ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -313,6 +304,16 @@ public class SQLiteDialect extends Dialect {
         return uniqueDelegate;
     }
 
+    @Override
+    public String getSelectGUIDString() {
+        return "select hex(randomblob(16))";
+    }
+
+    @Override
+    public ScrollMode defaultScrollMode() {
+        return ScrollMode.FORWARD_ONLY;
+    }
+
     private static class SQLiteUniqueDelegate extends DefaultUniqueDelegate {
         public SQLiteUniqueDelegate(Dialect dialect) {
             super(dialect);
@@ -322,15 +323,5 @@ public class SQLiteDialect extends Dialect {
         public String getColumnDefinitionUniquenessFragment(Column column) {
             return " unique";
         }
-    }
-
-    @Override
-    public String getSelectGUIDString() {
-        return "select hex(randomblob(16))";
-    }
-
-    @Override
-    public ScrollMode defaultScrollMode() {
-        return ScrollMode.FORWARD_ONLY;
     }
 }

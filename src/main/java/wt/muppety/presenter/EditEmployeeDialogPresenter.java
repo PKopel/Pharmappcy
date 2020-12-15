@@ -1,10 +1,10 @@
 package wt.muppety.presenter;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import wt.muppety.model.Employee;
-import wt.muppety.model.MockData;
 
 public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employee> {
 
@@ -15,7 +15,7 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
     public TextField lastNameTextField;
 
     @FXML
-    public ComboBox<String> positionComboBox;
+    public ComboBox<Employee.Position> positionComboBox;
 
     @FXML
     public TextField loginTextField;
@@ -25,7 +25,7 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
 
     @FXML
     private void initialize() {
-        positionComboBox.setItems(MockData.positions);
+        positionComboBox.setItems(FXCollections.observableArrayList(Employee.Position.values()));
     }
 
     @Override

@@ -5,11 +5,11 @@ import java.util.BitSet;
 import java.util.Objects;
 
 @Entity
-@Table(name=Employee.TABLE_NAME)
+@Table(name = Employee.TABLE_NAME)
 public class Employee {
     public static final String TABLE_NAME = "Employee";
 
-    public Employee(String firstname, String lastname, String position, String login, String password){
+    public Employee(String firstname, String lastname, Employee.Position position, String login, String password) {
         this();
         this.firstname = firstname;
         this.lastname = lastname;
@@ -18,7 +18,9 @@ public class Employee {
         this.password = password;
     }
 
-    public Employee(){setPermissions(true, true, true, true);}
+    public Employee() {
+        setPermissions(true, true, true, true);
+    }
 
     public int getId() {
         return id;
@@ -40,11 +42,11 @@ public class Employee {
         this.lastname = lastname;
     }
 
-    public String getPosition() {
+    public Employee.Position getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Employee.Position position) {
         this.position = position;
     }
 
@@ -80,7 +82,7 @@ public class Employee {
         return permissions.canModerateDB;
     }
 
-    public BitSet permissionsBitSet(){
+    public BitSet permissionsBitSet() {
         return permissions.asBitSet();
     }
 
@@ -115,7 +117,8 @@ public class Employee {
     @Column(name = "lastname", nullable = false, length = 50)
     private String lastname;
     @Column(name = "position", nullable = false, length = 50)
-    private String position;
+    @Enumerated(EnumType.STRING)
+    private Employee.Position position;
     @Column(name = "login", nullable = false, length = 50)
     private String login;
     @Column(name = "password", nullable = false, length = 50)
@@ -124,5 +127,7 @@ public class Employee {
     private final Permissions permissions = new Permissions();
 
 
-
+    public enum Position{
+        Manager, Chair, Worker
+    }
 }

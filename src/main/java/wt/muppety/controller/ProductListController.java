@@ -1,7 +1,6 @@
 package wt.muppety.controller;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,25 +10,24 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import wt.muppety.dao.CategoryDao;
+import wt.muppety.dao.ProductDao;
+import wt.muppety.dao.SupplierDao;
 import wt.muppety.model.Category;
-import wt.muppety.model.MockData;
 import wt.muppety.model.Product;
+import wt.muppety.model.Supplier;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import wt.muppety.model.Supplier;
-import wt.muppety.model.Category;
-import wt.muppety.dao.ProductDao;
-import wt.muppety.dao.SupplierDao;
-import wt.muppety.dao.CategoryDao;
-import wt.muppety.dao.BaseDao;
 
 import static wt.muppety.view.LayoutName.*;
-import java.util.List;
-import java.util.Observable;
-import java.util.stream.Collectors;
 
-public class ProductListController implements IController<ObservableList<Product>> {
+
+/**
+ * Controller for layout presenting product list.
+ * Allows to add, remove and edit product entries and create new categories in system's database.
+ */
+public class ProductListController extends AbstractController<ObservableList<Product>> {
 
     @FXML
     public TableView<Product> productTable;
@@ -44,6 +42,8 @@ public class ProductListController implements IController<ObservableList<Product
     @FXML
     public TableColumn<Product, String> categoryColumn;
     @FXML
+    public TableColumn<Product, String> supplierColumn;
+    @FXML
     public Button addProductButton;
     @FXML
     public Button addCategoryButton;
@@ -55,22 +55,14 @@ public class ProductListController implements IController<ObservableList<Product
     public Button backButton;
     @FXML
     public Button addSupplierButton;
-    private AppController appController;
     private ObservableList<Product> data = FXCollections.observableArrayList();
 
     @FXML
     private void initialize() {
-        
+
         ProductDao productDao = new ProductDao();
-        ObservableList<Product> products =  productDao.listAll();
+        ObservableList<Product> products = productDao.listAll();
         productTable.setItems(products);
-        
-        TableColumn<Product,String> nameColumn = new TableColumn<>("Name");
-        TableColumn<Product,Float> unitPriceColumn = new TableColumn<>("Price");
-        TableColumn<Product,Category> categoryColumn = new TableColumn<>("Category");
-        TableColumn<Product,String> manufacturerColumn = new TableColumn<>("Manufacturer");
-        TableColumn<Product,Boolean> onPrescriptionColumn = new TableColumn<>("On prescription");
-        TableColumn<Product,String> supplierColumn = new TableColumn<>("Supplier");
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
@@ -81,28 +73,6 @@ public class ProductListController implements IController<ObservableList<Product
 
         productTable.setItems(products);
         productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        productTable.getColumns().addAll(nameColumn);
-        productTable.getColumns().addAll(unitPriceColumn);
-        productTable.getColumns().addAll(categoryColumn);
-        productTable.getColumns().addAll(manufacturerColumn);
-        productTable.getColumns().addAll(onPrescriptionColumn);
-        productTable.getColumns().addAll(supplierColumn);
-
-        // nameColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getName()));
-        // priceColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getUnitPrice() + " zł"));
-        // categoryColumn.setCellValueFactory(dataValue -> {
-        //     StringBuilder builder = new StringBuilder();
-        //     dataValue.getValue().getCategories().forEach(category -> {
-        //         builder.append(category);
-        //         builder.append(", ");
-        //     });
-        //     return new SimpleStringProperty(builder.toString());
-        // });
-        // manufacturerColumn.setCellValueFactory(dataValue -> new SimpleStringProperty(dataValue.getValue().getManufacturer()));
-        // onPrescriptionColumn.setCellValueFactory(dataValue -> {
-        //     String text = dataValue.getValue().isOnPrescription() ? "yes" : "no";
-        //     return new SimpleStringProperty(text);
-        // });
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(productTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
@@ -111,19 +81,18 @@ public class ProductListController implements IController<ObservableList<Product
     public void handleDeleteAction(ActionEvent event) {
         ProductDao productDao = new ProductDao();
         System.out.println(productTable.getSelectionModel().getSelectedItems().size());
-        for (Product product : new ArrayList<>(productTable.getSelectionModel().getSelectedItems())){
-            productDao.deleteById(Product.class, product.getId());
+        boolean deleted;
+        for (Product product : new ArrayList<>(productTable.getSelectionModel().getSelectedItems())) {
+            deleted = productDao.deleteById(Product.class, product.getId());
+            if (!deleted) System.out.println("Error while deleting " + product);
         }
         data.removeAll(productTable.getSelectionModel().getSelectedItems());
-
-
-
     }
 
     public void handleEditAction(ActionEvent event) {
         Product product = productTable.getSelectionModel().getSelectedItem();
         ProductDao productDao = new ProductDao();
-        
+
         if (product != null) {
             appController.showDialog(product, EditProduct, "Edit product");
             productDao.update(product);
@@ -134,38 +103,29 @@ public class ProductListController implements IController<ObservableList<Product
     public void handleAddProductAction(ActionEvent event) {
         Product newProduct = new Product();
         if (appController.showDialog(newProduct, EditProduct, "Add product")) {
-            data.add(newProduct);
             ProductDao productDao = new ProductDao();
             Optional<Product> product = productDao.create(newProduct);
+            data.add(product.orElseThrow());
         }
     }
 
     public void handleAddCategoryAction(ActionEvent event) {
         Category newCategory = new Category();
         if (appController.showDialog(newCategory, EditCategory, "Add category")) {
-            MockData.categories.add(newCategory);
             CategoryDao categoryDao = new CategoryDao();
             Optional<Category> category = categoryDao.create(newCategory);
+            if (category.isEmpty()) System.out.println("Could not create new category");
         }
     }
 
     public void handleAddSupplierAction(ActionEvent event) {
         Supplier newSupplier = new Supplier();
-        SupplierDao supplierDao = new SupplierDao();
         if (appController.showDialog(newSupplier, EditSupplier, "Add supplier")) {
-            MockData.suppliers.add(newSupplier);
-            
+            SupplierDao supplierDao = new SupplierDao();
             Optional<Supplier> supplier = supplierDao.create(newSupplier);
-            
+            if (supplier.isEmpty()) System.out.println("Could not create new supplier");
         }
-        supplierDao.listAll();
     }
-
-
-    public void handleBackAction(ActionEvent event) {
-        appController.showPane(null, MainView);
-    }
-
 
     @Override
     public void setAppController(AppController appController) {

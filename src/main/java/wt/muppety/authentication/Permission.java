@@ -4,8 +4,7 @@ public enum Permission {
     canBuy(0),
     canSell(1),
     canBrowseDB(2),
-    canModerateDB(3),
-    ;
+    canModerateDB(3);
 
     private final int val;
     Permission(int val){

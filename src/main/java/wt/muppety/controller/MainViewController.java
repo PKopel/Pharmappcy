@@ -1,36 +1,27 @@
 package wt.muppety.controller;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.authentication.LoginData;
-import wt.muppety.model.MockData;
-import wt.muppety.model.Transaction;
-import wt.muppety.model.Product;
-import wt.muppety.model.Employee;
-import java.util.Optional;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
+import wt.muppety.dao.EmployeeDao;
 import wt.muppety.dao.ProductDao;
 import wt.muppety.dao.TransactionDao;
-import wt.muppety.dao.EmployeeDao;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import wt.muppety.model.Employee;
+import wt.muppety.model.Product;
+import wt.muppety.model.Transaction;
 
-import static wt.muppety.view.LayoutName.EmployeeList;
-import static wt.muppety.view.LayoutName.ProductList;
-import javafx.collections.FXCollections;
+import java.util.Optional;
 
-import static wt.muppety.authentication.Permission.*;
+import static wt.muppety.authentication.Permission.canBrowseDB;
+import static wt.muppety.authentication.Permission.canModerateDB;
 import static wt.muppety.view.LayoutName.*;
 
-public class MainViewController implements IController<Void> {
+public class MainViewController extends AbstractController<Void> {
 
     @FXML
     public Button employeeListButton;
@@ -41,15 +32,14 @@ public class MainViewController implements IController<Void> {
     @FXML
     public Button loginButton;
 
-    private AppController appController;
-    private ObservableList<Transaction> data = FXCollections.observableArrayList();
+    private final ObservableList<Transaction> data = FXCollections.observableArrayList();
 
 
     @FXML
     private void initialize() {
-        Authenticator.guardButton(employeeListButton,canBrowseDB);
-        Authenticator.guardButton(productListButton,canBrowseDB);
-        Authenticator.guardButton(addTransaction,canModerateDB);
+        Authenticator.guardButton(employeeListButton, canBrowseDB);
+        Authenticator.guardButton(productListButton, canBrowseDB);
+        Authenticator.guardButton(addTransaction, canModerateDB);
         loginButton.managedProperty().bind(Bindings.createBooleanBinding(Authenticator::isLoggedIn));
         loginButton.visibleProperty().bind(Bindings.createBooleanBinding(Authenticator::isLoggedIn));
     }
@@ -64,7 +54,6 @@ public class MainViewController implements IController<Void> {
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
         appController.showPane(products, ProductList);
-        // appController.showPane(MockData.products, ProductList);
     }
 
     public void handleAddTransactionAction(ActionEvent event) {
@@ -77,12 +66,11 @@ public class MainViewController implements IController<Void> {
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
         appController.showPane(products, ProductList);
-        // appController.showPane(MockData.products, ProductList);
     }
 
     public void handleLogin(ActionEvent event) {
         LoginData data = new LoginData();
-        if(this.appController.showDialog(data,Login,"Sign in")){
+        if (this.appController.showDialog(data, Login, "Sign in")) {
             Authenticator.logIn(data);
             this.initialize();
         }
@@ -96,6 +84,6 @@ public class MainViewController implements IController<Void> {
 
     @Override
     public void setData(Void data) {
-// operation ignored
+        //IGNORED
     }
 }
