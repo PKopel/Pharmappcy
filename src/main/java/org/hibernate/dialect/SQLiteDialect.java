@@ -7,10 +7,9 @@
  *    May you share freely, never taking more than you give.
  *
  */
-package wt.muppety.org.hibernate.dialect;
+package org.hibernate.dialect;
 
 import org.hibernate.ScrollMode;
-import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.*;
 import org.hibernate.dialect.identity.IdentityColumnSupport;
 import org.hibernate.dialect.identity.SQLiteDialectIdentityColumnSupport;

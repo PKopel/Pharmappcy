@@ -1,11 +1,11 @@
 package wt.muppety.controller;
 
-import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.authentication.LoginData;
 import wt.muppety.dao.EmployeeDao;
@@ -30,18 +30,25 @@ public class MainViewController extends AbstractController<Void> {
     @FXML
     public Button addTransaction;
     @FXML
-    public Button loginButton;
+    public Label loginLabel;
+    @FXML
+    public Label nameLabel;
+    @FXML
+    public Label positionLabel;
 
     private final ObservableList<Transaction> data = FXCollections.observableArrayList();
-
 
     @FXML
     private void initialize() {
         Authenticator.guardButton(employeeListButton, canBrowseDB);
         Authenticator.guardButton(productListButton, canBrowseDB);
         Authenticator.guardButton(addTransaction, canModerateDB);
-        loginButton.managedProperty().bind(Bindings.createBooleanBinding(Authenticator::isLoggedIn));
-        loginButton.visibleProperty().bind(Bindings.createBooleanBinding(Authenticator::isLoggedIn));
+        Employee currentEmployee = Authenticator.getCurrentUser();
+        if (currentEmployee != null) {
+            loginLabel.setText(currentEmployee.getLogin());
+            nameLabel.setText(currentEmployee.getFirstname() + " " + currentEmployee.getLastname());
+            positionLabel.setText(currentEmployee.getPosition().name());
+        }
     }
 
     public void handleEmployeeListAction(ActionEvent event) {
@@ -68,18 +75,16 @@ public class MainViewController extends AbstractController<Void> {
         appController.showPane(products, ProductList);
     }
 
-    public void handleLogin(ActionEvent event) {
-        LoginData data = new LoginData();
-        if (this.appController.showDialog(data, Login, "Sign in")) {
-            Authenticator.logIn(data);
-            this.initialize();
-        }
-
-    }
-
     @Override
     public void setAppController(AppController appController) {
         this.appController = appController;
+        if (Authenticator.isLoggedIn()) {
+            LoginData data = new LoginData();
+            if (this.appController.showDialog(data, Login, "Sign in")) {
+                Authenticator.logIn(data);
+                this.initialize();
+            }
+        }
     }
 
     @Override

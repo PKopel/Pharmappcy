@@ -3,6 +3,7 @@ package wt.muppety.presenter;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import wt.muppety.model.Employee;
 
@@ -21,7 +22,7 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
     public TextField loginTextField;
 
     @FXML
-    public TextField passwordTextField;
+    public PasswordField passwordTextField;
 
     @FXML
     private void initialize() {

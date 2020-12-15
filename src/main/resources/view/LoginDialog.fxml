@@ -7,6 +7,13 @@
             xmlns="http://javafx.com/javafx"
             fx:controller="wt.muppety.presenter.LoginDialogPresenter"
             prefWidth="500.0">
+    <top>
+        <Label text="Pharmacy App" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets left="25.0" right="25.0" top="25.0" />
+            </BorderPane.margin>
+        </Label>
+    </top>
     <center>
         <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -38,11 +45,11 @@
                     <Insets left="5.0" right="5.0" top="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <TextField fx:id="passwordTextField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <PasswordField fx:id="passwordTextField" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <GridPane.margin>
                     <Insets left="5.0" right="5.0" top="5.0"/>
                 </GridPane.margin>
-            </TextField>
+            </PasswordField>
 
         </GridPane>
     </center>
@@ -51,11 +58,6 @@
             <BorderPane.margin>
                 <Insets left="5.0" right="5.0" top="5.0"/>
             </BorderPane.margin>
-            <Button onAction="#handleCancelAction" prefWidth="100.0" text="_Cancel">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
             <Button onAction="#handleOkAction" prefWidth="60.0" text="_Login">
                 <HBox.margin>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>

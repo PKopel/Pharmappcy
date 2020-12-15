@@ -2,10 +2,11 @@ package wt.muppety.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import wt.muppety.presenter.AbstractDialogPresenter;
+import wt.muppety.session.SessionService;
 import wt.muppety.view.LayoutName;
 
 import java.io.IOException;
@@ -35,7 +36,7 @@ public class AppController {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(AppController.class.getResource(pathToResources + layoutName.getPath()));
-            BorderPane rootLayout = loader.load();
+            Pane rootLayout = loader.load();
 
             AbstractController<T> controller = loader.getController();
             controller.setAppController(this);
@@ -43,6 +44,10 @@ public class AppController {
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+            primaryStage.setOnCloseRequest(event -> {
+                SessionService.closeSession();
+                System.exit(0);
+            });
             primaryStage.show();
 
         } catch (IOException e) {
@@ -59,13 +64,13 @@ public class AppController {
      * @param data       Data required by layout controller
      * @param layoutName Enum LayoutName associated with .fxml file to display
      * @param title      Title for dialog window
-     * @return           true if presenter accepts data provided in dialog, false otherwise
+     * @return true if presenter accepts data provided in dialog, false otherwise
      */
     public <T> boolean showDialog(T data, LayoutName layoutName, String title) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(AppController.class.getResource(pathToResources + layoutName.getPath()));
-            BorderPane page = loader.load();
+            Pane page = loader.load();
 
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);

@@ -7,12 +7,20 @@
 - plany integracji z bazą danych (Hibernate, SQLite)
 - GUI pozwalające na dodawanie, edytowanie i usuwanie pracowników i produktów oraz dodawanie kategorii produktów
 
+
+#### **Milestone 2 (stan na 15.12.2020)**
+- autentykacja
+- integracja z bazą danych (Hibernate, SQLite)
+- GUI pozwalające na dodawanie transakcji, dostawców
+
 ## Opis
-Aplikacja do zarządzania apteką. 
+Aplikacja wspomagająca zarządzanie apteką. Aplikacja umożliwia pracownikom zarządzanie produktami 
+dostępnymi w aptece, zawieranymi transakcjami, jak i również listą pracowników.  
 
 ## Technologie
 * Java 14, Gradle
 * Hibernate
+* SQLite
 
 ## Uruchamianie aplikacji
 Do uruchomienia aplikacji potrzebny jest program Gradle i Java 14.
@@ -29,69 +37,26 @@ gradlew.bat run
 ```
 
 
-## Model bazy danych
-
-![db_model](docs/pictures/db_model.png)
-
-Product zawiera:
-* ID - identyfikator (Primary Key)
-* CategoryID - identyfikator kategorii produktu (Foreign Key)
-* SupplierID - identyfikator dostawcy (Foreign Key)
-* Name - nazwa produktu
-* UnitPrice - cena produktu
-* OnPrescription - flaga mówiąca o tym, czy lek jest na receptę
-* Manufacturer - nazwa producenta
-
-Category zawiera:
-* ID - identyfikator (Primary Key)
-* Name - nazwa kategorii
-
-Supplier zawiera:
-* ID - identyfikator (Primary Key)
-* CompanyName - nazwa firmy
-* Email - email do komunikacji z firmą
-* PhoneNumber - numer telefonu do komunikacji z firmą
-
-Transaction zawiera:
-* ID - identyfikator (Primary Key)
-* ProductID - identyfikator kupowanego produktu (Foreign Key)
-* EmployeeID - identyfikator pracownika nadzorującego transakcję (Foreign Key)
-* Quantity - ilość kupowanych produktów
-* Value - cena do zapłaty
-* Date - data wykonania transakcji
-
-Employee zawiera:
-* ID - identyfikator (Primary Key oraz Foreign Key)
-* Firstname - imię
-* Lastname - nazwisko
-* Position - pozycja w firmie: Manager, Chair lub Worker
-* Login - będzie wykorzystywany przy autentykacji
-* Password - będzie wykorzystywane przy autentykacji
-
-Permissions zawiera:
-* EmployeeID - identyfikator (Primary Key)
-* CanSell - pozwolenie na sprzedawanie leków
-* CanBuy - pozwolenie na kupowanie leków
-* CanBrowseDatabase - pozwolenie na przeglądanie bazy danych
-* CanModerateDatabase - pozwolenie na modyfikację bazy danych
-
-
 ## Przewodnik po projekcie
-[Data Access Object](./src/main/java/wt/muppety/dao)
 
-[Model](./src/main/java/wt/muppety/model) - klasy Category, Employee, MockData, Product, Supplier, Transaction - w obecnym stanie w każdej klasie znajduje się konstruktor oraz gettery i settery poszczególnych atrybutów.
+#### [Model](docs/model/README.md)
 
-GUI zgodne ze wzorcem model-view-presenter:
+#### [Persystencja](docs/persistence/README.md)
 
-* [Controller](./src/main/java/wt/muppety/controller)
-* [Presenter](./src/main/java/wt/muppety/presenter)
-* [View](./src/main/java/wt/muppety/view)
+#### [Autentykacja](docs/authentication/README.md)
+
+#### [GUI](docs/gui/README.md)
+
+W projekcie wykorzystano wzorce projektowe:
+* model-view-presenter [(GUI)](docs/gui/README.md)
+* singleton [(autentykacja)](docs/authentication/README.md)
+* DAO i ORM [(persystencja)](docs/persistence/README.md)
 
 
 
 ## Aplikacja
 
-Po uruchomieniu aplikacji mamy opcję przejścia do listy pracowników lub do listy produktów:
+Po uruchomieniu aplikacji otwiera się okno logowania:
 
 ![gui_1](docs/pictures/gui_1.png)
 

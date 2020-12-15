@@ -45,7 +45,7 @@
                     <Insets left="5.0" right="5.0" top="5.0"/>
                 </GridPane.margin>
             </TextField>
-            <TextField fx:id="phoneNumberTextField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="phoneNumberTextField" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <GridPane.margin>
                     <Insets left="5.0" right="5.0" top="5.0"/>
                 </GridPane.margin>
