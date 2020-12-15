@@ -1,18 +1,17 @@
-## Pakiet `wt.muppety.model`
+## Pakiet [`wt.muppety.model`](../../src/main/java/wt/muppety/model)
 
 ### Lista klas:
 
-* `Category`
-* `Employee`
-* `Permissions`
-* `Product`
-* `Supplier`
-* `Transaction`
-* `EmployeePosition`
+* [`Category`](../../src/main/java/wt/muppety/model/Category.java)
+* [`Employee`](../../src/main/java/wt/muppety/model/Employee.java)
+* [`Permissions`](../../src/main/java/wt/muppety/model/Permissions.java)
+* [`Product`](../../src/main/java/wt/muppety/model/Product.java)
+* [`Supplier`](../../src/main/java/wt/muppety/model/Supplier.java)
+* [`Transaction`](../../src/main/java/wt/muppety/model/Transaction.java)
 
-#### Klasa `Product`
+#### Klasa [`Product`](../../src/main/java/wt/muppety/model/Product.java)
 
-Klasa `Product` zawiera pola:
+Klasa [`Product`](../../src/main/java/wt/muppety/model/Product.java) zawiera pola:
 
 * ID — identyfikator (Primary Key)
 * CategoryID — identyfikator kategorii produktu (Foreign Key)
@@ -22,25 +21,25 @@ Klasa `Product` zawiera pola:
 * OnPrescription — flaga mówiąca o tym, czy lek jest na receptę
 * Manufacturer — nazwa producenta
 
-#### Klasa `Category`
+#### Klasa [`Category`](../../src/main/java/wt/muppety/model/Category.java)
 
-Klasa `Category` zawiera pola:
+Klasa [`Category`](../../src/main/java/wt/muppety/model/Category.java) zawiera pola:
 
 * ID — identyfikator (Primary Key)
 * Name — nazwa kategorii
 
-#### Klasa `Supplier`
+#### Klasa [`Supplier`](../../src/main/java/wt/muppety/model/Supplier.java)
 
-Klasa `Supplier` zawiera pola:
+Klasa [`Supplier`](../../src/main/java/wt/muppety/model/Supplier.java) zawiera pola:
 
 * ID — identyfikator (Primary Key)
 * CompanyName — nazwa firmy
 * Email — email do komunikacji z firmą
 * PhoneNumber — numer telefonu do komunikacji z firmą
 
-#### Klasa `Transaction`
+#### Klasa [`Transaction`](../../src/main/java/wt/muppety/model/Transaction.java)
 
-Klasa `Transaction` zawiera pola:
+Klasa [`Transaction`](../../src/main/java/wt/muppety/model/Transaction.java) zawiera pola:
 
 * ID — identyfikator (Primary Key)
 * ProductID — identyfikator kupowanego produktu (Foreign Key)
@@ -49,9 +48,9 @@ Klasa `Transaction` zawiera pola:
 * Value — cena do zapłaty
 * Date — data wykonania transakcji
 
-#### Klasa `Employee`
+#### Klasa [`Employee`](../../src/main/java/wt/muppety/model/Employee.java)
 
-Klasa `Employee` zawiera pola:
+Klasa [`Employee`](../../src/main/java/wt/muppety/model/Employee.java) zawiera pola:
 
 * ID — identyfikator (Primary Key oraz Foreign Key)
 * Firstname — imię
@@ -61,9 +60,9 @@ Klasa `Employee` zawiera pola:
 * Login — wykorzystywany przy autentykacji
 * Password — wykorzystywane przy autentykacji
 
-#### Klasa `Permissions`
+#### Klasa [`Permissions`](../../src/main/java/wt/muppety/model/Permissions.java)
 
-Klasa `Permissions` zawiera pola:
+Klasa [`Permissions`](../../src/main/java/wt/muppety/model/Permissions.java) zawiera pola:
 
 * EmployeeID — identyfikator (Primary Key)
 * CanSell — pozwolenie na sprzedawanie leków
