@@ -23,6 +23,7 @@ public class SessionService {
     }
 
     public static void closeSession() {
-        session.close();
+        if (session != null)
+            session.close();
     }
 }

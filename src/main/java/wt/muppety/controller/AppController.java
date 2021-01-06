@@ -48,6 +48,7 @@ public class AppController {
                 SessionService.closeSession();
                 System.exit(0);
             });
+            primaryStage.setMaximized(layoutName.isMaximized());
             primaryStage.show();
 
         } catch (IOException e) {
@@ -78,6 +79,7 @@ public class AppController {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
             dialogStage.setTitle(title);
+            dialogStage.setMaximized(layoutName.isMaximized());
 
             AbstractDialogPresenter<T> presenter = loader.getController();
             presenter.setAppController(this);

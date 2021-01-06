@@ -100,3 +100,8 @@ specjalizowana w obsłudze dialogu dodawania lub edycji transakcji.
 
 Obiekt zapewniający kontrolę nad wartościami przekazywanymi jako ścieżki do plików
 ['.fxml'](../../src/main/resources/view).
+
+#### Klasa [`DynamicComboBoxPane`](../../src/main/java/wt/muppety/view/DynamicComboBoxPane.java)
+
+Rozszerzenie klasy `javafx.scene.layout.GridPane` dynamicznie tworzące wiersze zawierające 
+`ComboBox` i przycisk do stworzenia kolejnego wiersza.
