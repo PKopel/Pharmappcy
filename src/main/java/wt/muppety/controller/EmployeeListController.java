@@ -57,9 +57,9 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
         employeeTable.setItems(employees);
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        Authenticator.guardButton(addButton, canModerateDB);
-        Authenticator.guardButton(editButton, canModerateDB);
-        Authenticator.guardButton(deleteButton, canModerateDB);
+        Authenticator.guardControl(addButton, canModerateDB);
+        Authenticator.guardControl(editButton, canModerateDB);
+        Authenticator.guardControl(deleteButton, canModerateDB);
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(employeeTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(employeeTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
@@ -90,12 +90,6 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
             Optional<Employee> employee = employeeDao.create(newEmployee);
             data.add(employee.orElseThrow());
         }
-
-    }
-
-    @Override
-    public void setAppController(AppController appController) {
-        this.appController = appController;
     }
 
     @Override

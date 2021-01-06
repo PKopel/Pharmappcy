@@ -1,17 +1,16 @@
 package wt.muppety.presenter;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import wt.muppety.model.Category;
-import wt.muppety.model.Supplier;
-import wt.muppety.model.Product;
-
 import wt.muppety.dao.CategoryDao;
 import wt.muppety.dao.SupplierDao;
+import wt.muppety.model.Category;
+import wt.muppety.model.Product;
+import wt.muppety.model.Supplier;
 
-import javafx.collections.ObservableList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,7 +55,7 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
         newCategories.add(categoryComboBox.getValue());
         data.setCategories(newCategories);
         data.setSupplier(supplierComboBox.getValue());
-        
+
     }
 
     @Override

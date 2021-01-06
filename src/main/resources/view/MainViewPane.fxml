@@ -6,7 +6,7 @@
 <GridPane xmlns:fx="http://javafx.com/fxml"
           xmlns="http://javafx.com/javafx"
           fx:controller="wt.muppety.controller.MainViewController"
-          prefHeight="300.0" prefWidth="600.0">
+          prefHeight="250.0" prefWidth="600.0">
 
     <VBox GridPane.columnIndex="0" prefWidth="300" prefHeight="300">
         <Label text="Current user:">
@@ -84,6 +84,12 @@
         </Button>
         <Button fx:id="addTransaction" mnemonicParsing="false" onAction="#handleAddTransactionAction"
                 text="Add transaction" prefWidth="200">
+            <VBox.margin>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </VBox.margin>
+        </Button>
+        <Button mnemonicParsing="false" onAction="#handleLogoutAction"
+                text="Logout" prefWidth="200">
             <VBox.margin>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </VBox.margin>

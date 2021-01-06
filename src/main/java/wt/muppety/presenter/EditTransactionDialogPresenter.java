@@ -1,18 +1,15 @@
 package wt.muppety.presenter;
-import javafx.scene.control.ComboBox;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
-import wt.muppety.model.Transaction;
-import wt.muppety.model.Product;
-import wt.muppety.dao.TransactionDao;
-import wt.muppety.authentication.Authenticator;
-import wt.muppety.dao.ProductDao;
 
 import javafx.collections.ObservableList;
-import java.util.HashSet;
-import java.util.Set;
-import java.time.*; 
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import wt.muppety.authentication.Authenticator;
+import wt.muppety.dao.ProductDao;
+import wt.muppety.model.Product;
+import wt.muppety.model.Transaction;
+
+import java.time.LocalDateTime;
 
 public class EditTransactionDialogPresenter extends AbstractDialogPresenter<Transaction> {
 
@@ -29,7 +26,6 @@ public class EditTransactionDialogPresenter extends AbstractDialogPresenter<Tran
         ObservableList<Product> products = productDao.listAll();
         productComboBox.setItems(products);
     }
-
 
 
     @Override

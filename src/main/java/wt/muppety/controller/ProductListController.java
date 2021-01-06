@@ -128,11 +128,6 @@ public class ProductListController extends AbstractController<ObservableList<Pro
     }
 
     @Override
-    public void setAppController(AppController appController) {
-        this.appController = appController;
-    }
-
-    @Override
     public void setData(ObservableList<Product> data) {
         this.data = data;
         productTable.setItems(data);

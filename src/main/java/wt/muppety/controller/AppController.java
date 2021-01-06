@@ -80,6 +80,7 @@ public class AppController {
             dialogStage.setTitle(title);
 
             AbstractDialogPresenter<T> presenter = loader.getController();
+            presenter.setAppController(this);
             presenter.setStage(dialogStage);
             presenter.setData(data);
 

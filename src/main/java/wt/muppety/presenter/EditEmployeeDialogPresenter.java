@@ -3,9 +3,14 @@ package wt.muppety.presenter;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import wt.muppety.authentication.Authenticator;
+import wt.muppety.authentication.Permission;
 import wt.muppety.model.Employee;
+
+import java.util.Objects;
 
 public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employee> {
 
@@ -14,6 +19,9 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
 
     @FXML
     public TextField lastNameTextField;
+
+    @FXML
+    public Label positionLabel;
 
     @FXML
     public ComboBox<Employee.Position> positionComboBox;
@@ -26,6 +34,8 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
 
     @FXML
     private void initialize() {
+        Authenticator.guardControl(positionComboBox, Permission.canModerateDB);
+        Authenticator.guardControl(positionLabel, Permission.canModerateDB);
         positionComboBox.setItems(FXCollections.observableArrayList(Employee.Position.values()));
     }
 
@@ -33,7 +43,8 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
     protected void updateModel() {
         data.setFirstname(firstNameTextField.getText());
         data.setLastname(lastNameTextField.getText());
-        data.setPosition(positionComboBox.getSelectionModel().getSelectedItem());
+        Employee.Position position = positionComboBox.getSelectionModel().getSelectedItem();
+        data.setPosition(Objects.requireNonNullElse(position, Employee.Position.Chair));
         data.setLogin(loginTextField.getText());
         data.setPassword(passwordTextField.getText());
     }

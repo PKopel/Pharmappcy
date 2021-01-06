@@ -2,9 +2,10 @@ package wt.muppety;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import wt.muppety.authentication.LoginData;
 import wt.muppety.controller.AppController;
 
-import static wt.muppety.view.LayoutName.MainView;
+import static wt.muppety.view.LayoutName.LoginView;
 
 public class App extends Application {
 
@@ -18,6 +19,6 @@ public class App extends Application {
         primaryStage.setTitle("Pharmacy app");
 
         AppController appController = new AppController(primaryStage);
-        appController.showPane(null, MainView);
+        appController.showPane(new LoginData(), LoginView);
     }
 }

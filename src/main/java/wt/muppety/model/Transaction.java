@@ -11,19 +11,35 @@ import java.util.Objects;
 public class Transaction {
 
     public static final String TABLE_NAME = "Tranzaction";
+    private static final String DATE_FORMATTER = "yyyy-MM-dd HH:mm:ss";
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Employee employee;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Product product;
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
+    @Column(name = "value", nullable = false)
+    private double value;
+    @Column(name = "datetime", nullable = false)
+    private LocalDateTime datetime;
 
-    public Transaction(Product product, Employee employee, int quantity, double value, LocalDateTime datetime){
+    public Transaction(Product product, Employee employee, int quantity, double value, LocalDateTime datetime) {
         this.product = product;
         this.employee = employee;
         this.quantity = quantity;
         this.value = value;
         this.datetime = datetime;
-        
+
     }
 
-    public Transaction(){}
+    public Transaction() {
+    }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
@@ -63,16 +79,14 @@ public class Transaction {
         return datetime;
     }
 
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
+    }
 
     public String getFormattedDatetime() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER);
         return this.datetime.format(formatter);
     }
-
-    public void setDatetime(LocalDateTime datetime) {
-        this.datetime = datetime;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -86,21 +100,4 @@ public class Transaction {
     public int hashCode() {
         return Objects.hash(getId());
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id")
-    private int id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Employee employee;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Product product;
-    @Column(name="quantity", nullable = false)
-    private int quantity;
-    @Column(name="value", nullable = false)
-    private double value;
-    @Column(name="datetime", nullable = false)
-    private LocalDateTime datetime;
-
-    private static final String DATE_FORMATTER= "yyyy-MM-dd HH:mm:ss";
 }

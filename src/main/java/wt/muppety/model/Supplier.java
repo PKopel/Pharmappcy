@@ -8,14 +8,25 @@ import java.util.Objects;
 public class Supplier {
 
     public static final String TABLE_NAME = "Supplier";
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "companyName", nullable = false, length = 50)
+    private String companyName;
+    @Column(name = "email", nullable = false, length = 50)
+    private String email;
+    @Column(name = "phoneNumber", nullable = false, length = 50)
+    private String phoneNumber;
 
-    public Supplier(String companyName, String email, String phoneNumber){
+    public Supplier(String companyName, String email, String phoneNumber) {
         this.companyName = companyName;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public  Supplier(){}
+    public Supplier() {
+    }
 
     public int getId() {
         return id;
@@ -62,19 +73,7 @@ public class Supplier {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return companyName;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id")
-    private int id;
-    @Column(name = "companyName", nullable = false, length = 50)
-    private String companyName;
-    @Column(name = "email", nullable = false, length = 50)
-    private String email;
-    @Column(name = "phoneNumber", nullable = false, length = 50)
-    private String phoneNumber;
 }

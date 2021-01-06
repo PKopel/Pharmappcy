@@ -2,7 +2,8 @@ package wt.muppety.model;
 
 import wt.muppety.authentication.Permission;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.lang.reflect.Field;
 import java.util.BitSet;
 
@@ -22,9 +23,9 @@ public class Permissions {
     public Permissions() {
     }
 
-    public BitSet asBitSet(){
+    public BitSet asBitSet() {
         BitSet ret = new BitSet(Permission.values().length);
-        for (Field f : this.getClass().getDeclaredFields()){
+        for (Field f : this.getClass().getDeclaredFields()) {
             ret.set(Permission.valueOf(f.getName()).value());
         }
         return ret;

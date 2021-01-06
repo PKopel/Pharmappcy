@@ -23,6 +23,7 @@ import static wt.muppety.view.LayoutName.*;
 
 public class MainViewController extends AbstractController<Void> {
 
+    private final ObservableList<Transaction> data = FXCollections.observableArrayList();
     @FXML
     public Button employeeListButton;
     @FXML
@@ -36,13 +37,11 @@ public class MainViewController extends AbstractController<Void> {
     @FXML
     public Label positionLabel;
 
-    private final ObservableList<Transaction> data = FXCollections.observableArrayList();
-
     @FXML
     private void initialize() {
-        Authenticator.guardButton(employeeListButton, canBrowseDB);
-        Authenticator.guardButton(productListButton, canBrowseDB);
-        Authenticator.guardButton(addTransaction, canModerateDB);
+        Authenticator.guardControl(employeeListButton, canBrowseDB);
+        Authenticator.guardControl(productListButton, canBrowseDB);
+        Authenticator.guardControl(addTransaction, canModerateDB);
         Employee currentEmployee = Authenticator.getInstance().getCurrentUser();
         if (currentEmployee != null) {
             loginLabel.setText(currentEmployee.getLogin());
@@ -75,17 +74,9 @@ public class MainViewController extends AbstractController<Void> {
         appController.showPane(products, ProductList);
     }
 
-    @Override
-    public void setAppController(AppController appController) {
-        this.appController = appController;
-        Authenticator auth = Authenticator.getInstance();
-        if (auth.isLoggedIn()) {
-            LoginData data = new LoginData();
-            if (this.appController.showDialog(data, Login, "Sign in")) {
-                auth.logIn(data);
-                this.initialize();
-            }
-        }
+    public void handleLogoutAction(ActionEvent event) {
+        Authenticator.getInstance().logOut();
+        appController.showPane(new LoginData(), LoginView);
     }
 
     @Override

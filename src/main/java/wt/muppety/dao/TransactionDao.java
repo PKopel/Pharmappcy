@@ -2,7 +2,6 @@ package wt.muppety.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import wt.muppety.model.Category;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;

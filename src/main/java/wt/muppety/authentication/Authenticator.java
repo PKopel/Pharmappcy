@@ -1,7 +1,7 @@
 package wt.muppety.authentication;
 
 import javafx.beans.binding.Bindings;
-import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import wt.muppety.dao.EmployeeDao;
 import wt.muppety.model.Employee;
 
@@ -23,9 +23,9 @@ public class Authenticator {
 
     private static Authenticator _instance;
     private final SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+    private final BitSet permissions = new BitSet(Permission.values().length);
     private Employee currentUser;
     private boolean isLoggedIn = false;
-    private final BitSet permissions = new BitSet(Permission.values().length);
 
 
     private Authenticator() throws NoSuchAlgorithmException {
@@ -40,6 +40,15 @@ public class Authenticator {
             e.printStackTrace();
         }
         return _instance;
+    }
+
+    private static boolean hasPermissionTo(Permission p) {
+        return _instance != null && _instance.isLoggedIn && _instance.permissions.get(p.value());
+    }
+
+    public static void guardControl(Control b, Permission... permissions) {
+        b.visibleProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
+        b.managedProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
     }
 
     private void grantPermission(Permission p) {
@@ -77,12 +86,9 @@ public class Authenticator {
         return false;
     }
 
-    private static boolean hasPermissionTo(Permission p) {
-        return _instance.isLoggedIn && _instance.permissions.get(p.value());
-    }
-
-    public static void guardButton(Button b, Permission... permissions) {
-        b.visibleProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
-        b.managedProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
+    public void logOut() {
+        isLoggedIn = false;
+        currentUser = null;
+        permissions.clear();
     }
 }

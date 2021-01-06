@@ -7,11 +7,12 @@ public enum Permission {
     canModerateDB(3);
 
     private final int val;
-    Permission(int val){
-        this.val=val;
+
+    Permission(int val) {
+        this.val = val;
     }
 
-    public int value(){
+    public int value() {
         return this.val;
     }
 }
