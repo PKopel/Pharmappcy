@@ -1,6 +1,13 @@
 package wt.muppety.model;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.persistence.*;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Objects;
 
@@ -15,7 +22,7 @@ public class Employee {
         this.lastname = lastname;
         this.position = position;
         this.login = login;
-        this.password = password;
+        this.setPassword(password);
     }
 
     public Employee() {
@@ -58,12 +65,35 @@ public class Employee {
         this.login = login;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
+    /**
+     * Setter responsible for updating password and salt entries after change
+     *
+     * @param password new password (plain)
+     */
     public void setPassword(String password) {
-        this.password = password;
+        //hash password
+        SecureRandom random = new SecureRandom();
+        byte[] hash, salt = new byte[16];
+        random.nextBytes(salt);
+        KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        try {
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            hash = keyFactory.generateSecret(spec).getEncoded();
+        } catch (InvalidKeySpecException | NoSuchAlgorithmException invalidKeySpecException) {
+            invalidKeySpecException.printStackTrace();
+            return;
+        }
+        //update salt and password (hashed)
+        this.salt = salt;
+        this.password = hash;
+    }
+
+    public byte[] getSalt() {
+        return salt;
     }
 
     public boolean canBuy() {
@@ -93,7 +123,7 @@ public class Employee {
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
         return getLogin().equals(employee.getLogin()) &&
-                getPassword().equals(employee.getPassword());
+                Arrays.equals(getPassword(), employee.getPassword());
     }
 
     @Override
@@ -122,12 +152,14 @@ public class Employee {
     @Column(name = "login", nullable = false, length = 50)
     private String login;
     @Column(name = "password", nullable = false, length = 50)
-    private String password;
+    private byte[] password;
+    @Column(name = "salt", nullable = false, length = 50)
+    private byte[] salt;
     @Embedded
     private final Permissions permissions = new Permissions();
 
 
-    public enum Position{
+    public enum Position {
         Manager, Chair, Worker
     }
 }

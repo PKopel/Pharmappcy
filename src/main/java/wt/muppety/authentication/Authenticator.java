@@ -1,11 +1,15 @@
 package wt.muppety.authentication;
 
-import javafx.scene.control.Button;
-
 import javafx.beans.binding.Bindings;
+import javafx.scene.control.Button;
 import wt.muppety.dao.EmployeeDao;
 import wt.muppety.model.Employee;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.Arrays;
 import java.util.BitSet;
 import java.util.Optional;
@@ -17,51 +21,68 @@ import java.util.Optional;
  */
 public class Authenticator {
 
-    private static final Authenticator _instance = new Authenticator();
-    private Employee _current;
+    private static Authenticator _instance;
+    private final SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+    private Employee currentUser;
     private boolean isLoggedIn = false;
-    private final BitSet _permissions = new BitSet(Permission.values().length);
+    private final BitSet permissions = new BitSet(Permission.values().length);
 
 
-    private Authenticator(){}
-
-    private void grantPermission(Permission p)
-    {
-        _instance._permissions.set(p.value());
+    private Authenticator() throws NoSuchAlgorithmException {
     }
 
-    private void grantAllPermissions()
-    {
-        for(Permission p : Permission.values()) _instance.grantPermission(p);
+    public static Authenticator getInstance() {
+        try {
+            if (_instance == null) {
+                _instance = new Authenticator();
+            }
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return _instance;
     }
 
-    public static Employee getCurrentUser(){
-        return _instance._current;
+    private void grantPermission(Permission p) {
+        _instance.permissions.set(p.value());
     }
 
-    public static boolean isLoggedIn(){
+    private void grantAllPermissions() {
+        for (Permission p : Permission.values()) _instance.grantPermission(p);
+    }
+
+    public Employee getCurrentUser() {
+        return _instance.currentUser;
+    }
+
+    public boolean isLoggedIn() {
         return !_instance.isLoggedIn;
     }
 
-    public static boolean logIn(LoginData data)
-    {
-        Optional<Employee> login_result = new EmployeeDao().findByLogin(data);
-        if(login_result.isPresent()){
-            _instance.isLoggedIn=true;
-            _instance._current = login_result.get();
-            _instance._permissions.or(login_result.get().permissionsBitSet());
-            return true;
+    public boolean logIn(LoginData data) {
+        Optional<Employee> loginResult = new EmployeeDao().findByLogin(data);
+        if (loginResult.isPresent()) {
+            Employee match = loginResult.get();
+            KeySpec keySpec = new PBEKeySpec(data.getPassword().toCharArray(), match.getSalt(), 65536, 128);
+            try {
+                if (Arrays.equals(match.getPassword(), keyFactory.generateSecret(keySpec).getEncoded())) {
+                    isLoggedIn = true;
+                    currentUser = match;
+                    permissions.or(match.permissionsBitSet());
+                    return true;
+                }
+            } catch (InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
         }
-        return true;
+        return false;
     }
 
-    private static boolean hasPermissionTo(Permission p)
-    {
-        return _instance.isLoggedIn && _instance._permissions.get(p.value());
+    private static boolean hasPermissionTo(Permission p) {
+        return _instance.isLoggedIn && _instance.permissions.get(p.value());
     }
 
-    public static void guardButton(Button b, Permission... permissions){
-        b.visibleProperty().bind(Bindings.createBooleanBinding(()-> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
-        b.managedProperty().bind(Bindings.createBooleanBinding(()-> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
+    public static void guardButton(Button b, Permission... permissions) {
+        b.visibleProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
+        b.managedProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
     }
 }

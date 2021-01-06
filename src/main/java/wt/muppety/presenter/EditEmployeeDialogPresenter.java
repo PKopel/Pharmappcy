@@ -44,6 +44,5 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
         lastNameTextField.setText(data.getLastname());
         positionComboBox.getSelectionModel().select(data.getPosition());
         loginTextField.setText(data.getLogin());
-        passwordTextField.setText(data.getPassword());
     }
 }

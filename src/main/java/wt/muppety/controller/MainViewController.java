@@ -43,7 +43,7 @@ public class MainViewController extends AbstractController<Void> {
         Authenticator.guardButton(employeeListButton, canBrowseDB);
         Authenticator.guardButton(productListButton, canBrowseDB);
         Authenticator.guardButton(addTransaction, canModerateDB);
-        Employee currentEmployee = Authenticator.getCurrentUser();
+        Employee currentEmployee = Authenticator.getInstance().getCurrentUser();
         if (currentEmployee != null) {
             loginLabel.setText(currentEmployee.getLogin());
             nameLabel.setText(currentEmployee.getFirstname() + " " + currentEmployee.getLastname());
@@ -78,10 +78,11 @@ public class MainViewController extends AbstractController<Void> {
     @Override
     public void setAppController(AppController appController) {
         this.appController = appController;
-        if (Authenticator.isLoggedIn()) {
+        Authenticator auth = Authenticator.getInstance();
+        if (auth.isLoggedIn()) {
             LoginData data = new LoginData();
             if (this.appController.showDialog(data, Login, "Sign in")) {
-                Authenticator.logIn(data);
+                auth.logIn(data);
                 this.initialize();
             }
         }

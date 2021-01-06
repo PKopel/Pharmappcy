@@ -38,8 +38,8 @@ public class EditTransactionDialogPresenter extends AbstractDialogPresenter<Tran
         Product product = productComboBox.getValue();
         data.setProduct(product);
         data.setDatetime(LocalDateTime.now());
-        data.setValue((double) (product.getUnitPrice() * data.getQuantity()));
-        data.setEmployee(Authenticator.getCurrentUser());
+        data.setValue(product.getUnitPrice() * data.getQuantity());
+        data.setEmployee(Authenticator.getInstance().getCurrentUser());
     }
 
     @Override

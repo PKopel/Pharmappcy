@@ -36,7 +36,7 @@ public class LoginDialogPresenter extends AbstractDialogPresenter<LoginData> {
     @FXML
     protected void handleOkAction(ActionEvent event){
         updateModel();
-        if(Authenticator.logIn(data)){
+        if(Authenticator.getInstance().logIn(data)){
             stage.close();
             accepted = true;
         }
