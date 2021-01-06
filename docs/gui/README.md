@@ -7,6 +7,7 @@
 * [`MainViewController`](../../src/main/java/wt/muppety/controller/MainViewController.java)
 * [`EmployeeListController`](../../src/main/java/wt/muppety/controller/EmployeeListController.java)
 * [`ProductListController`](../../src/main/java/wt/muppety/controller/ProductListController.java)
+* [`LoginViewController`](../../src/main/java/wt/muppety/controller/LoginViewController.java)
 
 #### Klasa [`AbstractController`](../../src/main/java/wt/muppety/controller/AbstractController.java)
 
@@ -40,6 +41,12 @@ tabeli [`Product`](../persistence/README.md) oraz dodawanie nowych kategorii pro
 [`ProductListController`](../../src/main/java/wt/muppety/controller/ProductListController.java)
 korzysta z układu zdefiniowanego w pliku [ProductListPane.fxml](../../src/main/resources/view/ProductListPane.fxml).
 
+#### Klasa [`LoginViewController`](../../src/main/java/wt/muppety/controller/LoginViewController.java)
+
+Klasa dziedzicząca po klasie
+[`AbstractController`](../../src/main/java/wt/muppety/controller/AbstractController.java)
+umożliwiająca użytkownikom logowanie się do systemu.
+
 ## Pakiet [`wt.muppety.presenter`](../../src/main/java/wt/muppety/presenter)
 
 ### Lista klas:
@@ -50,7 +57,6 @@ korzysta z układu zdefiniowanego w pliku [ProductListPane.fxml](../../src/main/
 * [`EditProductDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditProductDialogPresenter.java)
 * [`EditSupplierDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditSupplierDialogPresenter.java)
 * [`EditTransactionDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditTransactionDialogPresenter.java)
-* [`LoginDialogPresenter`](../../src/main/java/wt/muppety/presenter/LoginDialogPresenter.java)
 
 #### Klasa [`AbstractDialogPresenter`](../../src/main/java/wt/muppety/presenter/AbstractDialogPresenter.java)
 
@@ -87,12 +93,6 @@ specjalizowana w obsłudze dialogu dodawania lub edycji wpisu dostawcy.
 Klasa dziedzicząca po klasie
 [`AbstractDialogPresenter`](../../src/main/java/wt/muppety/presenter/AbstractDialogPresenter.java)
 specjalizowana w obsłudze dialogu dodawania lub edycji transakcji.
-
-#### Klasa [`LoginDialogPresenter`](../../src/main/java/wt/muppety/presenter/LoginDialogPresenter.java)
-
-Klasa dziedzicząca po klasie
-[`AbstractDialogPresenter`](../../src/main/java/wt/muppety/presenter/AbstractDialogPresenter.java)
-umożliwiająca użytkownikom logowanie się do systemu.
 
 ## Pakiet [`wt.muppety.view`](../../src/main/java/wt/muppety/view)
 

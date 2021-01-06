@@ -10,7 +10,7 @@
     <top>
         <Label text="Pharmacy App" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets left="25.0" right="25.0" top="25.0" />
+                <Insets left="25.0" right="25.0" top="25.0"/>
             </BorderPane.margin>
         </Label>
     </top>
@@ -25,7 +25,8 @@
                 <RowConstraints minHeight="10.0"/>
                 <RowConstraints minHeight="10.0"/>
             </rowConstraints>
-            <Label fx:id="errorLabel" text="Login attempt failed. Incorrect login/password combination" GridPane.columnIndex="1" visible="false" style="-fx-text-fill: red">
+            <Label fx:id="errorLabel" text="Login attempt failed. Incorrect login/password combination"
+                   GridPane.columnIndex="1" visible="false" style="-fx-text-fill: red">
                 <GridPane.margin>
                     <Insets left="5.0" right="5.0" top="5.0"/>
                 </GridPane.margin>
