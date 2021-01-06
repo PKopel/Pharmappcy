@@ -3,16 +3,16 @@ package wt.muppety.controller;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.dao.EmployeeDao;
 import wt.muppety.model.Employee;
+import wt.muppety.model.Product;
 
 import java.util.Optional;
 
@@ -41,6 +41,8 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
     public Button deleteButton;
     @FXML
     public Button backButton;
+    @FXML
+    private TextField filterField;
     private ObservableList<Employee> data = FXCollections.observableArrayList();
 
     @FXML
@@ -50,12 +52,31 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
         ObservableList<Employee> employees = employeeDao.listAll();
         employeeTable.setItems(employees);
 
+
         firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+        FilteredList<Employee> filteredData = new FilteredList<>(employees, e -> true);
+        SortedList<Employee> sortedData = new SortedList<>(filteredData);
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(employee -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                String[] splited = lowerCaseFilter.split(" ");
+                for(String part : splited) {
+                    if (!employee.toString().toLowerCase().contains(part))
+                        return false;
+                }
+                return true;
+            });
+            employeeTable.setItems(sortedData);
+        });
 
-        employeeTable.setItems(employees);
+        employeeTable.setItems(sortedData);
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        sortedData.comparatorProperty().bind(employeeTable.comparatorProperty());
 
         Authenticator.guardButton(addButton, canModerateDB);
         Authenticator.guardButton(editButton, canModerateDB);
