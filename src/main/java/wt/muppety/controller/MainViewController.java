@@ -78,7 +78,15 @@ public class MainViewController extends AbstractController<Void> {
     }
 
     public void handleChangeSubscriptionAction(ActionEvent event) {
-        System.out.println("change sub");
+        Employee employee = Authenticator.getCurrentUser();
+        if (changeSubscription.getText().equals("Subscribe")){
+            changeSubscription.setText("Unsubscribe");
+        }
+        else {
+            changeSubscription.setText("Subscribe");
+        }
+
+
     }
 
     @Override
