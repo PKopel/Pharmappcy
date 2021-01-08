@@ -32,7 +32,7 @@ public class LoginDialogPresenter extends AbstractDialogPresenter<LoginData> {
         data.setPassword(passwordTextField.getText());
     }
 
-    @Override
+
     @FXML
     protected void handleOkAction(ActionEvent event){
         updateModel();
@@ -49,5 +49,8 @@ public class LoginDialogPresenter extends AbstractDialogPresenter<LoginData> {
     @Override
     protected void updateControls() {
         //IGNORE
+    }
+
+    public void handleRegisterAction(ActionEvent actionEvent) {
     }
 }

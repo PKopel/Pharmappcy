@@ -1,0 +1,46 @@
+.header-section {
+    -fx-min-width: 200px;
+    -fx-max-width: 200px;
+    -fx-font-size: 20px;
+    -fx-background-color: #53b083 /*teal*/;
+}
+
+Button{
+    -fx-background-color: #53b083 /*teal*/;
+    -fx-min-height: 30px;
+    -fx-background-radius: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-min-width: 200px;
+}
+Button:hover{
+    -fx-background-color: #3d8558 /*darkcyan*/;
+}
+Button:focused{
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: black;
+}
+
+
+
+
+
+.image{
+    -fx-padding: 20px;
+}
+
+
+.labels{
+    -fx-background-color: lightgrey;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+    -fx-border-style: none none solid none;
+    -fx-max-width: 1080px;
+    -fx-min-width: 1080px;
+    -fx-max-height: 50px;
+}
+
+.text{
+    -fx-min-width: 60px;
+    -fx-padding: 0 20 0 0;
+}
