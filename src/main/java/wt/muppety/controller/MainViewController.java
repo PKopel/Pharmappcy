@@ -30,6 +30,8 @@ public class MainViewController extends AbstractController<Void> {
     @FXML
     public Button addTransaction;
     @FXML
+    public Button changeSubscription;
+    @FXML
     public Label loginLabel;
     @FXML
     public Label nameLabel;
@@ -73,6 +75,10 @@ public class MainViewController extends AbstractController<Void> {
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
         appController.showPane(products, ProductList);
+    }
+
+    public void handleChangeSubscriptionAction(ActionEvent event) {
+        System.out.println("change sub");
     }
 
     @Override
