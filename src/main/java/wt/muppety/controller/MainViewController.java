@@ -54,6 +54,13 @@ public class MainViewController extends AbstractController<Void> {
             nameLabel.setText(currentEmployee.getFirstname() + " " + currentEmployee.getLastname());
             positionLabel.setText(currentEmployee.getPosition().name());
         }
+        if (currentEmployee.getIsSubscribed() == true){
+            changeSubscriptionButton.setText("Unsubscribe");
+        } 
+        else {
+            changeSubscriptionButton.setText("Subscribe");
+        }
+
     }
 
 
@@ -91,11 +98,13 @@ public class MainViewController extends AbstractController<Void> {
         Employee employee = Authenticator.getInstance().getCurrentUser();
         if (changeSubscriptionButton.getText().equals("Subscribe")){
             changeSubscriptionButton.setText("Unsubscribe");
+            employeeDao.changeSubscription(employee);
         }
         else {
             changeSubscriptionButton.setText("Subscribe");
+            employeeDao.changeSubscription(employee);
         }
-        employeeDao.changeSubscription(employee);
+        
     }
 
     public void handleReturnAction(ActionEvent actionEvent) {
