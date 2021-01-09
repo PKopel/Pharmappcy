@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 
+<!--suppress ALL -->
 <VBox xmlns:fx="http://javafx.com/fxml"
         xmlns="http://javafx.com/javafx"
         fx:controller="wt.muppety.presenter.LoginDialogPresenter"

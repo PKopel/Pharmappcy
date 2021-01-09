@@ -16,7 +16,7 @@
 }
 
 Button{
-    -fx-background-color: #53b083 /*teal*/;
+    -fx-background-color: #39B38C /*teal*/;
     -fx-min-height: 50px;
     -fx-pref-width: 330px;
     -fx-background-radius: 0;
@@ -25,7 +25,7 @@ Button{
 }
 
 Button:hover{
-    -fx-background-color: #3d8558 /*darkcyan*/;
+    -fx-background-color: #297F64 /*darkcyan*/;
 }
 
 .buttons{

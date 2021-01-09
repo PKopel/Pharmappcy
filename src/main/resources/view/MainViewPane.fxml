@@ -18,26 +18,38 @@
             </ImageView>
         </VBox>
 
-        <Button fx:id="employeeListButton" mnemonicParsing="false"
-                text="Employee list"/>
-        <!--<Button fx:id="employeeListButton" mnemonicParsing="false" onAction="#handleEmployeeListAction" text="Employee list"/>-->
-        <Button fx:id="productListButton" mnemonicParsing="false"  text="Product list"/>
-        <!--<Button fx:id="productListButton" mnemonicParsing="false" onAction="#handleProductListAction" text="Product list"/>-->
-        <Button fx:id="addTransaction" mnemonicParsing="false"  text="Add transaction"/>
-        <!--<Button fx:id="addTransaction" mnemonicParsing="false" onAction="#handleAddTransactionAction" text="Add transaction"/>-->
+        <Button fx:id="employeeListButton" mnemonicParsing="false" onAction="#handleEmployeeListAction" text="Employee list"/>
+        <Button fx:id="productListButton" mnemonicParsing="false" onAction="#handleProductListAction" text="Product list"/>
+        <Button fx:id="addTransaction" mnemonicParsing="false" onAction="#handleAddTransactionAction" text="Add transaction"/>
     </VBox>
 
-    <HBox styleClass="labels" alignment="CENTER_RIGHT">
-        <Label text="Welcome,  "/>
-        <Label styleClass="text" fx:id="nameLabel"/>
 
-        <Label text="Login:  "/>
-        <Label styleClass="text" fx:id="loginLabel"/>
+    <VBox>
+            <BorderPane styleClass="labels">
+                <left>
+                    <Button text="Return" onAction="#handleReturnAction"/>
+                </left>
+                <right>
+                    <HBox>
+                        <Label text="Welcome,  "/>
+                        <Label styleClass="text" fx:id="nameLabel"/>
 
-        <Label text="Position:  "/>
-        <Label styleClass="text" fx:id="positionLabel"/>
-    </HBox>
+                        <Label text="Login:  "/>
+                        <Label styleClass="text" fx:id="loginLabel"/>
+
+                        <Label text="Position:  "/>
+                        <Label styleClass="text" fx:id="positionLabel"/>
+                    </HBox>
+
+                </right>
+            </BorderPane>
+        <Pane fx:id="subController"/>
+
+    </VBox>
+
     <stylesheets>
         <URL value="@../styles/mainview.css"/>
     </stylesheets>
+
+
 </HBox>
