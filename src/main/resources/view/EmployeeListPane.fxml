@@ -10,6 +10,7 @@
             <Button fx:id="deleteButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleDeleteAction" text="Delete"/>
             <Button fx:id="editButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleEditAction" text="Edit"/>
             <Button fx:id="addButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddAction" text="Add"/>
+            <TextField fx:id="filterField"/>
         </VBox>
     </right>
     <center>

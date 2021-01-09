@@ -12,6 +12,7 @@
             <Button fx:id="addProductButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddProductAction" text="Add product"/>
             <Button fx:id="addCategoryButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddCategoryAction" text="Add category"/>
             <Button fx:id="addSupplierButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#handleAddSupplierAction" text="Add supplier"/>
+            <TextField fx:id="filterField"/>
         </VBox>
     </right>
     <center>
