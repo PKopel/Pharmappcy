@@ -31,7 +31,7 @@ public abstract class BaseDao<T> {
      *
      * @param type Class object of type of item to delete
      * @param id   Id of object to delete
-     * @return     true if object of given id was deleted, false otherwise
+     * @return true if object of given id was deleted, false otherwise
      */
     public boolean deleteById(Class<T> type, int id) {
         System.out.println(id);

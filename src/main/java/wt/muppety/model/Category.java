@@ -10,14 +10,14 @@ import java.util.Set;
 public class Category {
 
     public static final String TABLE_NAME = "Category";
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private final Set<Product> products = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")
     private int id;
     @Column(name = "name", nullable = false, length = 50)
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    private final Set<Product> products = new HashSet<>();
 
     public Category(String name) {
         this.name = name;

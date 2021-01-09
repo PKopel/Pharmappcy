@@ -24,7 +24,7 @@ public class Product {
     private double unitPrice;
     @Column(name = "onPrescription", nullable = false)
     private boolean onPrescription;
-    @Column(name = "manfacturer", nullable = false, length = 50)
+    @Column(name = "manufacturer", nullable = false, length = 50)
     private String manufacturer;
 
     public Product(Supplier supplier, String name, double unitPrice, boolean onPrescription, String manufacturer) {

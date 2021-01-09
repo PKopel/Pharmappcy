@@ -3,12 +3,11 @@ package wt.muppety.presenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.stage.Stage;
+import wt.muppety.controller.AbstractController;
 
-public abstract class AbstractDialogPresenter<T> {
+public abstract class AbstractDialogPresenter<T> extends AbstractController<T> {
 
     protected Stage stage;
-
-    protected T data;
 
     protected boolean accepted;
 
@@ -16,6 +15,7 @@ public abstract class AbstractDialogPresenter<T> {
         this.stage = stage;
     }
 
+    @Override
     public void setData(T data) {
         this.data = data;
         updateControls();

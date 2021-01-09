@@ -51,8 +51,8 @@ public class EmployeeDao extends BaseDao<Employee> {
         try {
             System.out.println(currentSession().toString());
             Employee employee = currentSession()
-                    .createQuery("SELECT c FROM Employee c WHERE c.login = :login AND c.password = :password", Employee.class)
-                    .setParameter("login", data.getLogin()).setParameter("password", data.getPassword()).getSingleResult();
+                    .createQuery("SELECT c FROM Employee c WHERE c.login = :login", Employee.class)
+                    .setParameter("login", data.getLogin()).getSingleResult();
             return Optional.of(employee);
         } catch (Exception e) {
             e.printStackTrace();

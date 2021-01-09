@@ -23,6 +23,7 @@ import static wt.muppety.view.LayoutName.*;
 
 public class MainViewController extends AbstractController<Void> {
 
+    private final ObservableList<Transaction> data = FXCollections.observableArrayList();
     @FXML
     public Button employeeListButton;
     @FXML
@@ -38,14 +39,12 @@ public class MainViewController extends AbstractController<Void> {
     @FXML
     public Label positionLabel;
 
-    private final ObservableList<Transaction> data = FXCollections.observableArrayList();
-
     @FXML
     private void initialize() {
-        Authenticator.guardButton(employeeListButton, canBrowseDB);
-        Authenticator.guardButton(productListButton, canBrowseDB);
-        Authenticator.guardButton(addTransaction, canModerateDB);
-        Employee currentEmployee = Authenticator.getCurrentUser();
+        Authenticator.guardControl(employeeListButton, canBrowseDB);
+        Authenticator.guardControl(productListButton, canBrowseDB);
+        Authenticator.guardControl(addTransaction, canModerateDB);
+        Employee currentEmployee = Authenticator.getInstance().getCurrentUser();
         if (currentEmployee != null) {
             loginLabel.setText(currentEmployee.getLogin());
             nameLabel.setText(currentEmployee.getFirstname() + " " + currentEmployee.getLastname());
@@ -77,28 +76,9 @@ public class MainViewController extends AbstractController<Void> {
         appController.showPane(products, ProductList);
     }
 
-    public void handleChangeSubscriptionAction(ActionEvent event) {
-        Employee employee = Authenticator.getCurrentUser();
-        if (changeSubscription.getText().equals("Subscribe")){
-            changeSubscription.setText("Unsubscribe");
-        }
-        else {
-            changeSubscription.setText("Subscribe");
-        }
-
-
-    }
-
-    @Override
-    public void setAppController(AppController appController) {
-        this.appController = appController;
-        if (Authenticator.isLoggedIn()) {
-            LoginData data = new LoginData();
-            if (this.appController.showDialog(data, Login, "Sign in")) {
-                Authenticator.logIn(data);
-                this.initialize();
-            }
-        }
+    public void handleLogoutAction(ActionEvent event) {
+        Authenticator.getInstance().logOut();
+        appController.showPane(new LoginData(), LoginView);
     }
 
     @Override
