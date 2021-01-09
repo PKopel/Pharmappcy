@@ -46,6 +46,22 @@ public class EmployeeDao extends BaseDao<Employee> {
         return Optional.empty();
     }
 
+    public Optional<Employee> changeSubscription(Employee employee) {
+        try {
+            if (employee.getIsSubscribed() == true){
+                employee.setIsSubscribed(false);
+            }
+            else {
+                employee.setIsSubscribed(true);
+            }
+            this.update(employee);
+            return findById(employee.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
     public Optional<Employee> findById(final int indexNumber) {
         try {
             Employee employee = currentSession()

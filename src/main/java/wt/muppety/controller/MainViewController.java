@@ -45,7 +45,7 @@ public class MainViewController extends AbstractController<Void> {
 
     @FXML
     private void initialize() {
-        Authenticator.guardControl(employeeListButton, canBrowseDB);
+        Authenticator.guardControl(employeeListButton, canModerateDB);
         Authenticator.guardControl(productListButton, canBrowseDB);
         Authenticator.guardControl(addTransactionButton, canModerateDB);
         Employee currentEmployee = Authenticator.getInstance().getCurrentUser();
@@ -87,7 +87,15 @@ public class MainViewController extends AbstractController<Void> {
     }
 
     public void handleChangeSubscriptionAction(ActionEvent event) {
-        //TODO
+        EmployeeDao employeeDao = new EmployeeDao();
+        Employee employee = Authenticator.getInstance().getCurrentUser();
+        if (changeSubscriptionButton.getText().equals("Subscribe")){
+            changeSubscriptionButton.setText("Unsubscribe");
+        }
+        else {
+            changeSubscriptionButton.setText("Subscribe");
+        }
+        employeeDao.changeSubscription(employee);
     }
 
     public void handleReturnAction(ActionEvent actionEvent) {
