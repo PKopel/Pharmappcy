@@ -26,6 +26,8 @@ public class Employee {
     private String firstname;
     @Column(name = "lastname", nullable = false, length = 50)
     private String lastname;
+    @Column(name = "email", nullable = true, length = 50)
+    private String email;
     @Column(name = "position", nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
     private Employee.Position position;
