@@ -40,10 +40,11 @@ public class Employee {
     @Column(name = "isSubscribed", nullable = true)
     private boolean isSubscribed;
 
-    public Employee(String firstname, String lastname, Employee.Position position, String login, String password) {
+    public Employee(String firstname, String lastname, String email, Employee.Position position, String login, String password) {
         this();
         this.firstname = firstname;
         this.lastname = lastname;
+        this.email = email;
         this.position = position;
         this.login = login;
         this.setPassword(password);
@@ -52,6 +53,10 @@ public class Employee {
 
     public Employee() {
         setPermissions(true, true, true, true);
+    }
+
+    public void setClientPermissions(){
+        setPermissions(true, false, true, false);
     }
 
     public int getId() {
