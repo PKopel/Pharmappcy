@@ -58,7 +58,7 @@ Klasa [`Employee`](../../src/main/java/wt/muppety/model/Employee.java) zawiera p
 * Position — pozycja w firmie: Manager, Chair lub Worker. To pole korzysta z typu `Employee.Position` do kontrolowania
   dozwolonych wartości
 * Login — wykorzystywany przy autentykacji
-* Password — wykorzystywane przy autentykacji
+* Password i salt — wykorzystywane przy autentykacji
 
 #### Klasa [`Permissions`](../../src/main/java/wt/muppety/model/Permissions.java)
 

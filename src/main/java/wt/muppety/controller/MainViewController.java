@@ -15,7 +15,6 @@ import wt.muppety.dao.TransactionDao;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;
-import java.util.Optional;
 
 import static wt.muppety.authentication.Permission.canBrowseDB;
 import static wt.muppety.authentication.Permission.canModerateDB;
@@ -29,10 +28,11 @@ public class MainViewController extends AbstractController<Void> {
     @FXML
     public Button productListButton;
     @FXML
-    public Button addTransaction;
-
+    public Button addTransactionButton;
     @FXML
-    public Button changeSubscription;
+    public Button changeSubscriptionButton;
+    @FXML
+    public Button logOutButton;
     @FXML
     public Label loginLabel;
     @FXML
@@ -47,7 +47,7 @@ public class MainViewController extends AbstractController<Void> {
     private void initialize() {
         Authenticator.guardControl(employeeListButton, canBrowseDB);
         Authenticator.guardControl(productListButton, canBrowseDB);
-        Authenticator.guardControl(addTransaction, canModerateDB);
+        Authenticator.guardControl(addTransactionButton, canModerateDB);
         Employee currentEmployee = Authenticator.getInstance().getCurrentUser();
         if (currentEmployee != null) {
             loginLabel.setText(currentEmployee.getLogin());
@@ -74,7 +74,7 @@ public class MainViewController extends AbstractController<Void> {
         if (appController.showDialog(newTransaction, EditTransaction, "Add transaction")) {
             data.add(newTransaction);
             TransactionDao transactionDao = new TransactionDao();
-            Optional<Transaction> transaction = transactionDao.create(newTransaction);
+            transactionDao.create(newTransaction);
         }
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
@@ -86,12 +86,16 @@ public class MainViewController extends AbstractController<Void> {
         appController.showPane(new LoginData(), LoginView);
     }
 
-    @Override
-    public void setData(Void data) {
-        //IGNORED
+    public void handleChangeSubscriptionAction(ActionEvent event) {
+        //TODO
     }
 
     public void handleReturnAction(ActionEvent actionEvent) {
         this.subController.getChildren().clear();
+    }
+
+    @Override
+    public void setData(Void data) {
+        //IGNORED
     }
 }

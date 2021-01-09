@@ -1,44 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<!--suppress ALL -->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-
-<!--suppress ALL -->
 <VBox xmlns:fx="http://javafx.com/fxml"
-        xmlns="http://javafx.com/javafx"
-        fx:controller="wt.muppety.presenter.LoginDialogPresenter"
-        prefWidth="350.0">
+      xmlns="http://javafx.com/javafx"
+      fx:controller="wt.muppety.controller.LoginViewController"
+      prefWidth="350.0">
     <HBox styleClass="header-section">
         <Label id="header-text" text="Welcome to Pharmappcy!"/>
     </HBox>
     <VBox styleClass="main-box">
-        <Label fx:id="errorLabel" text="Login attempt failed. Incorrect login/password combination" GridPane.rowIndex="1" visible="false" style="-fx-text-fill: red"/>
+        <Label fx:id="errorLabel" text="Login attempt failed. Incorrect login/password combination"
+               GridPane.rowIndex="1" visible="false" style="-fx-text-fill: red"/>
 
-        </GridPane>
-    </center>
-    <bottom>
-        <HBox styleClass="buttons" alignment="BOTTOM_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets left="5.0" right="5.0" top="5.0"/>
-            </BorderPane.margin>
-            <Button onAction="#handleLogInAction" prefWidth="60.0" text="_Login">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
-            <Button onAction="#handleRegisterAction" prefWidth="100.0" text="_Register">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
         <HBox alignment="CENTER" styleClass="login-box">
             <Label text="Login:"/>
             <TextField styleClass="text-area" fx:id="loginTextField"/>
         </HBox>
         <HBox alignment="CENTER" styleClass="login-box">
-            <Label  text="Password:"/>
+            <Label text="Password:"/>
             <PasswordField styleClass="text-area" fx:id="passwordTextField"/>
         </HBox>
 
@@ -49,9 +31,8 @@
     </VBox>
 
 
-
     <stylesheets>
-        <URL value="@../styles/main.css" />
-        <URL value="@../styles/login.css" />
+        <URL value="@../styles/main.css"/>
+        <URL value="@../styles/login.css"/>
     </stylesheets>
 </VBox>

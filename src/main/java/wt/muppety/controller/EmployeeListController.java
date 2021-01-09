@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.dao.EmployeeDao;
 import wt.muppety.model.Employee;
-import wt.muppety.model.Product;
 
 import java.util.Optional;
 
@@ -65,7 +64,7 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
                 String[] splited = lowerCaseFilter.split(" ");
-                for(String part : splited) {
+                for (String part : splited) {
                     if (!employee.toString().toLowerCase().contains(part))
                         return false;
                 }

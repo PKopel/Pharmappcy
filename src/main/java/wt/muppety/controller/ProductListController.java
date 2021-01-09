@@ -80,8 +80,8 @@ public class ProductListController extends AbstractController<ObservableList<Pro
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
                 String[] splited = lowerCaseFilter.split(" ");
-                for(String part : splited) {
-                    if (!product.toString().toLowerCase().contains(part))
+                for (String part : splited) {
+                    if (!product.toStringLong().toLowerCase().contains(part))
                         return false;
                 }
                 return true;

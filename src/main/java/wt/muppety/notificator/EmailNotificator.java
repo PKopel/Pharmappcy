@@ -1,17 +1,9 @@
 package wt.muppety.notificator;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-
 import java.util.Properties;
-import java.util.logging.Level;
 
 public class EmailNotificator {
 
@@ -20,7 +12,7 @@ public class EmailNotificator {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");    
+        properties.put("mail.smtp.port", "587");
 
         String myAccountEmail = "pharmappcy.muppety@gmail.com";
         String password = "projektTOwtorek1615";
@@ -38,7 +30,7 @@ public class EmailNotificator {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
+
     }
 
 
@@ -51,14 +43,13 @@ public class EmailNotificator {
             message.setSubject("test pharmappcy notifications");
             message.setText("Hey");
             return message;
-            
+
         } catch (Exception ex) {
             System.out.println(ex);
         }
         return null;
 
     }
-
 
 
 }

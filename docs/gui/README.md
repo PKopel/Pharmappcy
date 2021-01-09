@@ -45,7 +45,7 @@ korzysta z układu zdefiniowanego w pliku [ProductListPane.fxml](../../src/main/
 
 Klasa dziedzicząca po klasie
 [`AbstractController`](../../src/main/java/wt/muppety/controller/AbstractController.java)
-umożliwiająca użytkownikom logowanie się do systemu.
+umożliwiająca użytkownikom rejestrację oraz logowanie do systemu.
 
 ## Pakiet [`wt.muppety.presenter`](../../src/main/java/wt/muppety/presenter)
 

@@ -106,11 +106,22 @@ public class Product {
 
     @Override
     public String toString() {
-        String catNames = "";
-        for (Category cat:categories) {
-                catNames+=cat.toString();
+        return name;
+    }
+
+    public String toStringLong() {
+        StringBuilder productString = new StringBuilder();
+        productString.append(name);
+        for (Category cat : categories) {
+            productString.append(cat.toString());
         }
-        return name + catNames + manufacturer + supplier.toString() + unitPrice + onPrescription;
+        productString.append(manufacturer);
+        if (supplier != null)
+            productString.append(supplier.toString());
+        productString.append(unitPrice);
+        productString.append(onPrescription);
+
+        return productString.toString();
     }
 
 }

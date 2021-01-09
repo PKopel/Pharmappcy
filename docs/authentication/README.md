@@ -8,12 +8,12 @@
 
 #### Klasa [`Authenticator`](../../src/main/java/wt/muppety/authentication/Authenticator.java)
 
-Główna klasa zarządzająca kontrolująca uprawnienia do korzystania z systemu. Pozwala na logowanie do systemu i
-sprawdzanie uprawnień zalogowanego użytkownika. Korzysta ze wzorca Singleton.
+Główna klasa zarządzająca kontrolująca uprawnienia do korzystania z systemu. Udostępnia funkcje służące do logowania 
+i wylogowania użytkownika oraz sprawdzania uprawnień zalogowanego użytkownika. Korzysta ze wzorca Singleton.
 
 #### Klasa [`LoginData`](../../src/main/java/wt/muppety/authentication/LoginData.java)
 
-Klasa przechowująca dane logowania
+Klasa przechowująca dane logowania.
 
 #### Enumerable [`Permission`](../../src/main/java/wt/muppety/authentication/LoginData.java)
 

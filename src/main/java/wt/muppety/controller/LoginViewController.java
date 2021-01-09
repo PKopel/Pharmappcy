@@ -22,13 +22,6 @@ public class LoginViewController extends AbstractController<LoginData> {
     @FXML
     private Label errorLabel;
 
-    /*
-        public void setStage(Stage stage) {
-            super.setStage(stage);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setOnCloseRequest(event -> System.exit(0));
-        }
-    */
     @Override
     public void setData(LoginData data) {
         this.data = data;

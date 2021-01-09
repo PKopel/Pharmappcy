@@ -16,6 +16,26 @@ import java.util.Objects;
 public class Employee {
     public static final String TABLE_NAME = "Employee";
 
+    @Embedded
+    private final Permissions permissions = new Permissions();
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id")
+    private int id;
+    @Column(name = "firstname", nullable = false, length = 50)
+    private String firstname;
+    @Column(name = "lastname", nullable = false, length = 50)
+    private String lastname;
+    @Column(name = "position", nullable = false, length = 50)
+    @Enumerated(EnumType.STRING)
+    private Employee.Position position;
+    @Column(name = "login", nullable = false, length = 50)
+    private String login;
+    @Column(name = "password", nullable = false, length = 50)
+    private byte[] password;
+    @Column(name = "salt", nullable = false, length = 50)
+    private byte[] salt;
+
     public Employee(String firstname, String lastname, Employee.Position position, String login, String password) {
         this();
         this.firstname = firstname;
@@ -136,26 +156,6 @@ public class Employee {
         permissions.canBrowseDB = canBrowseDB;
         permissions.canModerateDB = canModerateDB;
     }
-
-    @Embedded
-    private final Permissions permissions = new Permissions();
-    @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id")
-    private int id;
-    @Column(name = "firstname", nullable = false, length = 50)
-    private String firstname;
-    @Column(name = "lastname", nullable = false, length = 50)
-    private String lastname;
-    @Column(name = "position", nullable = false, length = 50)
-    @Enumerated(EnumType.STRING)
-    private Employee.Position position;
-    @Column(name = "login", nullable = false, length = 50)
-    private String login;
-    @Column(name = "password", nullable = false, length = 50)
-    private byte[] password;
-    @Column(name = "salt", nullable = false, length = 50)
-    private byte[] salt;
 
     public enum Position {
         Manager, Chair, Worker
