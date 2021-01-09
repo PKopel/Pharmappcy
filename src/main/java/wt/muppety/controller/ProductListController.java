@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import wt.muppety.authentication.Authenticator;
 import wt.muppety.dao.CategoryDao;
 import wt.muppety.dao.ProductDao;
 import wt.muppety.dao.SupplierDao;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static wt.muppety.view.LayoutName.*;
+import static wt.muppety.authentication.Permission.canModerateDB;
+
 
 
 /**
@@ -100,6 +103,13 @@ public class ProductListController extends AbstractController<ObservableList<Pro
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
 
         productTable.sort();
+
+        Authenticator.guardControl(addProductButton, canModerateDB);
+        Authenticator.guardControl(addCategoryButton, canModerateDB);
+        Authenticator.guardControl(addSupplierButton, canModerateDB);
+        Authenticator.guardControl(editButton, canModerateDB);
+        Authenticator.guardControl(deleteButton, canModerateDB);
+
     }
 
     public void handleDeleteAction(ActionEvent event) {
