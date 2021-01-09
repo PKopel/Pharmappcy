@@ -1,0 +1,8 @@
+.functional-buttons{
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+.functional-buttons Button{
+    -fx-background-color: #4298B3;
+}

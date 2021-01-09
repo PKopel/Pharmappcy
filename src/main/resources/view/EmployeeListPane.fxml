@@ -1,50 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="670.0" prefWidth="1080.0"
             xmlns="http://javafx.com/javafx/11.0.1" fx:controller="wt.muppety.controller.EmployeeListController">
-    <top>
-        <HBox prefHeight="20.0" BorderPane.alignment="CENTER">
-            <opaqueInsets>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </opaqueInsets>
-            <BorderPane.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </BorderPane.margin>
-            <Button fx:id="deleteButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleDeleteAction"
-                    text="Delete">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
-            <Button fx:id="editButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleEditAction"
-                    text="Edit">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
-            <Button fx:id="addButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddAction"
-                    text="Add">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
-            <Button fx:id="backButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#handleBackAction"
-                    text="Back">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
-            <Region prefWidth="100.0" HBox.hgrow="ALWAYS" />
-            <Label text="Search:" alignment="CENTER_RIGHT" translateY="7.5"/>
-            <TextField fx:id="filterField" prefWidth="150.0"  alignment="CENTER_LEFT" translateY="5"/>
-            <HBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </HBox.margin>
-        </HBox>
-    </top>
+    <right>
+        <VBox styleClass="functional-buttons">
+            <Button fx:id="deleteButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleDeleteAction" text="Delete"/>
+            <Button fx:id="editButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleEditAction" text="Edit"/>
+            <Button fx:id="addButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddAction" text="Add"/>
+        </VBox>
+    </right>
     <center>
         <TableView fx:id="employeeTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <columns>
@@ -57,5 +24,8 @@
             </columnResizePolicy>
         </TableView>
     </center>
+    <stylesheets>
+        <URL value="@../styles/functional-menu.css"/>
+    </stylesheets>
 
 </BorderPane>

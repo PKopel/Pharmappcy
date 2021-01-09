@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.authentication.LoginData;
 import wt.muppety.dao.EmployeeDao;
@@ -14,7 +15,6 @@ import wt.muppety.dao.TransactionDao;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;
-
 import java.util.Optional;
 
 import static wt.muppety.authentication.Permission.canBrowseDB;
@@ -29,6 +29,7 @@ public class MainViewController extends AbstractController<Void> {
     public Button productListButton;
     @FXML
     public Button addTransaction;
+
     @FXML
     public Button changeSubscription;
     @FXML
@@ -39,6 +40,9 @@ public class MainViewController extends AbstractController<Void> {
     public Label positionLabel;
 
     private final ObservableList<Transaction> data = FXCollections.observableArrayList();
+
+    @FXML
+    public Pane subController;
 
     @FXML
     private void initialize() {
@@ -53,16 +57,17 @@ public class MainViewController extends AbstractController<Void> {
         }
     }
 
+
     public void handleEmployeeListAction(ActionEvent event) {
         EmployeeDao employeeDao = new EmployeeDao();
         ObservableList<Employee> employees = employeeDao.listAll();
-        appController.showPane(employees, EmployeeList);
+        appController.showPane(employees, EmployeeList, subController);
     }
 
     public void handleProductListAction(ActionEvent event) {
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
-        appController.showPane(products, ProductList);
+        appController.showPane(products, ProductList, subController);
     }
 
     public void handleAddTransactionAction(ActionEvent event) {
@@ -74,7 +79,7 @@ public class MainViewController extends AbstractController<Void> {
         }
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
-        appController.showPane(products, ProductList);
+        appController.showPane(products, ProductList, subController);
     }
 
     public void handleChangeSubscriptionAction(ActionEvent event) {
@@ -104,5 +109,9 @@ public class MainViewController extends AbstractController<Void> {
     @Override
     public void setData(Void data) {
         //IGNORED
+    }
+
+    public void handleReturnAction(ActionEvent actionEvent) {
+        this.subController.getChildren().clear();
     }
 }

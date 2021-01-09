@@ -1,98 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml"
-          xmlns="http://javafx.com/javafx"
-          fx:controller="wt.muppety.controller.MainViewController"
-          prefHeight="300.0" prefWidth="600.0">
+<?import java.net.URL?>
 
-    <VBox GridPane.columnIndex="0" prefWidth="300" prefHeight="300">
-        <Label text="Current user:">
-            <VBox.margin>
-                <Insets bottom="5.0" left="10.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </Label>
-        <HBox>
-            <Label text="Login:">
-            <HBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </HBox.margin>
-        </Label>
-            <Label fx:id="loginLabel">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Label>
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </HBox>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-        <HBox>
-            <Label text="Name:">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Label>
-            <Label fx:id="nameLabel">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Label>
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </HBox>
+<HBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.controller.MainViewController" prefWidth="1280.0"
+      prefHeight="720.0">
 
-        <HBox>
-            <Label text="Position:">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Label>
-            <Label fx:id="positionLabel">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Label>
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </HBox>
+    <VBox styleClass="header-section" alignment="CENTER">
+        <VBox styleClass="image" alignment="CENTER">
+            <ImageView fitHeight="52" fitWidth="52" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../logo.png"/>
+            </ImageView>
+        </VBox>
+
+        <Button fx:id="employeeListButton" mnemonicParsing="false" onAction="#handleEmployeeListAction" text="Employee list"/>
+        <Button fx:id="productListButton" mnemonicParsing="false" onAction="#handleProductListAction" text="Product list"/>
+        <Button fx:id="addTransaction" mnemonicParsing="false" onAction="#handleAddTransactionAction" text="Add transaction"/>
     </VBox>
 
-    <VBox GridPane.columnIndex="1" prefWidth="300" prefHeight="300">
-        <opaqueInsets>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-        </opaqueInsets>
-        <BorderPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-        </BorderPane.margin>
-        <Button fx:id="employeeListButton" mnemonicParsing="false" onAction="#handleEmployeeListAction"
-                text="Employee list" prefWidth="200">
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </Button>
-        <Button fx:id="productListButton" mnemonicParsing="false" onAction="#handleProductListAction"
-                text="Product list" prefWidth="200">
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </Button>
-        <Button fx:id="addTransaction" mnemonicParsing="false" onAction="#handleAddTransactionAction"
-                text="Add transaction" prefWidth="200">
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </Button>
-        <Button fx:id="changeSubscription" mnemonicParsing="false" onAction="#handleChangeSubscriptionAction"
-                text="Subscribe" prefWidth="200">
-            <VBox.margin>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </VBox.margin>
-        </Button>
+
+    <VBox>
+            <BorderPane styleClass="labels">
+                <left>
+                    <Button text="Return" onAction="#handleReturnAction"/>
+                </left>
+                <right>
+                    <HBox>
+                        <Label text="Welcome,  "/>
+                        <Label styleClass="text" fx:id="nameLabel"/>
+
+                        <Label text="Login:  "/>
+                        <Label styleClass="text" fx:id="loginLabel"/>
+
+                        <Label text="Position:  "/>
+                        <Label styleClass="text" fx:id="positionLabel"/>
+                    </HBox>
+
+                </right>
+            </BorderPane>
+        <Pane fx:id="subController"/>
+
     </VBox>
-</GridPane>
+
+    <stylesheets>
+        <URL value="@../styles/mainview.css"/>
+    </stylesheets>
+
+
+</HBox>
