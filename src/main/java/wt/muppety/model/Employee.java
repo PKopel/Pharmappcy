@@ -35,6 +35,8 @@ public class Employee {
     private byte[] password;
     @Column(name = "salt", nullable = false, length = 50)
     private byte[] salt;
+    @Column(name = "isSubscribed", nullable = true)
+    private boolean isSubscribed;
 
     public Employee(String firstname, String lastname, Employee.Position position, String login, String password) {
         this();
@@ -43,6 +45,7 @@ public class Employee {
         this.position = position;
         this.login = login;
         this.setPassword(password);
+        this.isSubscribed = false;
     }
 
     public Employee() {
@@ -116,6 +119,14 @@ public class Employee {
         return salt;
     }
 
+    public boolean getIsSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setIsSubscribed(boolean isSubscribed) {
+        this.isSubscribed = isSubscribed;
+    }
+
     public boolean canBuy() {
         return permissions.canBuy;
     }
@@ -158,6 +169,6 @@ public class Employee {
     }
 
     public enum Position {
-        Manager, Chair, Worker
+        Manager, Chair, Worker, Client
     }
 }
