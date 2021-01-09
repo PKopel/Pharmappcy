@@ -108,6 +108,11 @@ public class Employee {
         permissions.canModerateDB = canModerateDB;
     }
 
+    @Override
+    public String toString() {
+        return firstname + lastname + position;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id")

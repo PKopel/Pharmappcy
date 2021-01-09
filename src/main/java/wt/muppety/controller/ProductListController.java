@@ -3,12 +3,11 @@ package wt.muppety.controller;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import wt.muppety.dao.CategoryDao;
 import wt.muppety.dao.ProductDao;
@@ -55,14 +54,15 @@ public class ProductListController extends AbstractController<ObservableList<Pro
     public Button backButton;
     @FXML
     public Button addSupplierButton;
+    @FXML
+    private TextField filterField;
     private ObservableList<Product> data = FXCollections.observableArrayList();
+
 
     @FXML
     private void initialize() {
-
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
-        productTable.setItems(products);
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         unitPriceColumn.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
@@ -71,11 +71,35 @@ public class ProductListController extends AbstractController<ObservableList<Pro
         onPrescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("onPrescription"));
         supplierColumn.setCellValueFactory(new PropertyValueFactory<>("supplier"));
 
-        productTable.setItems(products);
+        FilteredList<Product> filteredData = new FilteredList<>(products, p -> true);
+        SortedList<Product> sortedData = new SortedList<>(filteredData);
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(product -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                String[] splited = lowerCaseFilter.split(" ");
+                for(String part : splited) {
+                    if (!product.toString().toLowerCase().contains(part))
+                        return false;
+                }
+                return true;
+            });
+            productTable.setItems(sortedData);
+        });
+
+        productTable.setItems(sortedData);
+
+
         productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(productTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
+        productTable.getSortOrder().add(unitPriceColumn);
+        sortedData.comparatorProperty().bind(productTable.comparatorProperty());
+
+        productTable.sort();
     }
 
     public void handleDeleteAction(ActionEvent event) {

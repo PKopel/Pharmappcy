@@ -106,7 +106,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return name;
+        String catNames = "";
+        for (Category cat:categories) {
+                catNames+=cat.toString();
+        }
+        return name + catNames + manufacturer + supplier.toString() + unitPrice + onPrescription;
     }
 
 }
