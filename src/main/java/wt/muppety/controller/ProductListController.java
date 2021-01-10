@@ -16,6 +16,7 @@ import wt.muppety.dao.SupplierDao;
 import wt.muppety.model.Category;
 import wt.muppety.model.Product;
 import wt.muppety.model.Supplier;
+import wt.muppety.notificator.EmailNotificator;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -140,6 +141,7 @@ public class ProductListController extends AbstractController<ObservableList<Pro
             ProductDao productDao = new ProductDao();
             Optional<Product> product = productDao.create(newProduct);
             data.add(product.orElseThrow());
+            EmailNotificator.getInstance().sendEmailToAll();
         }
     }
 
