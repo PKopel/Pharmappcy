@@ -1,5 +1,6 @@
 package wt.muppety.controller;
 
+import com.sun.javafx.css.StyleManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -20,6 +21,7 @@ public class AppController {
     private final Stage primaryStage;
 
     public AppController(Stage primaryStage) {
+
         this.primaryStage = primaryStage;
     }
 
@@ -43,6 +45,7 @@ public class AppController {
             controller.setData(data);
 
             Scene scene = new Scene(rootLayout);
+            scene.getStylesheets().add("styles/global.css");
             primaryStage.setScene(scene);
             primaryStage.setOnCloseRequest(event -> {
                 SessionService.closeSession();
@@ -103,6 +106,7 @@ public class AppController {
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
+            scene.getStylesheets().add("styles/global.css");
             dialogStage.setScene(scene);
             dialogStage.setTitle(title);
 

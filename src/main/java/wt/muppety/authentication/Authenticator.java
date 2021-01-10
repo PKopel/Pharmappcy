@@ -52,7 +52,7 @@ public class Authenticator {
             _instance._permissions.or(login_result.get().permissionsBitSet());
             return true;
         }
-        return true;
+        return false;
     }
 
     private static boolean hasPermissionTo(Permission p)

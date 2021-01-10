@@ -10,30 +10,29 @@
         fx:controller="wt.muppety.presenter.LoginDialogPresenter"
         prefWidth="350.0">
     <HBox styleClass="header-section">
-        <Label id="header-text" text="Welcome to Pharmappcy!"/>
+        <Label text="Welcome to Pharmappcy!"/>
     </HBox>
-    <VBox styleClass="main-box">
-        <Label fx:id="errorLabel" text="Login attempt failed. Incorrect login/password combination" GridPane.rowIndex="1" visible="false" style="-fx-text-fill: red"/>
+    <VBox styleClass="pad-space-10">
+        <Label fx:id="errorLabel" text="Login attempt failed. Invalid login/password combination" visible="false" style="-fx-text-fill: red"/>
 
-        <HBox alignment="CENTER" styleClass="login-box">
+        <HBox styleClass="text-box">
             <Label text="Login:"/>
-            <TextField styleClass="text-area" fx:id="loginTextField"/>
+            <TextField fx:id="loginTextField"/>
         </HBox>
-        <HBox alignment="CENTER" styleClass="login-box">
+        <HBox styleClass="text-box">
             <Label  text="Password:"/>
-            <PasswordField styleClass="text-area" fx:id="passwordTextField"/>
+            <PasswordField fx:id="passwordTextField"/>
         </HBox>
 
         <VBox styleClass="buttons">
-            <Button alignment="CENTER" onAction="#handleOkAction" prefWidth="60.0" text="Sign in"/>
-            <Button alignment="CENTER" onAction="#handleRegisterAction" prefWidth="60.0" text="Register"/>
+            <Button styleClass="green" onAction="#handleOkAction" text="Sign in"/>
+            <Button styleClass="green" onAction="#handleRegisterAction" text="Register"/>
         </VBox>
     </VBox>
 
 
 
     <stylesheets>
-        <URL value="@../styles/main.css" />
         <URL value="@../styles/login.css" />
     </stylesheets>
 </VBox>

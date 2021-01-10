@@ -6,17 +6,12 @@
 }
 
 .header-section Button{
-    -fx-background-color: #39B38C /*teal*/;
     -fx-min-height: 30px;
-    -fx-background-radius: 0;
-    -fx-text-fill: white;
     -fx-font-size: 18px;
     -fx-min-width: 200px;
 }
-.header-section Button:hover{
-    -fx-background-color: #297F64 /*darkcyan*/;
-}
-.header-section Button:focused{
+
+.clicked{
     -fx-background-color: whitesmoke;
     -fx-text-fill: black;
 }
@@ -36,7 +31,31 @@
     -fx-max-height: 50px;
 }
 
+.credentials{
+    -fx-min-height: 30px;
+    -fx-spacing: 20px;
+}
+
 .text{
-    -fx-min-width: 60px;
     -fx-padding: 0 20 0 0;
+}
+
+.back {
+    -fx-background-color: rgba(245,245,245,0.6);
+    -fx-opacity: 0.5;
+}
+
+.back:hover {
+    -fx-background-color: rgba(245,245,245,1.0);
+}
+
+.quote{
+    -fx-min-height: 670px;
+    -fx-min-width: 1080px;
+    -fx-max-width: 1080px;
+    -fx-alignment: center;
+    -fx-font-size: 40px;
+    -fx-wrap-text: true;
+    -fx-padding: 20px;
+    -fx-font-style: italic;
 }

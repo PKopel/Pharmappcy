@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import wt.muppety.authentication.LoginData;
 import wt.muppety.model.Employee;
 
+import javax.persistence.NoResultException;
 import java.util.Optional;
 
 public class EmployeeDao extends BaseDao<Employee> {
@@ -49,15 +50,14 @@ public class EmployeeDao extends BaseDao<Employee> {
 
     public Optional<Employee> findByLogin(final LoginData data) {
         try {
-            System.out.println(currentSession().toString());
             Employee employee = currentSession()
                     .createQuery("SELECT c FROM Employee c WHERE c.login = :login AND c.password = :password", Employee.class)
                     .setParameter("login", data.getLogin()).setParameter("password", data.getPassword()).getSingleResult();
             return Optional.of(employee);
         } catch (Exception e) {
-            e.printStackTrace();
+            if(e instanceof NoResultException) System.out.println("User not found");
+            else e.printStackTrace();
         }
-
         return Optional.empty();
     }
 
