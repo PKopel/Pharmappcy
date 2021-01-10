@@ -83,8 +83,8 @@ public class ProductListController extends AbstractController<ObservableList<Pro
                     return true;
                 }
                 String lowerCaseFilter = newValue.toLowerCase();
-                String[] splited = lowerCaseFilter.split(" ");
-                for (String part : splited) {
+                String[] split = lowerCaseFilter.split(" ");
+                for (String part : split) {
                     if (!product.toStringLong().toLowerCase().contains(part))
                         return false;
                 }
@@ -94,7 +94,7 @@ public class ProductListController extends AbstractController<ObservableList<Pro
         });
 
         productTable.setItems(sortedData);
-
+        sortedData.comparatorProperty().bind(productTable.comparatorProperty());
 
         productTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 

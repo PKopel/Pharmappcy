@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class DynamicComboBoxPane<T> extends GridPane {
 
@@ -49,7 +51,6 @@ public class DynamicComboBoxPane<T> extends GridPane {
 
         //prepare ComboBox
         ComboBox<T> categoriesComboBox = new ComboBox<>(items);
-        categoriesComboBox.setPromptText("category");
         categoriesComboBox.setPrefWidth(500.0);
         categoriesComboBox.valueProperty().addListener((a, oldValue, newValue) -> {
             add.setDisable(categoriesComboBox.getValue() == null);
@@ -70,7 +71,7 @@ public class DynamicComboBoxPane<T> extends GridPane {
     }
 
     public List<T> getChosenItems() {
-        return chosenItems;
+        return chosenItems.stream().filter(Objects::nonNull).collect(Collectors.toList());
     }
 
     /**
