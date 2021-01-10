@@ -49,7 +49,6 @@ public class DynamicComboBoxPane<T> extends GridPane {
 
         //prepare ComboBox
         ComboBox<T> categoriesComboBox = new ComboBox<>(items);
-        categoriesComboBox.setPromptText("category");
         categoriesComboBox.setPrefWidth(500.0);
         categoriesComboBox.valueProperty().addListener((a, oldValue, newValue) -> {
             add.setDisable(categoriesComboBox.getValue() == null);
