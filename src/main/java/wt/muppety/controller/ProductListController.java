@@ -141,7 +141,7 @@ public class ProductListController extends AbstractController<ObservableList<Pro
             ProductDao productDao = new ProductDao();
             Optional<Product> product = productDao.create(newProduct);
             data.add(product.orElseThrow());
-            EmailNotificator.getInstance().sendEmailToAll();
+            EmailNotificator.getInstance().sendEmailToAll(newProduct);
         }
     }
 

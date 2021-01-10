@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 
 import wt.muppety.dao.EmployeeDao;
 import wt.muppety.model.Employee;
+import wt.muppety.model.Product;
 
 public class EmailNotificator {
 
@@ -33,19 +34,19 @@ public class EmailNotificator {
         return _instance;
     }
 
-    public void sendEmailToAll(){
+    public void sendEmailToAll(Product product){
         EmployeeDao employeeDao = new EmployeeDao();
         ObservableList<Employee> employees = employeeDao.listAll();
 
         for (Employee employee : employees) {
             if (employee.getIsSubscribed() && employee.getEmail() != null) {
-                sendEmail(employee.getEmail());
+                sendEmail(employee.getEmail(), product);
             }
         }
 
     }
 
-    public void sendEmail(String recipient) {
+    public void sendEmail(String recipient, Product product) {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -62,7 +63,7 @@ public class EmailNotificator {
             }
         });
 
-        Message message = prepareMessage(session, myAccountEmail, recipient);
+        Message message = prepareMessage(session, myAccountEmail, recipient, product);
         try {
             Transport.send(message);
         } catch (Exception ex) {
@@ -72,14 +73,14 @@ public class EmailNotificator {
     }
 
 
-    public static Message prepareMessage(Session session, String myAccountEmail, String recipient) {
+    public static Message prepareMessage(Session session, String myAccountEmail, String recipient, Product product) {
 
         try {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject("test pharmappcy notifications");
-            message.setText("Hey");
+            message.setSubject("We've added a new product");
+            message.setText("Hey, we have a new product in our stock: " + product.getName());
             return message;
 
         } catch (Exception ex) {
