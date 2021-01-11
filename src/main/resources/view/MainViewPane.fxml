@@ -1,58 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
 <HBox xmlns:fx="http://javafx.com/fxml"
-      xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.controller.MainViewController" prefWidth="1280.0"
-      prefHeight="720.0">
+    xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.controller.MainViewController" prefWidth="1280.0" prefHeight="720.0">
 
     <VBox styleClass="header-section" alignment="CENTER">
+
         <VBox styleClass="image" alignment="CENTER">
             <ImageView fitHeight="52" fitWidth="52" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../logo.png"/>
             </ImageView>
         </VBox>
 
-        <Button fx:id="employeeListButton" mnemonicParsing="false" onAction="#handleEmployeeListAction"
-                text="Employee list"/>
-        <Button fx:id="productListButton" mnemonicParsing="false" onAction="#handleProductListAction"
-                text="Product list"/>
-        <Button fx:id="addTransactionButton" mnemonicParsing="false" onAction="#handleAddTransactionAction"
-                text="Add transaction"/>
-        <Button fx:id="changeSubscriptionButton" mnemonicParsing="false" onAction="#handleChangeSubscriptionAction"
-                text="Subscribe"/>
-        <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#handleLogoutAction"
-                text="Logout"/>
-
+        <Button styleClass="green" fx:id="productListButton" onAction="#handleProductListAction" text="Product list"/>
+        <Button styleClass="green" fx:id="employeeListButton" onAction="#handleEmployeeListAction" text="Employee list"/>
+        <Button styleClass="green" fx:id="addTransactionButton" onAction="#handleAddTransactionAction" text="Add transaction"/>
+        <Button styleClass="green" fx:id="changeSubscriptionButton" onAction="#handleChangeSubscriptionAction" text="Subscribe"/>
+        <Button styleClass="green" fx:id="logOutButton" onAction="#handleLogoutAction" text="Log Out"/>
     </VBox>
 
 
     <VBox>
         <BorderPane styleClass="labels">
             <left>
-                <Button text="Return" onAction="#handleReturnAction"/>
+                <Button styleClass="back" onAction="#handleReturnAction">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="60">
+                            <Image url = "@../back.png"/>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </left>
             <right>
-                <HBox>
-                    <Label text="Welcome,  "/>
-                    <Label styleClass="text" fx:id="nameLabel"/>
-
-                    <Label text="Login:  "/>
-                    <Label styleClass="text" fx:id="loginLabel"/>
-
-                    <Label text="Position:  "/>
-                    <Label styleClass="text" fx:id="positionLabel"/>
+                <HBox styleClass="credentials" alignment="CENTER">
+                    <HBox alignment="CENTER">
+                        <Label text="Welcome,  "/>
+                        <Label styleClass="text" fx:id="nameLabel"/>
+                    </HBox>
+                    <HBox alignment="CENTER">
+                        <Label text="Login:  "/>
+                        <Label styleClass="text" fx:id="loginLabel"/>
+                    </HBox>
+                    <HBox alignment="CENTER">
+                        <Label text="Position:  "/>
+                        <Label styleClass="text" fx:id="positionLabel"/>
+                    </HBox>
                 </HBox>
-
             </right>
         </BorderPane>
         <Pane fx:id="subController"/>
-
     </VBox>
-
+    
     <stylesheets>
         <URL value="@../styles/mainview.css"/>
     </stylesheets>

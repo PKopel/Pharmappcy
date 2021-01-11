@@ -1,31 +1,18 @@
-.login-box Label{
-    -fx-font-size: 16px;
-    -fx-padding: 0 10 0 0;
-    -fx-min-width: 100px;
+.header-section {
+    -fx-padding: 10px;
+    -fx-font-size: 20px;
+    -fx-background-color: #39B38C /*teal*/;
 }
 
-.text-area{
-    -fx-min-width: 200px;
-    -fx-min-height: 22px;
-    -fx-font-size: 16px;
-}
-
-.login-box{
- -fx-padding: 0 0 10 0;
- -fx-label-padding: 12 0 10 0;
+.header-section Label {
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12px;
 }
 
 Button{
-    -fx-background-color: #39B38C /*teal*/;
     -fx-min-height: 50px;
     -fx-pref-width: 330px;
-    -fx-background-radius: 0;
-    -fx-text-fill: white;
     -fx-font-size: 25px;
-}
-
-Button:hover{
-    -fx-background-color: #297F64 /*darkcyan*/;
 }
 
 .buttons{

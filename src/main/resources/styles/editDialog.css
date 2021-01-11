@@ -1,0 +1,17 @@
+Button{
+    -fx-pref-width: 150px;
+    -fx-pref-height: 16px;
+    -fx-font-size: 14px;
+}
+
+.text-box ComboBox, CheckBox{
+    -fx-pref-width: 200px;
+}
+
+.w50{
+    -fx-pref-width: 50px;
+}
+
+.w145{
+    -fx-pref-width: 145px;
+}

@@ -1,108 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 <?import wt.muppety.view.DynamicComboBoxPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx"
-            fx:controller="wt.muppety.presenter.EditProductDialogPresenter"
-            prefWidth="500.0">
+            xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.presenter.EditProductDialogPresenter">
     <center>
-        <GridPane hgap="5.0" vgap="5.0" BorderPane.alignment="CENTER">
-            <columnConstraints>
-                <ColumnConstraints/>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="100.0" prefWidth="100.0"/>
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="20.0"/>
-                <RowConstraints minHeight="20.0"/>
-                <RowConstraints minHeight="20.0"/>
-                <RowConstraints minHeight="20.0"/>
-                <RowConstraints minHeight="20.0"/>
-            </rowConstraints>
-            <Label text="Name">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </Label>
-            <Label text="Price" GridPane.rowIndex="1">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </Label>
-            <Label text="Categories" GridPane.rowIndex="2">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </Label>
-            <Label text="Supplier" GridPane.rowIndex="3">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </Label>
-            <Label text="Manufacturer" GridPane.rowIndex="4">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </Label>
-            <Label text="On prescription" GridPane.rowIndex="5">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </Label>
-            <TextField fx:id="nameTextField" GridPane.columnIndex="1">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </TextField>
-            <TextField fx:id="priceTextField" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </TextField>
-            <ScrollPane prefHeight="50.0" style="-fx-background-color: transparent;"
-                        GridPane.columnIndex="1" GridPane.rowIndex="2">
-                <DynamicComboBoxPane fx:id="categoryComboBox" prefWidth="300.0"/>
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </ScrollPane>
-            <ComboBox fx:id="supplierComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </ComboBox>
-            <TextField fx:id="manufacturerTextField" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </TextField>
-            <CheckBox fx:id="onPrescriptionCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                <GridPane.margin>
-                    <Insets left="5.0" right="5.0" top="5.0"/>
-                </GridPane.margin>
-            </CheckBox>
-        </GridPane>
+        <VBox styleClass="pad-space-10">
+            <HBox styleClass="text-box">
+                <Label text="Name"/>
+                <TextField fx:id="nameTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Price"/>
+                <TextField fx:id="priceTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Category"/>
+                <ScrollPane prefHeight="50.0">
+                    <DynamicComboBoxPane fx:id="categoryComboBox"/>
+                </ScrollPane>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Supplier"/>
+                <ComboBox fx:id="supplierComboBox"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Manufacturer"/>
+                <TextField fx:id="manufacturerTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="On prescription"/>
+                <CheckBox fx:id="onPrescriptionCheckBox"/>
+            </HBox>
+        </VBox>
     </center>
     <bottom>
-        <HBox alignment="BOTTOM_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-                <Insets left="5.0" right="5.0" top="5.0"/>
-            </BorderPane.margin>
-            <Button onAction="#handleCancelAction" prefWidth="100.0" text="_Cancel">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
-            <Button onAction="#handleOkAction" prefWidth="60.0" text="_Ok">
-                <HBox.margin>
-                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                </HBox.margin>
-            </Button>
+        <HBox alignment="CENTER" styleClass="pad-space-10">
+            <Button styleClass="red" onAction="#handleCancelAction" text="_Cancel"/>
+            <Button styleClass="blue" onAction="#handleOkAction" text="_Ok"/>
         </HBox>
     </bottom>
-    <opaqueInsets>
-        <Insets/>
-    </opaqueInsets>
+    <stylesheets>
+        <URL value="@../styles/editDialog.css" />
+    </stylesheets>
 </BorderPane>

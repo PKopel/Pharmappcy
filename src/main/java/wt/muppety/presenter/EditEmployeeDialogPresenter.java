@@ -6,6 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.authentication.Permission;
 import wt.muppety.model.Employee;
@@ -24,7 +25,7 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
     public TextField emailTextField;
 
     @FXML
-    public Label positionLabel;
+    public HBox positionHBox;
 
     @FXML
     public ComboBox<Employee.Position> positionComboBox;
@@ -37,8 +38,9 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
 
     @FXML
     private void initialize() {
+
         Authenticator.guardControl(positionComboBox, Permission.canModerateDB);
-        Authenticator.guardControl(positionLabel, Permission.canModerateDB);
+        Authenticator.guardControl(positionHBox, Permission.canModerateDB);
         positionComboBox.setItems(FXCollections.observableArrayList(Employee.Position.values()));
     }
 

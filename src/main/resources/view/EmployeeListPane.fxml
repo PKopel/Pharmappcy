@@ -4,21 +4,21 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="670.0" prefWidth="1080.0"
-            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="wt.muppety.controller.EmployeeListController">
+    xmlns="http://javafx.com/javafx/11.0.1" fx:controller="wt.muppety.controller.EmployeeListController">
     <right>
         <VBox styleClass="functional-buttons">
-            <Button fx:id="deleteButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleDeleteAction" text="Delete"/>
-            <Button fx:id="editButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleEditAction" text="Edit"/>
-            <Button fx:id="addButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddAction" text="Add"/>
-            <TextField fx:id="filterField"/>
+            <TextField promptText="Search..." fx:id="filterField"/>
+            <Button styleClass="green" fx:id="addButton" onAction="#handleAddAction" text="Add"/>
+            <Button styleClass="blue" fx:id="editButton" onAction="#handleEditAction" text="Edit"/>
+            <Button styleClass="red" fx:id="deleteButton"  onAction="#handleDeleteAction" text="Delete"/>
         </VBox>
     </right>
     <center>
         <TableView fx:id="employeeTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <columns>
-                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First name"/>
-                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last name"/>
-                <TableColumn fx:id="positionColumn" prefWidth="75.0" text="Position"/>
+            <columns >
+                <TableColumn fx:id="firstNameColumn" prefWidth="75.0" text="First name" />
+                <TableColumn fx:id="lastNameColumn" prefWidth="75.0" text="Last name" />
+                <TableColumn fx:id="positionColumn" prefWidth="75.0" text="Position" />
             </columns>
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>

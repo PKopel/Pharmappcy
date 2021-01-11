@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--suppress ALL -->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+
+<!--suppress ALL -->
 <VBox xmlns:fx="http://javafx.com/fxml"
       xmlns="http://javafx.com/javafx"
       fx:controller="wt.muppety.controller.LoginViewController"
       prefWidth="350.0">
     <HBox styleClass="header-section">
-        <Label id="header-text" text="Welcome to Pharmappcy!"/>
+        <Label text="Welcome to Pharmappcy!"/>
     </HBox>
-    <VBox styleClass="main-box">
-        <Label fx:id="errorLabel" text="Login attempt failed. Incorrect login/password combination"
-               GridPane.rowIndex="1" visible="false" style="-fx-text-fill: red"/>
+    <VBox styleClass="pad-space-10">
+        <Label fx:id="errorLabel" text="Login attempt failed. Invalid login/password combination" visible="false" style="-fx-text-fill: red"/>
 
-        <HBox alignment="CENTER" styleClass="login-box">
+        <HBox styleClass="text-box">
             <Label text="Login:"/>
-            <TextField styleClass="text-area" fx:id="loginTextField"/>
+            <TextField fx:id="loginTextField"/>
         </HBox>
-        <HBox alignment="CENTER" styleClass="login-box">
-            <Label text="Password:"/>
-            <PasswordField styleClass="text-area" fx:id="passwordTextField"/>
+        <HBox styleClass="text-box">
+            <Label  text="Password:"/>
+            <PasswordField fx:id="passwordTextField"/>
         </HBox>
 
         <VBox styleClass="buttons">
-            <Button alignment="CENTER" onAction="#handleLogInAction" prefWidth="60.0" text="Sign in"/>
-            <Button alignment="CENTER" onAction="#handleRegisterAction" prefWidth="60.0" text="Register"/>
+            <Button styleClass="green" onAction="#handleLogInAction" text="Sign in"/>
+            <Button styleClass="green" onAction="#handleRegisterAction" text="Register"/>
         </VBox>
     </VBox>
 
 
+
     <stylesheets>
-        <URL value="@../styles/main.css"/>
-        <URL value="@../styles/login.css"/>
+        <URL value="@../styles/login.css" />
     </stylesheets>
 </VBox>

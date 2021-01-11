@@ -15,12 +15,24 @@ import wt.muppety.dao.TransactionDao;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;
+import java.util.Optional;
+import java.util.Random;
 
 import static wt.muppety.authentication.Permission.canBrowseDB;
 import static wt.muppety.authentication.Permission.canModerateDB;
 import static wt.muppety.view.LayoutName.*;
 
 public class MainViewController extends AbstractController<Void> {
+
+    private final String[] quotes = {
+      "\"One could say medications are useless. Now he can't because he died of pneumonia.\"",
+      "\"In case of a headache do as the bottle says - take a pill and keep away from children.\"",
+      "\"If you see hallucinations listed twice as a side effect, you might want to contact your doctor.\"",
+      "\"Some of our medicine actually tastes like raspberries. Although it's labeled as cherry-flavoured.\"",
+      "\"Did you google that? Go see a doctor...\"",
+    };
+
+    private final Random random = new Random();
 
     private final ObservableList<Transaction> data = FXCollections.observableArrayList();
     @FXML
@@ -54,29 +66,47 @@ public class MainViewController extends AbstractController<Void> {
             nameLabel.setText(currentEmployee.getFirstname() + " " + currentEmployee.getLastname());
             positionLabel.setText(currentEmployee.getPosition().name());
         }
-        if (currentEmployee.getIsSubscribed() == true){
+        assert currentEmployee != null;
+        if (currentEmployee.getIsSubscribed()){
             changeSubscriptionButton.setText("Unsubscribe");
-        } 
+        }
         else {
             changeSubscriptionButton.setText("Subscribe");
         }
 
+        randomQuote();
     }
 
+    private void set_clicked(Button b){
+        if (!b.equals(employeeListButton)) employeeListButton.getStyleClass().remove("clicked");
+        if (!b.equals(addTransactionButton)) addTransactionButton.getStyleClass().remove("clicked");
+        if (!b.equals(productListButton)) productListButton.getStyleClass().remove("clicked");
+        b.getStyleClass().add("clicked");
+    }
+
+    private void randomQuote(){
+        this.subController.getChildren().clear();
+        Label l = new Label(quotes[random.nextInt(quotes.length)]);
+        l.getStyleClass().add("quote");
+        subController.getChildren().add(l);
+    }
 
     public void handleEmployeeListAction(ActionEvent event) {
+        set_clicked(employeeListButton);
         EmployeeDao employeeDao = new EmployeeDao();
         ObservableList<Employee> employees = employeeDao.listAll();
         appController.showPane(employees, EmployeeList, subController);
     }
 
     public void handleProductListAction(ActionEvent event) {
+        set_clicked(productListButton);
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
         appController.showPane(products, ProductList, subController);
     }
 
     public void handleAddTransactionAction(ActionEvent event) {
+        set_clicked(addTransactionButton);
         Transaction newTransaction = new Transaction();
         if (appController.showDialog(newTransaction, EditTransaction, "Add transaction")) {
             data.add(newTransaction);
@@ -96,23 +126,23 @@ public class MainViewController extends AbstractController<Void> {
     public void handleChangeSubscriptionAction(ActionEvent event) {
         EmployeeDao employeeDao = new EmployeeDao();
         Employee employee = Authenticator.getInstance().getCurrentUser();
-        if (changeSubscriptionButton.getText().equals("Subscribe")){
+        if (changeSubscriptionButton.getText().equals("Subscribe")) {
             changeSubscriptionButton.setText("Unsubscribe");
             employeeDao.changeSubscription(employee);
-        }
-        else {
+        } else {
             changeSubscriptionButton.setText("Subscribe");
             employeeDao.changeSubscription(employee);
         }
-        
     }
 
-    public void handleReturnAction(ActionEvent actionEvent) {
-        this.subController.getChildren().clear();
-    }
 
     @Override
     public void setData(Void data) {
         //IGNORED
+    }
+
+    public void handleReturnAction(ActionEvent actionEvent) {
+        set_clicked(new Button());
+        randomQuote();
     }
 }

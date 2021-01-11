@@ -4,5 +4,22 @@
 }
 
 .functional-buttons Button{
-    -fx-background-color: #4298B3;
+    -fx-font-size: 16px;
 }
+
+.functional-buttons Button:disabled{
+    -fx-background-color: #a2a2a2;
+}
+
+
+.functional-buttons *{
+    -fx-pref-width: 180px;
+    -fx-pref-height: 30px;
+}
+
+TableView{
+    -fx-cell-size: 50px;
+    -fx-font-size: 16px;
+}
+
+
