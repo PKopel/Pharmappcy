@@ -47,7 +47,8 @@ public class LoginViewController extends AbstractController<LoginData> {
         Employee newEmployee = new Employee();
         if (appController.showDialog(newEmployee, EditUser, "New user")) {
             EmployeeDao employeeDao = new EmployeeDao();
-            employeeDao.create(newEmployee);
+            employeeDao.createClient(newEmployee);
+            
         }
     }
 }

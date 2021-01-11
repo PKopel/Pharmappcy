@@ -26,7 +26,12 @@ public class Permissions {
     public BitSet asBitSet() {
         BitSet ret = new BitSet(Permission.values().length);
         for (Field f : this.getClass().getDeclaredFields()) {
-            ret.set(Permission.valueOf(f.getName()).value());
+            try {
+                if(f.getBoolean(this))
+                ret.set(Permission.valueOf(f.getName()).value());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         return ret;
     }

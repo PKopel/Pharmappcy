@@ -11,10 +11,11 @@ public class EmployeeDao extends BaseDao<Employee> {
 
     public Optional<Employee> create(String firstname,
                                      String lastname,
+                                     String email,
                                      Employee.Position position,
                                      String login,
                                      String password) {
-        Employee employee = new Employee(firstname, lastname, position, login, password);
+        Employee employee = new Employee(firstname, lastname, email, position, login, password);
         try {
             this.save(employee);
             return findById(employee.getId());
@@ -32,6 +33,33 @@ public class EmployeeDao extends BaseDao<Employee> {
             e.printStackTrace();
         }
         return Optional.empty();
+    }
+
+    public Optional<Employee> createClient(Employee employee) {
+        try {
+            employee.setClientPermissions();
+            this.save(employee);
+            return findById(employee.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Optional.empty();
+    }
+
+    public void changeSubscription(Employee employee) {
+        try {
+            if (employee.getIsSubscribed() == true){
+                employee.setIsSubscribed(false);
+                this.update(employee);
+            }
+            else {
+                employee.setIsSubscribed(true);
+                this.update(employee);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Optional<Employee> findById(final int indexNumber) {

@@ -53,6 +53,7 @@ public class EditProductDialogPresenter extends AbstractDialogPresenter<Product>
         data.setManufacturer(manufacturerTextField.getText());
         data.setOnPrescription(onPrescriptionCheckBox.isSelected());
         Set<Category> newCategories = new HashSet<>(categoryComboBox.getChosenItems());
+        System.out.println(newCategories);
         data.setCategories(newCategories);
         data.setSupplier(supplierComboBox.getValue());
     }

@@ -21,6 +21,9 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
     public TextField lastNameTextField;
 
     @FXML
+    public TextField emailTextField;
+
+    @FXML
     public Label positionLabel;
 
     @FXML
@@ -43,8 +46,12 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
     protected void updateModel() {
         data.setFirstname(firstNameTextField.getText());
         data.setLastname(lastNameTextField.getText());
+        data.setEmail(emailTextField.getText());
         Employee.Position position = positionComboBox.getSelectionModel().getSelectedItem();
         data.setPosition(Objects.requireNonNullElse(position, Employee.Position.Chair));
+        if (position == Employee.Position.Client){
+            data.setClientPermissions();
+        }
         data.setLogin(loginTextField.getText());
         data.setPassword(passwordTextField.getText());
     }
