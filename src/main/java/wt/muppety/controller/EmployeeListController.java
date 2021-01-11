@@ -86,11 +86,11 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
     }
 
     public void handleDeleteAction(ActionEvent event) {
-        data.removeAll(employeeTable.getSelectionModel().getSelectedItems());
         Employee employee = employeeTable.getSelectionModel().getSelectedItem();
         EmployeeDao employeeDao = new EmployeeDao();
         boolean deleted = employeeDao.deleteById(Employee.class, employee.getId());
         if (!deleted) System.out.println("Error while deleting " + employee);
+        else data.removeAll(employeeTable.getSelectionModel().getSelectedItems());
     }
 
     public void handleEditAction(ActionEvent event) {
