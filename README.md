@@ -21,11 +21,11 @@
 - dodanie opcji wybrania wielu kategorii przy dodawaniu/edycji produktu
 - ulepszone GUI
 - rozróżnienie widoku klienta i pracownika
+- hashowanie haseł użytkowników w bazie danych
 
 ## Opis
 
-Aplikacja wspomagająca zarządzanie apteką. Aplikacja umożliwia pracownikom zarządzanie produktami dostępnymi w aptece,
-zawieranymi transakcjami, jak i również listą pracowników.
+Aplikacja wspomagająca zarządzanie apteką. Aplikacja umożliwia pracownikom zarządzanie produktami dostępnymi w aptece, zawieranymi transakcjami, jak i również listą pracowników.
 
 ## Technologie
 
