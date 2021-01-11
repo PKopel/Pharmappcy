@@ -97,3 +97,4 @@ Trzecią opcją w głównym oknie jest dodanie nowej transakcji:
 ![gui_add_transaction](docs/pictures/add_transaction.png)
 
 Zamknięcie okna nowej transakcji powoduje otwarcie widoku listy produktów.
+
