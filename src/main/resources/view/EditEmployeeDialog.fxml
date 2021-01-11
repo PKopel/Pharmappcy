@@ -15,6 +15,10 @@
                 <Label text="Last name"/>
                 <TextField fx:id="lastNameTextField"/>
             </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Email"/>
+                <TextField fx:id="emailTextField"/>
+            </HBox>
             <HBox fx:id="positionHBox" styleClass="text-box">
                 <Label text="Position"/>
                 <ComboBox fx:id="positionComboBox"/>
