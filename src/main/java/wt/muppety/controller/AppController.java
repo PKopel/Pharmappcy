@@ -21,8 +21,8 @@ public class AppController {
     private final Stage primaryStage;
 
     public AppController(Stage primaryStage) {
-
         this.primaryStage = primaryStage;
+        this.primaryStage.setResizable(false);
     }
 
     /**
