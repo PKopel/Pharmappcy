@@ -48,7 +48,7 @@ public class EditEmployeeDialogPresenter extends AbstractDialogPresenter<Employe
         data.setLastname(lastNameTextField.getText());
         data.setEmail(emailTextField.getText());
         Employee.Position position = positionComboBox.getSelectionModel().getSelectedItem();
-        data.setPosition(Objects.requireNonNullElse(position, Employee.Position.Chair));
+        data.setPosition(Objects.requireNonNullElse(position, Employee.Position.Client));
         if (position == Employee.Position.Client){
             data.setClientPermissions();
         }
