@@ -14,6 +14,14 @@
 - integracja z bazą danych (Hibernate, SQLite)
 - GUI pozwalające na dodawanie transakcji, dostawców
 
+#### **Milestone 3 (stan na 12.01.2021)**
+
+- dodanie opcji subskrypcji i wysyłania notyfikacji przez maila
+- dodanie sortowania i wyszukiwania w listach pracowników i produktów
+- dodanie opcji wybrania wielu kategorii przy dodawaniu/edycji produktu
+- ulepszone GUI
+- rozróżnienie widoku klienta i pracownika
+
 ## Opis
 
 Aplikacja wspomagająca zarządzanie apteką. Aplikacja umożliwia pracownikom zarządzanie produktami dostępnymi w aptece,
@@ -61,42 +69,14 @@ W projekcie wykorzystano wzorce projektowe:
 
 ## Aplikacja
 
-Po uruchomieniu aplikacji otwiera się okno logowania:
+Po uruchomienia aplikacji otwiera się okno logowania/rejestracji:
 
-![gui_login](docs/pictures/login.png)
+![5](docs/pictures/5.png)
 
-Do logowania trzeba wykorzystać dane użytkownika znajdującego się już w bazie, np. login 'user' hasło 'user'.
 
-Po przejściu do Employee list otwiera się widok na listę pracowników z danymi: imię, nazwisko i pozycja. Mamy opcję
-dodania pracownika oraz usunięcia/edytowania wpisu z listy.
+Po wybraniu opcji Register otwiera się okno rejestracji:
 
-![gui_employee_list](docs/pictures/employee_list.png)
-
-Po wybraniu opcji Add uruchamia się okno Add user z polami z klasy Employee do wypełnienia. Po wybraniu opcji Edit
-uruchamia się okno Edit user z polami wstępnie wypełnionymi. Po wybraniu konkretnego wpisu na liście aktywuje się opcja
-Delete i wpis jest usuwany z listy. Widok po dodaniu jednego pracownika:
-
-![gui_add_employee](docs/pictures/add_user.png)
-
-Po przejściu do Product list otwiera się widok na listę produktów z danymi: nazwa, cena, kategoria, wytwórca,
-informacja, czy lek jest na receptę oraz dostawca. Mamy opcję dodania/usunięcia/edytowania produktu, dodania kategorii
-oraz dodania dostawcy do listy.
-
-![gui_product_list](docs/pictures/product_list.png)
-
-Widok dodawania produktu:
-
-![gui_add_product](docs/pictures/add_product.png)
-
-Widok dodawania dostawcy:
-
-![gui_add_supplier](docs/pictures/add_supplier.png)
-
-Trzecią opcją w głównym oknie jest dodanie nowej transakcji:
-
-![gui_add_transaction](docs/pictures/add_transaction.png)
-
-Zamknięcie okna nowej transakcji powoduje otwarcie widoku listy produktów.
+![9](docs/pictures/9.png)
 
 Widok strony głównej aplikacji przy zalogowanym pracowniku:
 
