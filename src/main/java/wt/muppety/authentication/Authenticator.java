@@ -1,5 +1,7 @@
 package wt.muppety.authentication;
 
+import javafx.scene.control.Button;
+
 import javafx.beans.binding.Bindings;
 import javafx.scene.control.Control;
 import wt.muppety.dao.EmployeeDao;
@@ -26,6 +28,7 @@ public class Authenticator {
     private final BitSet permissions = new BitSet(Permission.values().length);
     private Employee currentUser;
     private boolean isLoggedIn = false;
+    private final BitSet _permissions = new BitSet(Permission.values().length);
 
 
     private Authenticator() throws NoSuchAlgorithmException {

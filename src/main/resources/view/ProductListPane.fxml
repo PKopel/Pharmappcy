@@ -4,15 +4,15 @@
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.controller.ProductListController" prefHeight="670.0" prefWidth="1080.0">
+    xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.controller.ProductListController" prefHeight="670.0" prefWidth="1080.0">
     <right>
         <VBox styleClass="functional-buttons">
-            <Button fx:id="deleteButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleDeleteAction" text="Delete"/>
-            <Button fx:id="editButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleEditAction" text="Edit"/>
-            <Button fx:id="addProductButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddProductAction" text="Add product"/>
-            <Button fx:id="addCategoryButton" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleAddCategoryAction" text="Add category"/>
-            <Button fx:id="addSupplierButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#handleAddSupplierAction" text="Add supplier"/>
-            <TextField fx:id="filterField"/>
+            <TextField promptText="Search..." fx:id="filterField"/>
+            <Button styleClass="green" fx:id="addProductButton" onAction="#handleAddProductAction" text="Add product"/>
+            <Button styleClass="green" fx:id="addCategoryButton" onAction="#handleAddCategoryAction" text="Add category"/>
+            <Button styleClass="green" fx:id="addSupplierButton" onAction="#handleAddSupplierAction" text="Add supplier"/>
+            <Button styleClass="blue" fx:id="editButton" onAction="#handleEditAction" text="Edit"/>
+            <Button styleClass="red" fx:id="deleteButton" onAction="#handleDeleteAction" text="Delete"/>
         </VBox>
     </right>
     <center>
