@@ -3,8 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+<?import wt.muppety.view.DynamicComboBoxPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-    xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.presenter.EditProductDialogPresenter">
+            xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.presenter.EditProductDialogPresenter">
     <center>
         <VBox styleClass="pad-space-10">
             <HBox styleClass="text-box">
@@ -17,7 +18,9 @@
             </HBox>
             <HBox styleClass="text-box">
                 <Label text="Category"/>
-                <ComboBox fx:id="categoryComboBox"/>
+                <ScrollPane prefHeight="50.0">
+                    <DynamicComboBoxPane fx:id="categoryComboBox"/>
+                </ScrollPane>
             </HBox>
             <HBox styleClass="text-box">
                 <Label text="Supplier"/>

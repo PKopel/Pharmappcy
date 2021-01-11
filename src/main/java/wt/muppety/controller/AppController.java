@@ -103,6 +103,7 @@ public class AppController {
             Pane page = loader.load();
 
             Stage dialogStage = new Stage();
+            dialogStage.setResizable(false);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);

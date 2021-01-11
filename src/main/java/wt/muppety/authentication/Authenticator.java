@@ -1,5 +1,6 @@
 package wt.muppety.authentication;
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 import javafx.beans.binding.Bindings;
@@ -49,7 +50,7 @@ public class Authenticator {
         return _instance != null && _instance.isLoggedIn && _instance.permissions.get(p.value());
     }
 
-    public static void guardControl(Control b, Permission... permissions) {
+    public static void guardControl(Node b, Permission... permissions) {
         b.visibleProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
         b.managedProperty().bind(Bindings.createBooleanBinding(() -> Arrays.stream(permissions).allMatch(Authenticator::hasPermissionTo)));
     }

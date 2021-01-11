@@ -25,7 +25,7 @@
         </HBox>
 
         <VBox styleClass="buttons">
-            <Button styleClass="green" onAction="#handleOkAction" text="Sign in"/>
+            <Button styleClass="green" onAction="#handleLogInAction" text="Sign in"/>
             <Button styleClass="green" onAction="#handleRegisterAction" text="Register"/>
         </VBox>
     </VBox>

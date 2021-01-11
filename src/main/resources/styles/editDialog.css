@@ -7,3 +7,11 @@ Button{
 .text-box ComboBox, CheckBox{
     -fx-pref-width: 200px;
 }
+
+.w50{
+    -fx-pref-width: 50px;
+}
+
+.w145{
+    -fx-pref-width: 145px;
+}

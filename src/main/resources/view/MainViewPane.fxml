@@ -20,7 +20,9 @@
 
         <Button styleClass="green" fx:id="productListButton" onAction="#handleProductListAction" text="Product list"/>
         <Button styleClass="green" fx:id="employeeListButton" onAction="#handleEmployeeListAction" text="Employee list"/>
-        <Button styleClass="green" fx:id="addTransaction" onAction="#handleAddTransactionAction" text="Add transaction"/>
+        <Button styleClass="green" fx:id="addTransactionButton" onAction="#handleAddTransactionAction" text="Add transaction"/>
+        <Button styleClass="green" fx:id="changeSubscriptionButton" onAction="#handleChangeSubscriptionAction" text="Subscribe"/>
+        <Button styleClass="green" fx:id="logOutButton" onAction="#handleLogoutAction" text="Log Out"/>
     </VBox>
 
 

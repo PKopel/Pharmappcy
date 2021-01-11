@@ -15,7 +15,7 @@
                 <Label text="Last name"/>
                 <TextField fx:id="lastNameTextField"/>
             </HBox>
-            <HBox styleClass="text-box">
+            <HBox fx:id="positionHBox" styleClass="text-box">
                 <Label text="Position"/>
                 <ComboBox fx:id="positionComboBox"/>
             </HBox>

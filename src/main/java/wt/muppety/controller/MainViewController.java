@@ -66,7 +66,8 @@ public class MainViewController extends AbstractController<Void> {
             nameLabel.setText(currentEmployee.getFirstname() + " " + currentEmployee.getLastname());
             positionLabel.setText(currentEmployee.getPosition().name());
         }
-        if (currentEmployee.getIsSubscribed() == true){
+        assert currentEmployee != null;
+        if (currentEmployee.getIsSubscribed()){
             changeSubscriptionButton.setText("Unsubscribe");
         }
         else {
@@ -78,7 +79,7 @@ public class MainViewController extends AbstractController<Void> {
 
     private void set_clicked(Button b){
         if (!b.equals(employeeListButton)) employeeListButton.getStyleClass().remove("clicked");
-        if (!b.equals(addTransaction)) addTransaction.getStyleClass().remove("clicked");
+        if (!b.equals(addTransactionButton)) addTransactionButton.getStyleClass().remove("clicked");
         if (!b.equals(productListButton)) productListButton.getStyleClass().remove("clicked");
         b.getStyleClass().add("clicked");
     }
@@ -105,7 +106,7 @@ public class MainViewController extends AbstractController<Void> {
     }
 
     public void handleAddTransactionAction(ActionEvent event) {
-        set_clicked(addTransaction);
+        set_clicked(addTransactionButton);
         Transaction newTransaction = new Transaction();
         if (appController.showDialog(newTransaction, EditTransaction, "Add transaction")) {
             data.add(newTransaction);
@@ -125,19 +126,15 @@ public class MainViewController extends AbstractController<Void> {
     public void handleChangeSubscriptionAction(ActionEvent event) {
         EmployeeDao employeeDao = new EmployeeDao();
         Employee employee = Authenticator.getInstance().getCurrentUser();
-        if (changeSubscriptionButton.getText().equals("Subscribe")){
+        if (changeSubscriptionButton.getText().equals("Subscribe")) {
             changeSubscriptionButton.setText("Unsubscribe");
             employeeDao.changeSubscription(employee);
-        }
-        else {
+        } else {
             changeSubscriptionButton.setText("Subscribe");
             employeeDao.changeSubscription(employee);
         }
-
-
-    public void handleReturnAction(ActionEvent actionEvent) {
-        this.subController.getChildren().clear();
     }
+
 
     @Override
     public void setData(Void data) {
