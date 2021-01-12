@@ -18,10 +18,10 @@
 
 - dodanie opcji subskrypcji i wysyłania notyfikacji przez maila
 - dodanie sortowania i wyszukiwania w listach pracowników i produktów
-- dodanie opcji wybrania wielu kategorii przy dodawaniu/edycji produktu
+- poprawienie opcji wybrania wielu kategorii przy dodawaniu/edycji produktu
 - ulepszone GUI
 - rozróżnienie widoku klienta i pracownika
-- hashowanie haseł użytkowników w bazie danych
+- haszowanie haseł użytkowników w bazie danych
 
 ## Opis
 
@@ -61,15 +61,17 @@ gradlew.bat run
 
 #### [GUI](docs/gui/README.md)
 
+#### [Powiadomienia](docs/notifications/README.md)
+
 W projekcie wykorzystano wzorce projektowe:
 
-* model-view-presenter [(GUI)](docs/gui/README.md)
-* singleton [(autentykacja)](docs/authentication/README.md)
-* DAO i ORM [(persystencja)](docs/persistence/README.md)
+* Model-View-Presenter ([GUI](docs/gui/README.md))
+* Singleton ([autentykacja](docs/authentication/README.md) i [powiadomienia](docs/notifications/README.md))
+* DAO i ORM ([persystencja](docs/persistence/README.md))
 
 ## Aplikacja
 
-Po uruchomienia aplikacji otwiera się okno logowania/rejestracji:
+Po uruchomieniu aplikacji otwiera się okno logowania/rejestracji:
 
 ![5](docs/pictures/5.png)
 

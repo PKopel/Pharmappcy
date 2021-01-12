@@ -115,7 +115,6 @@ public class ProductListController extends AbstractController<ObservableList<Pro
 
     public void handleDeleteAction(ActionEvent event) {
         ProductDao productDao = new ProductDao();
-        System.out.println(productTable.getSelectionModel().getSelectedItems().size());
         boolean deleted;
         for (Product product : new ArrayList<>(productTable.getSelectionModel().getSelectedItems())) {
             deleted = productDao.deleteById(Product.class, product.getId());

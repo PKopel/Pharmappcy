@@ -14,8 +14,8 @@
 Klasa [`Product`](../../src/main/java/wt/muppety/model/Product.java) zawiera pola:
 
 * ID — identyfikator (Primary Key)
-* CategoryID — identyfikator kategorii produktu (Foreign Key)
-* SupplierID — identyfikator dostawcy (Foreign Key)
+* Categories — zbiór kategorii produktu
+* Supplier — dostawca produktu
 * Name — nazwa produktu
 * UnitPrice — cena produktu
 * OnPrescription — flaga mówiąca o tym, czy lek jest na receptę
@@ -42,8 +42,8 @@ Klasa [`Supplier`](../../src/main/java/wt/muppety/model/Supplier.java) zawiera p
 Klasa [`Transaction`](../../src/main/java/wt/muppety/model/Transaction.java) zawiera pola:
 
 * ID — identyfikator (Primary Key)
-* ProductID — identyfikator kupowanego produktu (Foreign Key)
-* EmployeeID — identyfikator pracownika nadzorującego transakcję (Foreign Key)
+* Product — przedmiot transakcji
+* Employee — pracownik nadzorujący transakcję
 * Quantity — ilość kupowanych produktów
 * Value — cena do zapłaty
 * Date — data wykonania transakcji
@@ -55,16 +55,16 @@ Klasa [`Employee`](../../src/main/java/wt/muppety/model/Employee.java) zawiera p
 * ID — identyfikator (Primary Key oraz Foreign Key)
 * Firstname — imię
 * Lastname — nazwisko
-* Position — pozycja w firmie: Manager, Chair lub Worker. To pole korzysta z typu `Employee.Position` do kontrolowania
-  dozwolonych wartości
+* Position — rola użytkownika: Manager, Chair, Worker lub Client. To pole korzysta z typu `Employee.Position` do 
+  kontrolowania dozwolonych wartości
 * Login — wykorzystywany przy autentykacji
 * Password i salt — wykorzystywane przy autentykacji
+* Email — adres do odbierania powiadomień
 
 #### Klasa [`Permissions`](../../src/main/java/wt/muppety/model/Permissions.java)
 
 Klasa [`Permissions`](../../src/main/java/wt/muppety/model/Permissions.java) zawiera pola:
 
-* EmployeeID — identyfikator (Primary Key)
 * CanSell — pozwolenie na sprzedawanie leków
 * CanBuy — pozwolenie na kupowanie leków
 * CanBrowseDatabase — pozwolenie na przeglądanie bazy danych

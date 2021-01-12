@@ -12,7 +12,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.dao.EmployeeDao;
 import wt.muppety.model.Employee;
+import wt.muppety.model.Product;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static wt.muppety.authentication.Permission.canModerateDB;
@@ -86,11 +88,13 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
     }
 
     public void handleDeleteAction(ActionEvent event) {
-        Employee employee = employeeTable.getSelectionModel().getSelectedItem();
         EmployeeDao employeeDao = new EmployeeDao();
-        boolean deleted = employeeDao.deleteById(Employee.class, employee.getId());
-        if (!deleted) System.out.println("Error while deleting " + employee);
-        else data.removeAll(employeeTable.getSelectionModel().getSelectedItems());
+        boolean deleted;
+        for (Employee employee : new ArrayList<>(employeeTable.getSelectionModel().getSelectedItems())) {
+            deleted = employeeDao.deleteById(Employee.class, employee.getId());
+            if (!deleted) System.out.println("Error while deleting " + employee);
+        }
+        data.removeAll(employeeTable.getSelectionModel().getSelectedItems());
     }
 
     public void handleEditAction(ActionEvent event) {

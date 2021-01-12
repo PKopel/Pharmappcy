@@ -1,40 +1,30 @@
 package wt.muppety.notificator;
 
+import javafx.collections.ObservableList;
+import wt.muppety.dao.EmployeeDao;
+import wt.muppety.model.Employee;
+import wt.muppety.model.Product;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
-import javafx.collections.ObservableList;
-
-import wt.muppety.dao.EmployeeDao;
-import wt.muppety.model.Employee;
-import wt.muppety.model.Product;
 
 public class EmailNotificator {
 
     private static EmailNotificator _instance;
 
-    private EmailNotificator() throws NoSuchAlgorithmException {
-
+    private EmailNotificator() {
     }
 
     public static EmailNotificator getInstance() {
-        try {
-            if (_instance == null) {
-                _instance = new EmailNotificator();
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        if (_instance == null) {
+            _instance = new EmailNotificator();
         }
         return _instance;
     }
 
-    public void sendEmailToAll(Product product){
+    public void sendEmailToAll(Product product) {
         EmployeeDao employeeDao = new EmployeeDao();
         ObservableList<Employee> employees = employeeDao.listAll();
 
@@ -65,15 +55,16 @@ public class EmailNotificator {
 
         Message message = prepareMessage(session, myAccountEmail, recipient, product);
         try {
-            Transport.send(message);
-        } catch (Exception ex) {
-            System.out.println(ex);
+            if (message != null)
+                Transport.send(message);
+        } catch (MessagingException ex) {
+            System.out.println(ex.getMessage());
         }
 
     }
 
 
-    public static Message prepareMessage(Session session, String myAccountEmail, String recipient, Product product) {
+    public Message prepareMessage(Session session, String myAccountEmail, String recipient, Product product) {
 
         try {
             Message message = new MimeMessage(session);
@@ -82,9 +73,8 @@ public class EmailNotificator {
             message.setSubject("We've added a new product");
             message.setText("Hey, we have a new product in our stock: " + product.getName());
             return message;
-
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (MessagingException ex) {
+            System.out.println(ex.getMessage());
         }
         return null;
 
