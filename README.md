@@ -61,6 +61,8 @@ gradlew.bat run
 
 #### [GUI](docs/gui/README.md)
 
+#### [Notyfikator](docs/notificator/README.md)
+
 W projekcie wykorzystano wzorce projektowe:
 
 * model-view-presenter [(GUI)](docs/gui/README.md)
