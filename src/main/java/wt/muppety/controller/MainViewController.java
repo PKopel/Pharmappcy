@@ -1,12 +1,16 @@
 package wt.muppety.controller;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
+import wt.muppety.Util.StringPair;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.authentication.LoginData;
 import wt.muppety.dao.EmployeeDao;
@@ -15,7 +19,8 @@ import wt.muppety.dao.TransactionDao;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;
-import java.util.Optional;
+
+import java.util.HashMap;
 import java.util.Random;
 
 import static wt.muppety.authentication.Permission.canBrowseDB;
@@ -39,6 +44,8 @@ public class MainViewController extends AbstractController<Void> {
     public Button employeeListButton;
     @FXML
     public Button productListButton;
+    @FXML
+    public Button statisticsListButton;
     @FXML
     public Button addTransactionButton;
     @FXML
@@ -102,6 +109,45 @@ public class MainViewController extends AbstractController<Void> {
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
         appController.showPane(products, ProductList, subController);
+    }
+
+    private class p{
+      private final String s1;
+      private final String s2;
+
+        private p(String s1, String s2) {
+            this.s1 = s1;
+            this.s2 = s2;
+        }
+
+        public String getS1() {
+            return s1;
+        }
+
+        public String getS2() {
+            return s2;
+        }
+    }
+
+    public void handleStatisticsListAction(ActionEvent event) {
+        set_clicked(statisticsListButton);
+        ProductDao productDao = new ProductDao();
+        ObservableList<Product> products = productDao.listAll();
+        TransactionDao transactionDao = new TransactionDao();
+        ObservableList<Transaction> transactions = transactionDao.listAll();
+        HashMap<Product,Integer> stats = new HashMap<>();
+        ObservableList<StringPair> data;
+        for(Product p : products){
+            stats.put(p,0);
+        }
+        for(Transaction t : transactions){
+            if(stats.containsKey(t.getProduct()))
+            stats.put(t.getProduct(),stats.get(t.getProduct())+t.getQuantity());
+        }
+
+        data = FXCollections.observableArrayList(stats.keySet().stream().map(x->new StringPair(x.getName(),stats.get(x).toString())).toArray(StringPair[]::new));
+
+        appController.showPane(data, StatisticsList, subController);
     }
 
     public void handleAddTransactionAction(ActionEvent event) {

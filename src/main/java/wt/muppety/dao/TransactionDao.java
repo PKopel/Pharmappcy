@@ -2,6 +2,7 @@ package wt.muppety.dao;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;
@@ -55,6 +56,6 @@ public class TransactionDao extends BaseDao<Transaction> {
             e.printStackTrace();
         }
 
-        return null;
+        return FXCollections.emptyObservableList();
     }
 }
