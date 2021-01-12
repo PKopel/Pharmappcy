@@ -9,7 +9,8 @@ public enum LayoutName {
     EditProduct("view/EditProductDialog.fxml"),
     EditCategory("view/EditCategoryDialog.fxml"),
     EditSupplier("view/EditSupplierDialog.fxml"),
-    EditTransaction("view/EditTransactionDialog.fxml");
+    EditTransaction("view/EditTransactionDialog.fxml"),
+    StatisticsList("view/StatisticsViewPane.fxml");
 
     private final String path;
 

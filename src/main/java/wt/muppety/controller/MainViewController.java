@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.authentication.LoginData;
 import wt.muppety.dao.EmployeeDao;
@@ -15,6 +16,8 @@ import wt.muppety.dao.TransactionDao;
 import wt.muppety.model.Employee;
 import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;
+
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.Random;
 
@@ -39,6 +42,8 @@ public class MainViewController extends AbstractController<Void> {
     public Button employeeListButton;
     @FXML
     public Button productListButton;
+    @FXML
+    public Button statisticsListButton;
     @FXML
     public Button addTransactionButton;
     @FXML
@@ -103,6 +108,26 @@ public class MainViewController extends AbstractController<Void> {
         ProductDao productDao = new ProductDao();
         ObservableList<Product> products = productDao.listAll();
         appController.showPane(products, ProductList, subController);
+    }
+    public void handleStatisticsListAction(ActionEvent event) {
+        set_clicked(statisticsListButton);
+        ProductDao productDao = new ProductDao();
+        ObservableList<Product> products = productDao.listAll();
+        TransactionDao transactionDao = new TransactionDao();
+        ObservableList<Transaction> transactions = transactionDao.listAll();
+        HashMap<Product,Integer> stats = new HashMap<Product, Integer>();
+        ObservableList<javafx.util.Pair<String, String>> data = FXCollections.emptyObservableList();
+        for(Product p : products){
+            stats.put(p,0);
+        }
+        for(Transaction t : transactions){
+            if(stats.containsKey(t.getProduct()))
+            stats.put(t.getProduct(),stats.get(t.getProduct())+t.getQuantity());
+        }
+        for(Product p : stats.keySet()){
+            data.add(new javafx.util.Pair<String,String>(p.getName(),stats.get(p).toString()));
+        }
+        appController.showPane(data, StatisticsList, subController);
     }
 
     public void handleAddTransactionAction(ActionEvent event) {
