@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
+import wt.muppety.Util.StringPair;
 import wt.muppety.authentication.Authenticator;
 import wt.muppety.authentication.LoginData;
 import wt.muppety.dao.EmployeeDao;
@@ -127,7 +128,7 @@ public class MainViewController extends AbstractController<Void> {
         public String getS2() {
             return s2;
         }
-    };
+    }
 
     public void handleStatisticsListAction(ActionEvent event) {
         set_clicked(statisticsListButton);
@@ -135,8 +136,8 @@ public class MainViewController extends AbstractController<Void> {
         ObservableList<Product> products = productDao.listAll();
         TransactionDao transactionDao = new TransactionDao();
         ObservableList<Transaction> transactions = transactionDao.listAll();
-        HashMap<Product,Integer> stats = new HashMap<Product, Integer>();
-        ObservableList<Pair<String,String>> data;
+        HashMap<Product,Integer> stats = new HashMap<>();
+        ObservableList<StringPair> data;
         for(Product p : products){
             stats.put(p,0);
         }
@@ -145,7 +146,7 @@ public class MainViewController extends AbstractController<Void> {
             stats.put(t.getProduct(),stats.get(t.getProduct())+t.getQuantity());
         }
 
-        data = FXCollections.observableArrayList(stats.keySet().stream().map(x->new Pair<>(x.getName(),stats.get(x).toString())).toArray(Pair[]::new));
+        data = FXCollections.observableArrayList(stats.keySet().stream().map(x->new StringPair(x.getName(),stats.get(x).toString())).toArray(StringPair[]::new));
 
         appController.showPane(data, StatisticsList, subController);
     }

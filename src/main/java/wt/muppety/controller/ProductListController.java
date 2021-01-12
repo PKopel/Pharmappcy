@@ -55,8 +55,6 @@ public class ProductListController extends AbstractController<ObservableList<Pro
     @FXML
     public Button editButton;
     @FXML
-    public Button backButton;
-    @FXML
     public Button addSupplierButton;
     @FXML
     private TextField filterField;
