@@ -69,6 +69,10 @@ W projekcie wykorzystano wzorce projektowe:
 
 ## Aplikacja
 
+**Aby zalogować się jako pracownik, należy wpisać**:
+**login: test**
+**password: test**
+
 Po uruchomienia aplikacji otwiera się okno logowania/rejestracji:
 
 ![5](docs/pictures/5.png)
