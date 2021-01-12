@@ -64,7 +64,7 @@ public class EmployeeListController extends AbstractController<ObservableList<Em
                 String lowerCaseFilter = newValue.toLowerCase();
                 String[] split = lowerCaseFilter.split(" ");
                 for (String part : split) {
-                    if (!employee.toString().toLowerCase().contains(part))
+                    if (!employee.toStringForFilter().toLowerCase().contains(part))
                         return false;
                 }
                 return true;

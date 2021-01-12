@@ -182,6 +182,10 @@ public class Employee {
         return login;
     }
 
+    public String toStringForFilter(){
+        return login+position.toString()+lastname+firstname;
+    }
+
     public void setPermissions(boolean canBuy, boolean canSell, boolean canBrowseDB, boolean canModerateDB) {
         permissions.canBuy = canBuy;
         permissions.canSell = canSell;
