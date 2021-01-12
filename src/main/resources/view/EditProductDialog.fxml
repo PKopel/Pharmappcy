@@ -18,9 +18,7 @@
             </HBox>
             <HBox styleClass="text-box">
                 <Label text="Category"/>
-                <ScrollPane prefHeight="50.0">
-                    <DynamicComboBoxPane fx:id="categoryComboBox"/>
-                </ScrollPane>
+                <DynamicComboBoxPane fx:id="categoryComboBox"/>
             </HBox>
             <HBox styleClass="text-box">
                 <Label text="Supplier"/>
