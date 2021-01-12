@@ -1,6 +1,8 @@
 package wt.muppety.controller;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +20,6 @@ import wt.muppety.model.Product;
 import wt.muppety.model.Transaction;
 
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.Random;
 
 import static wt.muppety.authentication.Permission.canBrowseDB;
@@ -109,6 +110,25 @@ public class MainViewController extends AbstractController<Void> {
         ObservableList<Product> products = productDao.listAll();
         appController.showPane(products, ProductList, subController);
     }
+
+    private class p{
+      private final String s1;
+      private final String s2;
+
+        private p(String s1, String s2) {
+            this.s1 = s1;
+            this.s2 = s2;
+        }
+
+        public String getS1() {
+            return s1;
+        }
+
+        public String getS2() {
+            return s2;
+        }
+    };
+
     public void handleStatisticsListAction(ActionEvent event) {
         set_clicked(statisticsListButton);
         ProductDao productDao = new ProductDao();
@@ -116,7 +136,7 @@ public class MainViewController extends AbstractController<Void> {
         TransactionDao transactionDao = new TransactionDao();
         ObservableList<Transaction> transactions = transactionDao.listAll();
         HashMap<Product,Integer> stats = new HashMap<Product, Integer>();
-        ObservableList<javafx.util.Pair<String, String>> data = FXCollections.emptyObservableList();
+        ObservableList<Pair<String,String>> data;
         for(Product p : products){
             stats.put(p,0);
         }
@@ -124,9 +144,9 @@ public class MainViewController extends AbstractController<Void> {
             if(stats.containsKey(t.getProduct()))
             stats.put(t.getProduct(),stats.get(t.getProduct())+t.getQuantity());
         }
-        for(Product p : stats.keySet()){
-            data.add(new javafx.util.Pair<String,String>(p.getName(),stats.get(p).toString()));
-        }
+
+        data = FXCollections.observableArrayList(stats.keySet().stream().map(x->new Pair<>(x.getName(),stats.get(x).toString())).toArray(Pair[]::new));
+
         appController.showPane(data, StatisticsList, subController);
     }
 

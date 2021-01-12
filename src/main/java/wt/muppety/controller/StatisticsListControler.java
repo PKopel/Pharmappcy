@@ -31,16 +31,16 @@ public class StatisticsListControler  extends AbstractController<ObservableList<
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("first"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<>("second"));
         HashMap<Product,Integer> stats = new HashMap<Product, Integer>();
-        ObservableList<javafx.util.Pair<String,String>> data = FXCollections.emptyObservableList();
+        ObservableList<javafx.util.Pair<String,String>> data;
         for(Product p : products){
             stats.put(p,0);
         }
         for(Transaction t : transactions){
-            stats.put(t.getProduct(),stats.get(t.getProduct())+t.getQuantity());
+            if(stats.containsKey(t.getProduct())) stats.put(t.getProduct(),stats.get(t.getProduct())+t.getQuantity());
         }
-        for(Product p : stats.keySet()){
-            data.add(new javafx.util.Pair<String,String>(p.getName(),stats.get(p).toString()));
-        }
+
+        data = FXCollections.observableArrayList(stats.keySet().stream().map(x->new Pair<>(x.getName(),stats.get(x).toString())).toArray(Pair[]::new));
+
         statisticsTable.setItems(data);
     }
 }
