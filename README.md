@@ -61,7 +61,7 @@ gradlew.bat run
 
 #### [GUI](docs/gui/README.md)
 
-#### [Powiadomienia](docs/notifications/README.md)
+#### [Notyfikator](docs/notificator/README.md)
 
 W projekcie wykorzystano wzorce projektowe:
 
@@ -70,6 +70,10 @@ W projekcie wykorzystano wzorce projektowe:
 * DAO i ORM ([persystencja](docs/persistence/README.md))
 
 ## Aplikacja
+
+**Aby zalogować się jako pracownik, należy wpisać**:
+**login: test**
+**password: test**
 
 Po uruchomieniu aplikacji otwiera się okno logowania/rejestracji:
 
