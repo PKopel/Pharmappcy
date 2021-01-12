@@ -61,12 +61,12 @@ gradlew.bat run
 
 #### [GUI](docs/gui/README.md)
 
-#### [Notyfikator](docs/notificator/README.md)
+#### [Powiadomienia](docs/notificator/README.md)
 
 W projekcie wykorzystano wzorce projektowe:
 
 * Model-View-Presenter ([GUI](docs/gui/README.md))
-* Singleton ([autentykacja](docs/authentication/README.md) i [powiadomienia](docs/notifications/README.md))
+* Singleton ([autentykacja](docs/authentication/README.md) i [powiadomienia](docs/notificator/README.md))
 * DAO i ORM ([persystencja](docs/persistence/README.md))
 
 ## Aplikacja
