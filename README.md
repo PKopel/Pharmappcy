@@ -78,40 +78,40 @@ W projekcie wykorzystano wzorce projektowe:
 
 Po uruchomieniu aplikacji otwiera się okno logowania/rejestracji:
 
-![5](docs/pictures/5.png)
+![5](docs/pictures/login_view.png)
 
 
 Po wybraniu opcji Register otwiera się okno rejestracji:
 
-![9](docs/pictures/9.png)
+![9](docs/pictures/registration.png)
 
 Widok strony głównej aplikacji przy zalogowanym pracowniku:
 
-![1](docs/pictures/1.png)
+![1](docs/pictures/main_view_employee.png)
 
 Widok listy pracowników wraz z oknem dodawania pracownika przy zalogowanym pracowniku:
 
-![2](docs/pictures/2.png)
+![2](docs/pictures/add_user.png)
 
 Widok listy produktów wraz z oknem dodawania dostawcy przy zalogowanym pracowniku:
 
-![3](docs/pictures/3.png)
+![3](docs/pictures/add_supplier.png)
 
 Widok strony głównej wraz z oknem dodawania transakcji przy zalogowanym pracowniku:
 
-![4](docs/pictures/4.png)
+![4](docs/pictures/add_transaction.png)
 
 Widok strony głównej przy zalogowanym kliencie z aktywowaną subskrypcją:
 
-![6](docs/pictures/6.png)
+![6](docs/pictures/main_view_client.png)
 
 Widok listy produktów posortowanych według kategorii przy zalogowanym kliencie:
 
-![8](docs/pictures/8.png)
+![8](docs/pictures/product_view_client.png)
 
 Widok listy produktów przy użyciu opcji szukania po nazwie przy zalogowanym kliencie:
 
-![7](docs/pictures/7.png)
+![7](docs/pictures/product_client_search.png)
 
 
 
