@@ -79,7 +79,6 @@ public class MainViewController extends AbstractController<Void> {
 
     private void set_clicked(Button b){
         if (!b.equals(employeeListButton)) employeeListButton.getStyleClass().remove("clicked");
-        if (!b.equals(addTransactionButton)) addTransactionButton.getStyleClass().remove("clicked");
         if (!b.equals(productListButton)) productListButton.getStyleClass().remove("clicked");
         b.getStyleClass().add("clicked");
     }
@@ -106,7 +105,7 @@ public class MainViewController extends AbstractController<Void> {
     }
 
     public void handleAddTransactionAction(ActionEvent event) {
-        set_clicked(addTransactionButton);
+        set_clicked(productListButton);
         Transaction newTransaction = new Transaction();
         if (appController.showDialog(newTransaction, EditTransaction, "Add transaction")) {
             data.add(newTransaction);
