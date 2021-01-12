@@ -12,7 +12,12 @@ import java.util.Properties;
 
 public class EmailNotificator {
 
+    private static final String APP_EMAIL = "pharmappcy.muppety@gmail.com";
+    private static final String APP_EMAIL_PASSWORD = "projektTOwtorek1615";
+
     private static EmailNotificator _instance;
+
+    private Session session;
 
     private EmailNotificator() {
     }
@@ -28,50 +33,48 @@ public class EmailNotificator {
         EmployeeDao employeeDao = new EmployeeDao();
         ObservableList<Employee> employees = employeeDao.listAll();
 
+        String topic = "We've added a new product";
+        String text = "Hey, we have a new product in our stock: " + product;
+
         for (Employee employee : employees) {
             if (employee.getIsSubscribed() && employee.getEmail() != null) {
-                sendEmail(employee.getEmail(), product);
+                sendEmail(employee.getEmail(), topic, text);
             }
         }
 
     }
 
-    public void sendEmail(String recipient, Product product) {
+    public void sendEmail(String recipient, String subject, String text) {
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
 
-        String myAccountEmail = "pharmappcy.muppety@gmail.com";
-        String password = "projektTOwtorek1615";
-
-        Session session = Session.getInstance(properties, new Authenticator() {
+        session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myAccountEmail, password);
+                return new PasswordAuthentication(APP_EMAIL, APP_EMAIL_PASSWORD);
             }
         });
 
-        Message message = prepareMessage(session, myAccountEmail, recipient, product);
+        Message message = prepareMessage(recipient, subject, text);
         try {
             if (message != null)
                 Transport.send(message);
         } catch (MessagingException ex) {
             System.out.println(ex.getMessage());
         }
-
     }
 
-
-    public Message prepareMessage(Session session, String myAccountEmail, String recipient, Product product) {
+    public Message prepareMessage(String recipient, String subject, String text) {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(myAccountEmail));
+            message.setFrom(new InternetAddress(APP_EMAIL));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-            message.setSubject("We've added a new product");
-            message.setText("Hey, we have a new product in our stock: " + product.getName());
+            message.setSubject(subject);
+            message.setText(text);
             return message;
         } catch (MessagingException ex) {
             System.out.println(ex.getMessage());
@@ -79,6 +82,5 @@ public class EmailNotificator {
         return null;
 
     }
-
 
 }

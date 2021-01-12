@@ -55,7 +55,7 @@ public class ProductListController extends AbstractController<ObservableList<Pro
     @FXML
     public Button editButton;
     @FXML
-    public Button backButton;
+    public Button recommendButton;
     @FXML
     public Button addSupplierButton;
     @FXML
@@ -100,6 +100,7 @@ public class ProductListController extends AbstractController<ObservableList<Pro
 
         deleteButton.disableProperty().bind(Bindings.isEmpty(productTable.getSelectionModel().getSelectedItems()));
         editButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
+        recommendButton.disableProperty().bind(Bindings.size(productTable.getSelectionModel().getSelectedItems()).isNotEqualTo(1));
         productTable.getSortOrder().add(unitPriceColumn);
         sortedData.comparatorProperty().bind(productTable.comparatorProperty());
 
@@ -160,6 +161,11 @@ public class ProductListController extends AbstractController<ObservableList<Pro
             Optional<Supplier> supplier = supplierDao.create(newSupplier);
             if (supplier.isEmpty()) System.out.println("Could not create new supplier");
         }
+    }
+
+    public void handleRecommendAction(ActionEvent event) {
+        Product product = productTable.getSelectionModel().getSelectedItem();
+        appController.showDialog(product,EditRecommendation, "Recommend " + product);
     }
 
     @Override

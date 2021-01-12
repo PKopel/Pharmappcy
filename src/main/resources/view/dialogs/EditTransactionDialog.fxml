@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="wt.muppety.presenter.EditTransactionDialogPresenter">
+    <center>
+        <VBox styleClass="pad-space-10">
+            <HBox styleClass="text-box">
+                <Label text="Product" />
+                <ComboBox fx:id="productComboBox" />
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Quantity" />
+                <TextField fx:id="quantityTextField" />
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" styleClass="pad-space-10">
+            <Button styleClass="red" onAction="#handleCancelAction" text="_Cancel"/>
+            <Button styleClass="blue" onAction="#handleOkAction" text="_Ok"/>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@../../styles/editDialog.css" />
+    </stylesheets>
+</BorderPane>

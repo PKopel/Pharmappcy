@@ -30,6 +30,6 @@
         </HBox>
     </bottom>
     <stylesheets>
-        <URL value="@../styles/editDialog.css" />
+        <URL value="@../../styles/editDialog.css" />
     </stylesheets>
 </BorderPane>

@@ -14,7 +14,7 @@
 
         <VBox styleClass="image" alignment="CENTER">
             <ImageView fitHeight="52" fitWidth="52" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../logo.png"/>
+                <Image url="@../../pictures/logo.png"/>
             </ImageView>
         </VBox>
 
@@ -32,7 +32,7 @@
                 <Button styleClass="back" onAction="#handleReturnAction">
                     <graphic>
                         <ImageView fitHeight="30" fitWidth="60">
-                            <Image url = "@../back.png"/>
+                            <Image url = "@../../pictures/back.png"/>
                         </ImageView>
                     </graphic>
                 </Button>
@@ -58,7 +58,7 @@
     </VBox>
     
     <stylesheets>
-        <URL value="@../styles/mainview.css"/>
+        <URL value="@../../styles/mainview.css"/>
     </stylesheets>
 
 

@@ -24,7 +24,7 @@ Klasa kontrolująca widok głównego okna aplikacji. Korzystając z klasy [`Auth
 ustala zakres działań dostępny dla aktualnie zalogowanego pracownika. Umożliwia przejście do list produktów i
 pracowników oraz otwarcie okna nowej transakcji. Klasa
 [`MainViewController`](../../src/main/java/wt/muppety/controller/MainViewController.java)
-korzysta z układu zdefiniowanego w pliku [MainViewPane.fxml](../../src/main/resources/view/MainViewPane.fxml).
+korzysta z układu zdefiniowanego w pliku [MainViewPane.fxml](../../src/main/resources/view/panes/MainViewPane.fxml).
 
 #### Klasa [`EmployeeListController`](../../src/main/java/wt/muppety/controller/EmployeeListController.java)
 
@@ -32,21 +32,23 @@ Klasa kontrolująca widok list pracowników. Zawiera metody pozwalające na doda
 tabeli [`Employee`](../persistence/README.md). Korzysta z klasy [`Authenticator`](../authentication/README.md)
 do kontroli uprawnień zalogowanego użytkownika. Klasa
 [`EmployeeListController`](../../src/main/java/wt/muppety/controller/EmployeeListController.java)
-korzysta z układu zdefiniowanego w pliku [EmployeeListPane.fxml](../../src/main/resources/view/EmployeeListPane.fxml).
+korzysta z układu zdefiniowanego w pliku 
+[EmployeeListPane.fxml](../../src/main/resources/view/panes/EmployeeListPane.fxml).
 
 #### Klasa [`ProductListController`](../../src/main/java/wt/muppety/controller/ProductListController.java)
 
 Klasa kontrolująca widok list produktów. Zawiera metody pozwalające na dodawanie, usuwanie i edytowanie zawartości
 tabeli [`Product`](../persistence/README.md) oraz dodawanie nowych kategorii produktów. Klasa
 [`ProductListController`](../../src/main/java/wt/muppety/controller/ProductListController.java)
-korzysta z układu zdefiniowanego w pliku [ProductListPane.fxml](../../src/main/resources/view/ProductListPane.fxml).
+korzysta z układu zdefiniowanego w pliku 
+[ProductListPane.fxml](../../src/main/resources/view/panes/ProductListPane.fxml).
 
 #### Klasa [`LoginViewController`](../../src/main/java/wt/muppety/controller/LoginViewController.java)
 
 Klasa dziedzicząca po klasie
 [`AbstractController`](../../src/main/java/wt/muppety/controller/AbstractController.java)
 umożliwiająca użytkownikom rejestrację oraz logowanie do systemu. Korzysta z układu zdefiniowanego w pliku 
-[LoginViewPane.fxml](../../src/main/resources/view/LoginViewPane.fxml).
+[LoginViewPane.fxml](../../src/main/resources/view/panes/LoginViewPane.fxml).
 
 ## Pakiet [`wt.muppety.presenter`](../../src/main/java/wt/muppety/presenter)
 
@@ -58,6 +60,7 @@ umożliwiająca użytkownikom rejestrację oraz logowanie do systemu. Korzysta z
 * [`EditProductDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditProductDialogPresenter.java)
 * [`EditSupplierDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditSupplierDialogPresenter.java)
 * [`EditTransactionDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditTransactionDialogPresenter.java)
+* [`EditRecommendationDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditRecommendationDialogPresenter.java)
 
 #### Klasa [`AbstractDialogPresenter`](../../src/main/java/wt/muppety/presenter/AbstractDialogPresenter.java)
 
@@ -94,6 +97,12 @@ specjalizowana w obsłudze dialogu dodawania lub edycji wpisu dostawcy.
 Klasa dziedzicząca po klasie
 [`AbstractDialogPresenter`](../../src/main/java/wt/muppety/presenter/AbstractDialogPresenter.java)
 specjalizowana w obsłudze dialogu dodawania lub edycji transakcji.
+
+#### Klasa [`EditRecommendationDialogPresenter`](../../src/main/java/wt/muppety/presenter/EditRecommendationDialogPresenter.java)
+
+Klasa dziedzicząca po klasie
+[`AbstractDialogPresenter`](../../src/main/java/wt/muppety/presenter/AbstractDialogPresenter.java)
+specjalizowana w obsłudze dialogu tworzenia rekomendacji.
 
 ## Pakiet [`wt.muppety.view`](../../src/main/java/wt/muppety/view)
 

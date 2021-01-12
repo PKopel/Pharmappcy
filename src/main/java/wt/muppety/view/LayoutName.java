@@ -1,15 +1,16 @@
 package wt.muppety.view;
 
 public enum LayoutName {
-    LoginView("view/LoginViewPane.fxml"),
-    MainView("view/MainViewPane.fxml"),
-    EmployeeList("view/EmployeeListPane.fxml"),
-    ProductList("view/ProductListPane.fxml"),
-    EditUser("view/EditEmployeeDialog.fxml"),
-    EditProduct("view/EditProductDialog.fxml"),
-    EditCategory("view/EditCategoryDialog.fxml"),
-    EditSupplier("view/EditSupplierDialog.fxml"),
-    EditTransaction("view/EditTransactionDialog.fxml");
+    LoginView("view/panes/LoginViewPane.fxml"),
+    MainView("view/panes/MainViewPane.fxml"),
+    EmployeeList("view/panes/EmployeeListPane.fxml"),
+    ProductList("view/panes/ProductListPane.fxml"),
+    EditUser("view/dialogs/EditEmployeeDialog.fxml"),
+    EditProduct("view/dialogs/EditProductDialog.fxml"),
+    EditCategory("view/dialogs/EditCategoryDialog.fxml"),
+    EditSupplier("view/dialogs/EditSupplierDialog.fxml"),
+    EditTransaction("view/dialogs/EditTransactionDialog.fxml"),
+    EditRecommendation("view/dialogs/EditRecommendationDialog.fxml");
 
     private final String path;
 
