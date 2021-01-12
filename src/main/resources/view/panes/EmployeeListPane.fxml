@@ -26,7 +26,7 @@
         </TableView>
     </center>
     <stylesheets>
-        <URL value="@../styles/functional-menu.css"/>
+        <URL value="@../../styles/functional-menu.css"/>
     </stylesheets>
 
 </BorderPane>

@@ -17,6 +17,7 @@
 #### **Milestone 3 (stan na 12.01.2021)**
 
 - dodanie opcji subskrypcji i wysyłania notyfikacji przez maila
+- dodanie opcji wysyłania rekomendacji 
 - dodanie sortowania i wyszukiwania w listach pracowników i produktów
 - poprawienie opcji wybrania wielu kategorii przy dodawaniu/edycji produktu
 - ulepszone GUI

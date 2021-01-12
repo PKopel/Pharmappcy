@@ -11,6 +11,7 @@
             <Button styleClass="green" fx:id="addProductButton" onAction="#handleAddProductAction" text="Add product"/>
             <Button styleClass="green" fx:id="addCategoryButton" onAction="#handleAddCategoryAction" text="Add category"/>
             <Button styleClass="green" fx:id="addSupplierButton" onAction="#handleAddSupplierAction" text="Add supplier"/>
+            <Button styleClass="green" fx:id="recommendButton" onAction="#handleRecommendAction" text="Recommend"/>
             <Button styleClass="blue" fx:id="editButton" onAction="#handleEditAction" text="Edit"/>
             <Button styleClass="red" fx:id="deleteButton" onAction="#handleDeleteAction" text="Delete"/>
         </VBox>
@@ -31,6 +32,6 @@
         </TableView>
     </center>
     <stylesheets>
-        <URL value="@../styles/functional-menu.css"/>
+        <URL value="@../../styles/functional-menu.css"/>
     </stylesheets>
 </BorderPane>

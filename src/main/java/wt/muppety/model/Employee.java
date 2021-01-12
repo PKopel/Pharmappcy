@@ -26,7 +26,7 @@ public class Employee {
     private String firstname;
     @Column(name = "lastname", nullable = false, length = 50)
     private String lastname;
-    @Column(name = "email", nullable = true, length = 50)
+    @Column(name = "email", length = 50)
     private String email;
     @Column(name = "position", nullable = false, length = 50)
     @Enumerated(EnumType.STRING)
@@ -37,7 +37,7 @@ public class Employee {
     private byte[] password;
     @Column(name = "salt", nullable = false, length = 50)
     private byte[] salt;
-    @Column(name = "isSubscribed", nullable = true)
+    @Column(name = "isSubscribed")
     private boolean isSubscribed;
 
     public Employee(String firstname, String lastname, String email, Employee.Position position, String login, String password) {
@@ -55,7 +55,7 @@ public class Employee {
         setPermissions(true, true, true, true);
     }
 
-    public void setClientPermissions(){
+    public void setClientPermissions() {
         setPermissions(true, false, true, false);
     }
 
@@ -175,6 +175,11 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(getLogin(), getPassword());
+    }
+
+    @Override
+    public String toString() {
+        return login;
     }
 
     public void setPermissions(boolean canBuy, boolean canSell, boolean canBrowseDB, boolean canModerateDB) {
