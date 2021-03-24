@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+    xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.controller.ProductListController" prefHeight="670.0" prefWidth="1080.0">
+    <right>
+        <VBox styleClass="functional-buttons">
+            <TextField promptText="Search..." fx:id="filterField"/>
+            <Button styleClass="green" fx:id="addProductButton" onAction="#handleAddProductAction" text="Add product"/>
+            <Button styleClass="green" fx:id="addCategoryButton" onAction="#handleAddCategoryAction" text="Add category"/>
+            <Button styleClass="green" fx:id="addSupplierButton" onAction="#handleAddSupplierAction" text="Add supplier"/>
+            <Button styleClass="green" fx:id="recommendButton" onAction="#handleRecommendAction" text="Recommend"/>
+            <Button styleClass="blue" fx:id="editButton" onAction="#handleEditAction" text="Edit"/>
+            <Button styleClass="red" fx:id="deleteButton" onAction="#handleDeleteAction" text="Delete"/>
+        </VBox>
+    </right>
+    <center>
+        <TableView fx:id="productTable" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="unitPriceColumn" prefWidth="75.0" text="Unit price" />
+                <TableColumn fx:id="categoryColumn" prefWidth="75.0" text="Category" />
+                <TableColumn fx:id="manufacturerColumn" prefWidth="75.0" text="Manufacturer" />
+                <TableColumn fx:id="onPrescriptionColumn" prefWidth="75.0" text="On prescription" />
+                <TableColumn fx:id="supplierColumn" prefWidth="75.0" text="Supplier" />
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+    </center>
+    <stylesheets>
+        <URL value="@../../styles/functional-menu.css"/>
+    </stylesheets>
+</BorderPane>

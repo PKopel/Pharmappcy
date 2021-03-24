@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            fx:controller="wt.muppety.presenter.EditSupplierDialogPresenter">
+    <center>
+
+        <VBox styleClass="pad-space-10">
+            <HBox styleClass="text-box">
+                <Label text="Name"/>
+                <TextField fx:id="nameTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Email"/>
+                <TextField fx:id="emailTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Phone Number"/>
+                <TextField fx:id="phoneNumberTextField"/>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" styleClass="pad-space-10">
+            <Button styleClass="red" onAction="#handleCancelAction" text="_Cancel"/>
+            <Button styleClass="blue" onAction="#handleOkAction" text="_Ok"/>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@../../styles/editDialog.css" />
+    </stylesheets>
+</BorderPane>

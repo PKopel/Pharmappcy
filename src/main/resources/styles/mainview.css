@@ -1,0 +1,61 @@
+.header-section {
+    -fx-min-width: 200px;
+    -fx-max-width: 200px;
+    -fx-font-size: 20px;
+    -fx-background-color: #39B38C /*teal*/;
+}
+
+.header-section Button{
+    -fx-min-height: 30px;
+    -fx-font-size: 18px;
+    -fx-min-width: 200px;
+}
+
+.clicked{
+    -fx-background-color: whitesmoke;
+    -fx-text-fill: black;
+}
+
+.image{
+    -fx-padding: 20px;
+}
+
+
+.labels{
+    -fx-background-color: lightgrey;
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+    -fx-border-style: none none solid none;
+    -fx-max-width: 1080px;
+    -fx-min-width: 1080px;
+    -fx-max-height: 50px;
+}
+
+.credentials{
+    -fx-min-height: 30px;
+    -fx-spacing: 20px;
+}
+
+.text{
+    -fx-padding: 0 20 0 0;
+}
+
+.back {
+    -fx-background-color: rgba(245,245,245,0.6);
+    -fx-opacity: 0.5;
+}
+
+.back:hover {
+    -fx-background-color: rgba(245,245,245,1.0);
+}
+
+.quote{
+    -fx-min-height: 670px;
+    -fx-min-width: 1080px;
+    -fx-max-width: 1080px;
+    -fx-alignment: center;
+    -fx-font-size: 40px;
+    -fx-wrap-text: true;
+    -fx-padding: 20px;
+    -fx-font-style: italic;
+}

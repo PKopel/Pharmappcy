@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.presenter.EditEmployeeDialogPresenter">
+    <center>
+        <VBox styleClass="pad-space-10">
+            <HBox styleClass="text-box">
+                <Label text="First name"/>
+                <TextField fx:id="firstNameTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Last name"/>
+                <TextField fx:id="lastNameTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Email"/>
+                <TextField fx:id="emailTextField"/>
+            </HBox>
+            <HBox fx:id="positionHBox" styleClass="text-box">
+                <Label text="Position"/>
+                <ComboBox fx:id="positionComboBox"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Login"/>
+                <TextField fx:id="loginTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Password"/>
+                <PasswordField fx:id="passwordTextField"/>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" styleClass="pad-space-10">
+            <Button styleClass="red" onAction="#handleCancelAction" text="_Cancel"/>
+            <Button styleClass="blue" onAction="#handleOkAction" text="_Ok"/>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@../../styles/editDialog.css" />
+    </stylesheets>
+</BorderPane>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import wt.muppety.view.DynamicComboBoxPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx" fx:controller="wt.muppety.presenter.EditProductDialogPresenter">
+    <center>
+        <VBox styleClass="pad-space-10">
+            <HBox styleClass="text-box">
+                <Label text="Name"/>
+                <TextField fx:id="nameTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Price"/>
+                <TextField fx:id="priceTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Category"/>
+                <DynamicComboBoxPane fx:id="categoryComboBox"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Supplier"/>
+                <ComboBox fx:id="supplierComboBox"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="Manufacturer"/>
+                <TextField fx:id="manufacturerTextField"/>
+            </HBox>
+            <HBox styleClass="text-box">
+                <Label text="On prescription"/>
+                <CheckBox fx:id="onPrescriptionCheckBox"/>
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" styleClass="pad-space-10">
+            <Button styleClass="red" onAction="#handleCancelAction" text="_Cancel"/>
+            <Button styleClass="blue" onAction="#handleOkAction" text="_Ok"/>
+        </HBox>
+    </bottom>
+    <stylesheets>
+        <URL value="@../../styles/editDialog.css" />
+    </stylesheets>
+</BorderPane>

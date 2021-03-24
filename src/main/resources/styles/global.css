@@ -1,0 +1,54 @@
+Button, TextField, PasswordField{
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+}
+
+Button{
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+.pad-space-10{
+    -fx-spacing: 10px;
+    -fx-padding: 10px;
+}
+
+.text-box{
+    -fx-alignment: center;
+    -fx-padding: 0 0 10 0;
+    -fx-label-padding: 12 0 10 0;
+}
+
+.text-box TextField, PasswordField{
+    -fx-font-size: 14px;
+    -fx-pref-height: 16px;
+    -fx-pref-width: 200px;
+}
+.text-box Label{
+    -fx-padding: 0 10 0 0;
+    -fx-pref-width: 100px;
+}
+
+.green{
+    -fx-background-color: #39B38C;
+}
+
+.green:hover{
+    -fx-background-color: #297F64;
+}
+
+.blue{
+    -fx-background-color: #4298B3;
+}
+
+.blue:hover{
+    -fx-background-color: #2F6D7F;
+}
+
+.red{
+    -fx-background-color: #D91E1E;
+}
+
+.red:hover{
+    -fx-background-color: #8C1414;
+}

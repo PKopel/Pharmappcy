@@ -1,0 +1,21 @@
+.header-section {
+    -fx-padding: 10px;
+    -fx-font-size: 20px;
+    -fx-background-color: #39B38C /*teal*/;
+}
+
+.header-section Label {
+    -fx-text-fill: #ffffff;
+    -fx-padding: 12px;
+}
+
+Button{
+    -fx-min-height: 50px;
+    -fx-pref-width: 330px;
+    -fx-font-size: 25px;
+}
+
+.buttons{
+    -fx-padding: 30 0 0 0;
+    -fx-spacing: 15px;
+}

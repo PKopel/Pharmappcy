@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+
+<!--suppress ALL -->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      xmlns="http://javafx.com/javafx"
+      fx:controller="wt.muppety.controller.LoginViewController"
+      prefWidth="350.0">
+    <HBox styleClass="header-section">
+        <Label text="Welcome to Pharmappcy!"/>
+    </HBox>
+    <VBox styleClass="pad-space-10">
+        <Label fx:id="errorLabel" text="Login attempt failed. Invalid login/password combination" visible="false" style="-fx-text-fill: red"/>
+
+        <HBox styleClass="text-box">
+            <Label text="Login:"/>
+            <TextField fx:id="loginTextField"/>
+        </HBox>
+        <HBox styleClass="text-box">
+            <Label  text="Password:"/>
+            <PasswordField fx:id="passwordTextField"/>
+        </HBox>
+
+        <VBox styleClass="buttons">
+            <Button styleClass="green" onAction="#handleLogInAction" text="Sign in"/>
+            <Button styleClass="green" onAction="#handleRegisterAction" text="Register"/>
+        </VBox>
+    </VBox>
+
+
+
+    <stylesheets>
+        <URL value="@../../styles/login.css" />
+    </stylesheets>
+</VBox>
